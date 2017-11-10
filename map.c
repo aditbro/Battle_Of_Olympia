@@ -11,7 +11,7 @@ void createMap(MAP *M, int row, int col) {
 	
 	for (int i = 0; i <= MapBrsEff(*M); i++) {
 		for (int j = 0; j <= MapKolEff(*M); j++) {
-			MapElmt(*M, i, j).bld = Nil;
+			Build_Type(Build(*M, i, j)) = Nil;
 			Unit(*M, i, j).type = Nil;
 		}
 	}
@@ -37,11 +37,20 @@ void printMap(MAP M) {
 		printf("*\n  ");
 		for (j = 0; j <= MapKolEff(M); j++) {
 			printf("* ");
-			if (MapElmt(M, i, j).bld == Nil) {
+			if (Build_Type(Build(M, i, j)) == Nil) {
 				printf("  ");
 			}
 			else {
-				printf("%c ", MapElmt(M, i, j).bld);
+				if(Build_Owner(Build(M, i, j))==1){
+					print_red(Build_Type(Build(M, i, j)));
+					printf(" ");
+				}else if(Build_Owner(Build(M, i, j))==2){
+					print_blue(Build_Type(Build(M, i, j)));
+					printf(" ");
+				}else{
+					print_magenta(Build_Type(Build(M, i, j)));
+					printf(" ");
+				}
 			}
 		}
 		printf("*\n");

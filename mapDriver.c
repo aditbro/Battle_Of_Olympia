@@ -1,4 +1,5 @@
 #include "map.h"
+#include "building.h"
 #include <stdio.h>
 
 int main() {

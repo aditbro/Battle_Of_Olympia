@@ -43,5 +43,4 @@ void show_unit_available(UNIT U,boolean Retaliates);
 /*F.S. menuliskan atribut dari unit yang available*/
 
 
-
 #endif

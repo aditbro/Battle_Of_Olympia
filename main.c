@@ -1,6 +1,7 @@
 #include "map.h"
 #include <stdio.h>
 #include "Offbattle.h"
+#include "unit.h"
 int main() {
 	MAP M;
 	int col, row;

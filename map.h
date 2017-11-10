@@ -5,6 +5,7 @@
 
 #include "ADT/boolean.h"
 #include "unit.h"
+#include "building.h"
 #include "ADT/pcolor.h"
 
 #define BrsMin 0
@@ -16,7 +17,7 @@
 
 typedef struct {
     UNIT chr;	//karakter
-    char bld;	//building
+    Build bld;	//building
 	boolean move;
 	boolean select;
 } PION;
