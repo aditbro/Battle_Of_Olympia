@@ -1,16 +1,18 @@
-#include "unit.h"
 #include <stdio.h>
+#include "unit.h"
 void Init_unit (UNIT * U){
 
-    M_Hp(*U)    = 0;
-    Hp(*U)      = 0;
-    Atk(*U)     = 0;
-    M_Mov(*U)   = 0;
-    Mov(*U)     = 0;
-    Cost(*U)    = 0;
-    Pos(*U)     = MakePOINT(0, 0);
-    Type(*U)    = 'U';
-    Can_Atk(*U) = false;
+	Owner(*U)		= 0;
+	Type(*U)		= '0';
+    M_Hp(*U)		= 0;
+    Hp(*U)			= 0;
+    Atk(*U)			= 0;
+    M_Mov(*U)		= 0;
+    Mov(*U)		    = 0;
+    Cost(*U)		= 0;
+    Pos(*U)			= MakePOINT(0, 0);
+    Atk_Type(*U)    = 'U';
+    Can_Atk(*U)		= false;
 
 }
 
@@ -46,11 +48,11 @@ void show_unit_available(UNIT U,boolean Retaliates)
 /*F.S. menuliskan atribut dari unit yang available*/
 {
     print_type(U);
-    TulisPoint(Pos(U));
+    TulisPOINT(Pos(U));
     printf(" | ");
     printf("Health %d/%d  ",Hp(U),M_Hp(U));
     if(Retaliates){
-        printf((Retaliates));
+        printf("(Retaliates)");
     }
     printf("\n");
 }
