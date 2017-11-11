@@ -5,7 +5,7 @@
 
 
 // ----------Constructor----------
-void createMap(Map *M, int row, int col) {
+void createMap(MAP *M, int row, int col) {
 	MapBrsEff(*M) = row;
 	MapKolEff(*M) = col;
 	for (int i = 0; i <= MapBrsEff(*M); i++) {
@@ -19,7 +19,7 @@ void createMap(Map *M, int row, int col) {
 
 
 // ----------Output----------
-void printMap(Map M) {
+void printMap(MAP M) {
 	int i, j;
 
 	printf(" ");
