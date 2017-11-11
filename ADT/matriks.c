@@ -191,7 +191,7 @@ MATRIKS matriks_KaliMATRIKS (MATRIKS M1, MATRIKS M2)
     matriks_ElType sum;
     MATRIKS MHsl;
 
-    MakeMATRIKS(matriks_NBrsEff(M1), matriks_NKolEff(M2), &MHsl);
+    matriks_MakeMATRIKS(matriks_NBrsEff(M1), matriks_NKolEff(M2), &MHsl);
 
     for (i = BrsMin; i <= matriks_NBrsEff(MHsl); i++){
         for (j = KolMin; j <= matriks_NKolEff(MHsl); j++){
@@ -394,7 +394,7 @@ float matriks_Determinan (MATRIKS M)
     matriks_indeks i, j;
     float det = 1;
 
-    void matriks_swap_rows(float M[brsneff+1][kolneff+1], int a, int b, float * det){
+    void swap_rows(float M[brsneff+1][kolneff+1], int a, int b, float * det){
     /* a dan b adalah baris yang akan ditukar */
         float Temp;
         matriks_indeks i;
@@ -408,7 +408,7 @@ float matriks_Determinan (MATRIKS M)
         *det = -(*det); /* setelah 2 baris ditukar, determinan menjadi -determinan */
     }
 
-    void matriks_make_one(float M[brsneff+1][kolneff+1], int a, float * det){
+    void make_one(float M[brsneff+1][kolneff+1], int a, float * det){
     /* a,a adalah index element diagonal yang akan dibuat 1 */
 
         matriks_indeks i;
@@ -434,7 +434,7 @@ float matriks_Determinan (MATRIKS M)
         *det = *det * divider;
     }
 
-    void matriks_make_zero(float M[brsneff+1][kolneff+1], int a){
+    void make_zero(float M[brsneff+1][kolneff+1], int a){
     /* reduce column a to 0 */
         matriks_indeks i,j ;
 
