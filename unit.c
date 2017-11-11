@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "unit.h"
-void Init_unit (UNIT * U){
+/*void Init_unit (UNIT * U){
 
 	Owner(*U)		= 0;
 	Type(*U)		= '0';
@@ -21,7 +21,7 @@ UNIT Create_new_unit(){
     UNIT new_unit;
     Init_unit(&new_unit);
     return new_unit;
-    }
+    }*/
 
 void Show_unit_info (UNIT U){
 

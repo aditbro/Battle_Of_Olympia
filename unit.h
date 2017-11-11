@@ -35,11 +35,9 @@ typedef struct {
 void print_type(UNIT U);
 /*I.S. U terdefinisi*/
 /*F.S. menuliskan jenis dari U*/
-void Init_unit (UNIT * U);
-
-UNIT Create_new_unit();
 
 void Show_unit_info (UNIT U);
+
 void show_unit_available(UNIT U,boolean Retaliates);
 /*I.S. U terdefinisi*/
 /*F.S. menuliskan atribut dari unit yang available*/

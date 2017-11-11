@@ -7,7 +7,7 @@
 
 /* LAST UPDATE : 11 NOV 2017 - 23 : 16 */
 
-void Init_game(MATRIKS *MAP, int map_x, int map_y){
+void Init_game(MAP *M, int map_x, int map_y){
     /* Function to setup tower, castle, and villages before game starts */
 
     /* Constants */
@@ -18,10 +18,10 @@ void Init_game(MATRIKS *MAP, int map_x, int map_y){
     srand (time(NULL));
 
 
-    void Set_element(MATRIKS *MAP, POINT index, char symbol){
+    void Set_element(MAP *M, POINT index, char symbol){
         /* Procedure to set symbol into designated index in matrix */
 
-        Elmt(*MAP, Absis(index), Ordinat(index)) = symbol;
+        Elmt(*M, Absis(index), Ordinat(index)) = symbol;
     }
 
     int Village_too_close(POINT index, int map_x, int map_y){
