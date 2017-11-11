@@ -8,12 +8,14 @@
 void createMap(MAP *M, int row, int col) {
 	MapBrsEff(*M) = row;
 	MapKolEff(*M) = col;
+	
 	for (int i = 0; i <= MapBrsEff(*M); i++) {
 		for (int j = 0; j <= MapKolEff(*M); j++) {
 			MapElmt(*M, i, j).bld = Nil;
-			MapElmt(*M, i, j).chr = Nil;
+			Unit(*M, i, j).type = Nil;
 		}
 	}
+	
 }
 // membuat map berukuran baris row dan kolom col
 
@@ -46,11 +48,11 @@ void printMap(MAP M) {
 		printf("%d ", i);
 		for (j = 0; j <= MapKolEff(M); j++) {
 			printf("* ");
-			if (MapElmt(M, i, j).chr == Nil) {
+			if (Type(Unit(M, i, j)) == Nil) {
 				printf("  ");
 			}
 			else {
-				printf("%c ", MapElmt(M, i, j).chr);
+				printf("%c ", Type(Unit(M, i, j)));
 			}
 		}
 		printf("*\n  ");

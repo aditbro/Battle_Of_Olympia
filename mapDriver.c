@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 int main() {
-	Map M;
+	MAP M;
 	
 	createMap(&M, 3, 10);
 	printMap(M);

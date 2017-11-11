@@ -14,7 +14,7 @@
 #define Nil '0'
 
 typedef struct {
-    UNIT chr;	//karakter
+    UNIT unit;	//karakter
     char bld;	//building
 } PION;
 
@@ -29,6 +29,7 @@ typedef struct {
 #define MapBrsEff(M)	(M).NBrsEff
 #define MapKolEff(M)	(M).NKolEff
 #define MapElmt(M,i,j)	(M).P[(i)][(j)]
+#define Unit(M,i,j)		(M).P[(i)][(j)].unit
 
 
 // ----------Constructor---------- //
