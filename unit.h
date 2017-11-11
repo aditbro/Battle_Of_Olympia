@@ -4,10 +4,10 @@
 
 #include "ADT/point.h"
 #include "ADT/boolean.h"
-#include "map.h"
 
 typedef struct {
     char type;
+	int owner;
     int max_health;
     int health;
     int attack;
@@ -21,6 +21,7 @@ typedef struct {
 } UNIT;
 
 #define Type(U) (U).type
+#define Owner(U) (U).owner
 #define M_Hp(U) (U).max_health
 #define Hp(U) ((U).health)
 #define Atk(U) (U).attack

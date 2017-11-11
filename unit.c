@@ -1,17 +1,19 @@
-#include "stdio.h"
+#include <stdio.h>
 #include "unit.h"
 
 void Init_unit (UNIT * U){
 
-    M_Hp(*U)    = 0;
-    Hp(*U)      = 0;
-    Atk(*U)     = 0;
-    M_Mov(*U)   = 0;
-    Mov(*U)     = 0;
-    Cost(*U)    = 0;
-    Pos(*U)     = MakePOINT(0, 0);
-    Type(*U)    = 'U';
-    Can_Atk(*U) = false;
+	Owner(*U)		= 0;
+	Type(*U)		= '0';
+    M_Hp(*U)		= 0;
+    Hp(*U)			= 0;
+    Atk(*U)			= 0;
+    M_Mov(*U)		= 0;
+    Mov(*U)		    = 0;
+    Cost(*U)		= 0;
+    Pos(*U)			= MakePOINT(0, 0);
+    Atk_Type(*U)    = 'U';
+    Can_Atk(*U)		= false;
 
 }
 
