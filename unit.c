@@ -1,4 +1,4 @@
-
+#include "stdio.h"
 #include "unit.h"
 
 void Init_unit (UNIT * U){
@@ -24,6 +24,7 @@ UNIT Create_new_unit(){
 
 void Show_unit_info (UNIT U){
 
+    printf("Unit Type    : %c\n", Type(U));
     printf("Max HP       : %d\n", M_Hp(U));
     printf("HP           : %d\n", Hp(U));
     printf("Atk          : %d\n", Atk(U));
@@ -31,7 +32,7 @@ void Show_unit_info (UNIT U){
     printf("Movement     : %d\n", Mov(U));
     printf("Cost         : %d\n", Cost(U));
     printf("Position     : <%d, %d>\n", Absis(Pos(U)), Ordinat((Pos(U))));
-    printf("Type         : %c\n", Type(U));
+    printf("Attack Type  : %c\n", Atk_Type(U));
     printf("Can attack   : ");
 
     if (Can_Atk(U)){
@@ -40,4 +41,46 @@ void Show_unit_info (UNIT U){
     else{
         printf("no\n");
     }
+}
+
+void attack(UNIT *Attacker)
+/*I.S. Attacker terdefinisi*/
+/*F.S. menjalankan command attack sesuai kondisi yang terdefinisi*/
+{
+    /*int Found=false; 
+
+    if(M(Absis(Pos(*Attacker))+1,Ordinat(Pos(*Attacker)))!='0'){
+        Found=true;
+
+    }
+    if(M(Absis(Pos(*Attacker))-1,Ordinat(Pos(*Attacker)))!='0'){
+        Found=true;
+    }
+    if(M(Absis(Pos(*Attacker)),Ordinat(Pos(*Attacker))+1)!='0'){
+        Found=true;
+    }
+    if(M(Absis(Pos(*Attacker)),Ordinat(Pos(*Attacker))-1)!='0'){
+        Found=true;
+    }*/
+}
+
+void unit_attack(UNIT *Attacker, UNIT *Defender)
+/*I.S. Attacker dan Defender letaknya bersebalahan*/
+/*F.S. health dari Attacker dan Defender berubah sesuai kondisi*/
+{
+    Can_Atk(*Attacker)=false;
+    if(Type(*Defender)!='K'){
+        if(Type(*Attacker)==Type(*Defender)){
+            M_Hp(*Defender)-=Atk(*Attacker);
+            if(M_Hp(*Defender)!=0){
+                M_Hp(*Attacker)-=Atk(*Defender);   
+            } 
+        }else{
+            M_Hp(*Defender)-=Atk(*Attacker);
+        }
+    }else{
+        M_Hp(*Attacker)-=Atk(*Defender);
+        M_Hp(*Defender)-=Atk(*Attacker);
+    }
+
 }
