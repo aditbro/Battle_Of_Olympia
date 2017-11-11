@@ -1,27 +1,53 @@
 #include <stdio.h>
 #include "unit.h"
-/*void Init_unit (UNIT * U){
+void Init_unit(UNIT * U,char type,int owner,int x, int y){
 
-	Owner(*U)		= 0;
-	Type(*U)		= '0';
-    M_Hp(*U)		= 0;
-    Hp(*U)			= 0;
-    Atk(*U)			= 0;
-    M_Mov(*U)		= 0;
-    Mov(*U)		    = 0;
-    Cost(*U)		= 0;
-    Pos(*U)			= MakePOINT(0, 0);
-    Atk_Type(*U)    = 'U';
-    Can_Atk(*U)		= false;
+	Owner(*U)		= owner;
+    Type(*U)		= type;
+    if(type=='S'){
+        M_Hp(*U)		= 100;
+        Hp(*U)			= 100;
+        Atk(*U)			= 20;
+        M_Mov(*U)		= 3;
+        Mov(*U)		    = 3;
+        Cost(*U)		= 2;
+        Atk_Type(*U)    = 'M';
+    }else if(type=='A'){
+        M_Hp(*U)		= 100;
+        Hp(*U)			= 100;
+        Atk(*U)			= 15;
+        M_Mov(*U)		= 2;
+        Mov(*U)		    = 2;
+        Cost(*U)		= 1;
+        Atk_Type(*U)    = 'R';
+    }else if(type=='K'){
+        M_Hp(*U)		= 100;
+        Hp(*U)			= 100;
+        Atk(*U)			= 25;
+        M_Mov(*U)		= 1;
+        Mov(*U)		    = 1;
+        Cost(*U)		= 0;
+        Atk_Type(*U)    = 'M';
+    }else if(type=='W'){
+        M_Hp(*U)		= 100;
+        Hp(*U)			= 100;
+        Atk(*U)			= 20;
+        M_Mov(*U)		= 3;
+        Mov(*U)		    = 3;
+        Cost(*U)		= 5;
+        Atk_Type(*U)    = 'M';
+    }
+    Pos(*U)			= MakePOINT(x, y);
+    Can_Atk(*U)		= true;
 
 }
 
-UNIT Create_new_unit(){
+UNIT Create_new_unit(char type,int owner,int x, int y){
 
     UNIT new_unit;
-    Init_unit(&new_unit);
+    Init_unit(&new_unit,type,owner,x,y);
     return new_unit;
-    }*/
+    }
 
 void Show_unit_info (UNIT U){
 

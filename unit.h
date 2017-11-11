@@ -31,7 +31,8 @@ typedef struct {
 #define Atk_Type(U) (U).atk_type
 #define Can_Atk(U) (U).can_attack
 
-
+void Init_unit(UNIT * U,char type,int owner,int x, int y);
+UNIT Create_new_unit(char type,int owner,int x, int y);
 void print_type(UNIT U);
 /*I.S. U terdefinisi*/
 /*F.S. menuliskan jenis dari U*/
