@@ -1,6 +1,6 @@
 
-#include "matriks.h"
-#include "point.h"
+#include "ADT/matriks.h"
+#include "ADT/point.h"
 #include "Offbattle.h"
 #include <stdlib.h>
 #include <time.h>
