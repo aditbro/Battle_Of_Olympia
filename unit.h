@@ -4,6 +4,7 @@
 
 #include "ADT/point.h"
 #include "ADT/boolean.h"
+#include "ADT/matriks.h"
 
 typedef struct {
     char type;
@@ -44,6 +45,5 @@ void Show_unit_info (UNIT U);
 void show_unit_available(UNIT U,boolean Retaliates);
 /*I.S. U terdefinisi*/
 /*F.S. menuliskan atribut dari unit yang available*/
-
 
 #endif

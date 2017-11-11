@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "Offbattle.h"
 #include "unit.h"
+#include "unit_battle.h"
 int main() {
 	MAP M;
 	int col, row;
@@ -17,14 +18,23 @@ int main() {
 
 	createMap(&M, row, col);
 	Init_game(&M,row,col);
-	Unit(M, 1, 1) = Create_new_unit('A',1,1,1);
+	Unit(M, 1, 1) = Create_new_unit('S',1,1,1);
 	Unit(M, 1, 2) = Create_new_unit('S',2,1,2);
 	/*Unit(M, 3, 5).type = 'K';
 	Unit(M, 3, 5).owner = 0;
 	
 	MapElmt(M, 2, 3).bld = 'V';*/
 	printMap(M);
-	scanf('%c',inp);
-	if(inp=='')
+	//scanf("%c",inp);
+	
+	scanf("%c",&inp);
+	while(inp!='Q'){
+		if(inp=='A'){
+			attack(&Unit(M, 1, 1),&M);
+		}else if(inp=='S'){
+			Show_unit_info(Unit(M, 1, 1));
+		}
+		scanf("%c",&inp);
+	}
 	return 0;
 }

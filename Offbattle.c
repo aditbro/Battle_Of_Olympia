@@ -5,7 +5,6 @@
 #include "unit.h"
 #include <stdlib.h>
 #include <time.h>
-#include "unit.h"
 /* LAST UPDATE : 11 NOV 2017 - 23 : 16 */
 
 void Init_game(MAP *M, int map_x, int map_y){
