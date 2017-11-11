@@ -1,6 +1,5 @@
-#include "stdio.h"
 #include "unit.h"
-
+#include <stdio.h>
 void Init_unit (UNIT * U){
 
     M_Hp(*U)    = 0;
@@ -42,45 +41,31 @@ void Show_unit_info (UNIT U){
         printf("no\n");
     }
 }
-
-void attack(UNIT *Attacker)
-/*I.S. Attacker terdefinisi*/
-/*F.S. menjalankan command attack sesuai kondisi yang terdefinisi*/
+void show_unit_available(UNIT U,boolean Retaliates)
+/*I.S. U terdefinisi*/
+/*F.S. menuliskan atribut dari unit yang available*/
 {
-    /*int Found=false; 
-
-    if(M(Absis(Pos(*Attacker))+1,Ordinat(Pos(*Attacker)))!='0'){
-        Found=true;
-
+    print_type(U);
+    TulisPoint(Pos(U));
+    printf(" | ");
+    printf("Health %d/%d  ",Hp(U),M_Hp(U));
+    if(Retaliates){
+        printf((Retaliates));
     }
-    if(M(Absis(Pos(*Attacker))-1,Ordinat(Pos(*Attacker)))!='0'){
-        Found=true;
-    }
-    if(M(Absis(Pos(*Attacker)),Ordinat(Pos(*Attacker))+1)!='0'){
-        Found=true;
-    }
-    if(M(Absis(Pos(*Attacker)),Ordinat(Pos(*Attacker))-1)!='0'){
-        Found=true;
-    }*/
+    printf("\n");
 }
 
-void unit_attack(UNIT *Attacker, UNIT *Defender)
-/*I.S. Attacker dan Defender letaknya bersebalahan*/
-/*F.S. health dari Attacker dan Defender berubah sesuai kondisi*/
+void print_type(UNIT U)
+/*I.S. U terdefinisi*/
+/*F.S. menuliskan jenis dari U*/
 {
-    Can_Atk(*Attacker)=false;
-    if(Type(*Defender)!='K'){
-        if(Type(*Attacker)==Type(*Defender)){
-            M_Hp(*Defender)-=Atk(*Attacker);
-            if(M_Hp(*Defender)!=0){
-                M_Hp(*Attacker)-=Atk(*Defender);   
-            } 
-        }else{
-            M_Hp(*Defender)-=Atk(*Attacker);
-        }
-    }else{
-        M_Hp(*Attacker)-=Atk(*Defender);
-        M_Hp(*Defender)-=Atk(*Attacker);
+    if(Type(U)=='K'){
+        printf("King ");
+    }else if(Type(U)=='A'){
+        printf("Archer ");
+    }else if(Type(U)=='S'){
+        printf("Swordman ");
+    }else if(Type(U)=='W'){
+        printf("White Mage ");
     }
-
 }
