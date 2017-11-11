@@ -42,7 +42,7 @@ boolean stack_IsFull (Stack S)
 }
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */
-void stack_Push (Stack * S, infotype X)
+void stack_Push (Stack * S, stack_infotype X)
 /* Menambahkan X sebagai elemen Stack S. */
 /* I.S. S mungkin kosong, tabel penampung elemen stack TIDAK penuh */
 /* F.S. X menjadi TOP yang baru,TOP bertambah 1 */
@@ -59,7 +59,7 @@ void stack_Push (Stack * S, infotype X)
 }
 
 /* ************ Menghapus sebuah elemen Stack ************ */
-void stack_Pop (Stack * S, infotype* X)
+void stack_Pop (Stack * S, stack_infotype* X)
 /* Menghapus X dari Stack S. */
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
