@@ -50,7 +50,7 @@ typedef struct {
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create tabel kosong  */
-void array_MakeEmpty (TabInt * T)
+void array_MakeEmpty (TabInt *T)
 /* I.S. T sembarang */
 /* F.S. Terbentuk tabel T kosong dengan kapasitas IdxMax-IdxMin+1 */
 {

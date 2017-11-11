@@ -52,7 +52,17 @@ void printMap(MAP M) {
 				printf("  ");
 			}
 			else {
-				printf("%c ", Type(Unit(M, i, j)));
+				if (Owner(Unit(M, i, j)) == 1) {
+					print_red(Type(Unit(M, i, j)));
+					printf(" ");
+				}
+				else if (Owner(Unit(M, i, j)) == 2) {
+					print_blue(Type(Unit(M, i, j)));
+					printf(" ");
+				}
+				else {
+					printf("%c ", Type(Unit(M, i, j)));
+				}
 			}
 		}
 		printf("*\n  ");
