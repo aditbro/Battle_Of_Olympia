@@ -21,7 +21,7 @@ void Init_game(MAP *M, int map_x, int map_y){
     void Set_element(MAP *M, POINT index, char symbol){
         /* Procedure to set symbol into designated index in matrix */
 
-        Elmt(*M, Absis(index), Ordinat(index)) = symbol;
+        Build(*M, Absis(index), Ordinat(index)) = symbol;
     }
 
     int Village_too_close(POINT index, int map_x, int map_y){
@@ -65,18 +65,18 @@ void Init_game(MAP *M, int map_x, int map_y){
 
     /* Place tower and castle in position */
     // [MIGHT NEED SOME ADJUSTMENT, MAP element will be a struct]
-    Set_element(MAP, tower_1, tower_symbol);
-    Set_element(MAP, tower_2, tower_symbol);
+    Set_element(M, tower_1, tower_symbol);
+    Set_element(M, tower_2, tower_symbol);
 
-    Set_element(MAP, castle_1a, castle_symbol);
-    Set_element(MAP, castle_1b, castle_symbol);
-    Set_element(MAP, castle_1c, castle_symbol);
-    Set_element(MAP, castle_1d, castle_symbol);
+    Set_element(M, castle_1a, castle_symbol);
+    Set_element(M, castle_1b, castle_symbol);
+    Set_element(M, castle_1c, castle_symbol);
+    Set_element(M, castle_1d, castle_symbol);
 
-    Set_element(MAP, castle_2a, castle_symbol);
-    Set_element(MAP, castle_2b, castle_symbol);
-    Set_element(MAP, castle_2c, castle_symbol);
-    Set_element(MAP, castle_2d, castle_symbol);
+    Set_element(M, castle_2a, castle_symbol);
+    Set_element(M, castle_2b, castle_symbol);
+    Set_element(M, castle_2c, castle_symbol);
+    Set_element(M, castle_2d, castle_symbol);
 
 
     /* Setup villages */
@@ -89,13 +89,13 @@ void Init_game(MAP *M, int map_x, int map_y){
         POINT village = MakePOINT(rand() % map_x, rand() % map_y);
 
         /* Check enability of map to put village in that position */
-        char content = Elmt(*MAP, Absis(village), Ordinat(village));
+        char content = Build(*M, Absis(village), Ordinat(village));
         int too_close = Village_too_close(village, map_x, map_y);
 
         if (content != castle_symbol && content != tower_symbol && !too_close){
 
             /* If possible */
-            Set_element(MAP, village, village_symbol);
+            Set_element(M, village, village_symbol);
             village_count--;
 
         }

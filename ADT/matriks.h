@@ -6,10 +6,10 @@
 #include "boolean.h"
 
 /* Ukuran minimum dan maksimum baris dan kolom */
-#define BrsMin 1
-#define BrsMax 100
-#define KolMin 1
-#define KolMax 100
+#define BrsMin 0
+#define BrsMax 10
+#define KolMin 0
+#define KolMax 10
 
 typedef int matriks_indeks; /* indeks baris, kolom */
 typedef int matriks_ElType;
