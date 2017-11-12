@@ -1,8 +1,9 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "ADT/list.h"
-#include "ADT/pcolor.h"
+#include "../ADT/pcolor.h"
+#include "villagelist.h"
+#include "unitlist.h"
 
 typedef struct {
 	int ID;
