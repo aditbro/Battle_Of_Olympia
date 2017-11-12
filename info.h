@@ -2,18 +2,17 @@
 
 #include "map.h"
 #include "unit.h"
+#include "building.h"
 #include "ADT/boolean.h"
 #include <stdio.h>
 
 typedef struct {
 	int Row;
 	int Column;
-	UNIT Unit;
 } Cell;
 
-#define Row(C)		 (C).Row
-#define Col(C)		 (C).Column
-#define UnitInCell(C) (C).Unit
+#define Row(C)	(C).Row
+#define Col(C)	(C).Column
 
 /* CTOR */
 void CreateCell(Cell *C, int row, int col);

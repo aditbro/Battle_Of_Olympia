@@ -34,37 +34,43 @@ void unit_attack(UNIT * Attacker, UNIT * Defender)
             if(Atk_Type(*Attacker)==Atk_Type(*Defender)){
                 Hp(*Defender)-=Atk(*Attacker);
                 printf("Enemy's ");
-                print_type(*Defender);
-                printf("is damaged by %d\n",Atk(*Defender));
+                print_unit_type(*Defender);
+                printf("is damaged by %d\n",Atk(*Attacker));
                 if(Hp(*Defender)!=0){
-                    Hp(*Attacker)-=Atk(*Defender);
+                    Hp(*Attacker)-=Def(*Defender);
                     printf("Enemy's ");
-                    print_type(*Attacker);
+                    print_unit_type(*Defender);
                     printf("retaliates.\n");
-                    printf("Enemy's ");
-                    print_type(*Attacker);
-                    printf("is damaged by %d\n",Atk(*Attacker));   
+                    printf("Your ");
+                    print_unit_type(*Attacker);
+                    printf("is damaged by %d\n",def(*Defender));  
+                }else{
+                    Type(*Defender)=Nil;
                 }
             }else{
                 Hp(*Defender)-=Atk(*Attacker);
                 printf("Enemy's ");
-                print_type(*Defender);
-                printf("is damaged by %d\n",Atk(*Defender));
+                print_unit_type(*Defender);
+                printf("is damaged by %d\n",Atk(*Attacker));
             }
         }else{
             Hp(*Defender)-=Atk(*Attacker);
-            Hp(*Attacker)-=Atk(*Defender);
+            Hp(*Attacker)-=Def(*Defender);
             printf("Enemy's ");
-            print_type(*Defender);
-            printf("is damaged by %d\n",Atk(*Defender));
+            print_unit_type(*Defender);
+            printf("is damaged by %d\n",Atk(*Attacker));
             printf("Enemy's ");
-            print_type(*Attacker);
-            printf("is damaged by %d\n",Atk(*Attacker));   
+            print_unit_type(*Defender);
+            printf("retaliates.\n");
+            printf("Your ");
+            print_unit_type(*Attacker);
+            printf("is damaged by %d\n",Def(*Defender));   
         }
         if(Hp(*Attacker)==0){
             printf("Your ");
-            print_type(*Attacker);
+            print_unit_type(*Attacker);
             printf("is dead :(");
+            Type(*Attacker)=Nil;
         }
     //}
     //else{
