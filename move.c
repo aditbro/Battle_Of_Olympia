@@ -27,36 +27,56 @@ void call_move(MAP P, UNIT U)
 	stack_CreateEmpty(&Y);
 }
 
-void print_possible_move(MAP P,UNIT U)
+void possible_move(MAP *P,UNIT U)
 /**prosedur ini menampilkan map yang sudah berisi
  * semua langkah-langkah yang mungkin
  * dilakukan oleh sebuah unit
  *
- * diasumsikan pada awalnya di setiap lokasi peta diinisialisasi unit bernilai U
+ * diasumsikan pada awalnya di setiap lokasi peta diinisialisasi unit bernilai 0
  */
 {
 	POINT Loc = Pos(U);
 	for(int i = 1; i <= M_Mov(U); i++){
-		if(Type(Unit(P,Loc.Y + i,Loc.X)) == 'U'){
-			Type(Unit(P,Loc.Y + i,Loc.X)) = '#';
+		if(Type(Unit(*P,Loc.Y + i,Loc.X)) == '0'){
+			Type(Unit(*P,Loc.Y + i,Loc.X)) = '#';
+		}
+		if(Owner(U) != Owner(Unit(*P,Loc.Y+i,Loc.X))){
+			break;
 		}
 	}
 	for(int i = 1; i <= M_Mov(U); i++){
-		if(Type(Unit(P,Loc.Y - i,Loc.X)) == 'U'){
-			Type(Unit(P,Loc.Y - i,Loc.X)) = '#';
+		if(Type(Unit(*P,Loc.Y - i,Loc.X)) == '0'){
+			Type(Unit(*P,Loc.Y - i,Loc.X)) = '#';
+		}
+		if(Owner(U) != Owner(Unit(*P,Loc.Y-i,Loc.X))){
+			break;
 		}
 	}
 	for(int i = 1; i <= M_Mov(U); i++){
-		if(Type(Unit(P,Loc.Y,Loc.X - i)) == 'U'){
-			Type(Unit(P,Loc.Y - i,Loc.X - i)) = '#';
+		if(Type(Unit(*P,Loc.Y,Loc.X - i)) == '0'){
+			Type(Unit(*P,Loc.Y - i,Loc.X - i)) = '#';
+		}
+		if(Owner(U) != Owner(Unit(*P,Loc.Y,Loc.X-i))){
+			break;
 		}
 	}
 	for(int i = 1; i <= M_Mov(U); i++){
-		if(Type(Unit(P,Loc.Y,Loc.X + i)) == 'U'){
-			Type(Unit(P,Loc.Y,Loc.X + i)) = '#';
+		if(Type(Unit(*P,Loc.Y,Loc.X + i)) == '0'){
+			Type(Unit(*P,Loc.Y,Loc.X + i)) = '#';
+		}
+		if(Owner(U) != Owner(Unit(*P,Loc.Y,Loc.X+i))){
+			break;
 		}
 	}
-	printMap(P);
+	//printMap(P);
+}
+
+void print_possible_move(MAP P, UNIT U)
+/*print semua possible move dari suatu unit*/
+{
+	MAP temp = P;
+	possible_move(&temp, U);
+	printMap(temp);
 }
 
 int check_if_possible(MAP P, UNIT U, int x, int y)
@@ -65,16 +85,15 @@ int check_if_possible(MAP P, UNIT U, int x, int y)
  * jika tidak, fungsi akan mengembalikan false/0
  */
 {
-	POINT Loc = Pos(U);
-	int distance = x-Loc.X + y - Loc.Y;
-	if(Type(Unit(P,y,x)) != 'U'){
-		return 0;
-	}else if(absolute(distance) > M_Mov(U)){
+	MAP temp = P;
+	possible_move(&temp, U);
+	if(Unit(temp, y, x).type != '#'){
 		return 0;
 	}else{
 		return 1;
 	}
 }
+
 void move_unit(MAP P, UNIT *U, int x, int y)
 /*prosedur ini akan memindahkan unit menuju sebuah sel yang berkoordinat (x,y)
  * lalu memasukan lokasi sebelumnya ke stack agar bisa melakukan undo
@@ -88,6 +107,7 @@ void move_unit(MAP P, UNIT *U, int x, int y)
 	Pos(*U) = Loc;
 	M_Mov(*U) -= 1;
 }
+
 void undo(MAP P, UNIT *U)
 /*prosedur ini mengembalikan state unit ke state sebelum pindah */
 {
