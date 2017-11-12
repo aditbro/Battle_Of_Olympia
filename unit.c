@@ -83,7 +83,7 @@ void show_unit_available(UNIT U,boolean Retaliates)
     printf("\n");
 }
 
-void print_type(UNIT U)
+void print_unit_type(UNIT U)
 /*I.S. U terdefinisi*/
 /*F.S. menuliskan jenis dari U*/
 {

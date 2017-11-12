@@ -8,22 +8,22 @@ void CreateCell(Cell *C, int row, int col) {
 }
 
 boolean IsUnitInCell(Map M, Cell C) {
-	return (Unit(M, row, col).type!=Nil);
+	return (Unit(M, Row(C),Col(C)).type!=Nil);
 }
 // Return true jika ada unit di cell dan false jika tidak ada unit di cell
 
 boolean IsBuildingInCell(Map M, Cell C) {
-	return (MapElmt(M, row, col).bld!=Nil);
+	return (Build(M, Row(C),Col(C))!=Nil);
 }
 // Return true jika ada building di cell dan false jika tidak ada building di cell
 
-char UnitInCell(Map M, Cell C) {
-	return (Unit(M, row, col));
+UNIT UnitInCell(Map M, Cell C) {
+	return (Unit(M, Row(C), Col(C)));
 }
 // Return tipe unit di cell
 
-char BuildingInCell(Map M, Cell C) {
-	return (MapElmt(M, row, col).bld);
+Build BuildingInCell(Map M, Cell C) {
+	return (Build(M, Row(C), Col(C)));
 }
 // Return tipe building di cell
 
@@ -36,20 +36,27 @@ void printInfo(Map M) {
 	CreateCell(&C, row, col);
 
 	printf("== Cell Info ==\n");
-	if (IsUnitInCell(M, C)) {
-		if (UnitInCell(M, C)=='K'){
-			printf("King");
-		}
-		else if(UnitInCell(M, C)=='A'){
-        printf("Archer");
-	    }
-	    else if(UnitInCell(M, C)=='S'){
-	        printf("Swordman");
-	    }
-	    else if(UnitInCell(M, C)=='W'){
-	        printf("White Mage");
-	    }
+	if (IsBuildingInCell(M, C)){
+		Build B = BuildingInCell(M, C);
+		print_build_type(B);
+		printf("\nOwned by player ");
+		printf("%d\n", Build_Owner(B));
 	}
+	else{
+		printf("No building in cell.\n");
+	}
+	printf("== Unit Info ==\n");
+	if (IsUnitInCell(M, C)){
+		UNIT U = UnitInCell(M, C);
+		print_unit_type(U);
+		printf("\nOwned by player ");
+		printf("%d", Owner(U));
+		printf("\nHealth %d/%d | ATK %d | DEF %d\n", Hp(U),M_Hp(U),ATK(U),GHP(U));
+	}
+	else{
+		printf("No unit in cell.\n");
+	}
+	printf("\n");
 }
 // Mencetak info
 // Called in main if user input is INFO
