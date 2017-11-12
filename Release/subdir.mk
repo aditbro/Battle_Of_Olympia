@@ -8,6 +8,7 @@ C_SRCS += \
 ../Offbattle.c \
 ../main.c \
 ../map.c \
+../mapDriver.c \
 ../move.c \
 ../unit.c \
 ../unit_battle.c 
@@ -17,6 +18,7 @@ OBJS += \
 ./Offbattle.o \
 ./main.o \
 ./map.o \
+./mapDriver.o \
 ./move.o \
 ./unit.o \
 ./unit_battle.o 
@@ -26,6 +28,7 @@ C_DEPS += \
 ./Offbattle.d \
 ./main.d \
 ./map.d \
+./mapDriver.d \
 ./move.d \
 ./unit.d \
 ./unit_battle.d 
@@ -35,7 +38,7 @@ C_DEPS += \
 %.o: ../%.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: GCC C Compiler'
-	gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
+	gcc -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

@@ -11,6 +11,7 @@ C_SRCS += \
 ../ADT/mesinkar.c \
 ../ADT/mesinkata.c \
 ../ADT/pcolor.c \
+../ADT/pcolor_driver.c \
 ../ADT/point.c \
 ../ADT/queue.c \
 ../ADT/stackt.c 
@@ -23,6 +24,7 @@ OBJS += \
 ./ADT/mesinkar.o \
 ./ADT/mesinkata.o \
 ./ADT/pcolor.o \
+./ADT/pcolor_driver.o \
 ./ADT/point.o \
 ./ADT/queue.o \
 ./ADT/stackt.o 
@@ -35,6 +37,7 @@ C_DEPS += \
 ./ADT/mesinkar.d \
 ./ADT/mesinkata.d \
 ./ADT/pcolor.d \
+./ADT/pcolor_driver.d \
 ./ADT/point.d \
 ./ADT/queue.d \
 ./ADT/stackt.d 
@@ -44,7 +47,7 @@ C_DEPS += \
 ADT/%.o: ../ADT/%.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: GCC C Compiler'
-	gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
+	gcc -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

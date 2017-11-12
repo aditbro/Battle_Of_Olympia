@@ -23,7 +23,8 @@ void call_move(MAP P, UNIT U)
  * prosedur ini akan menginisialisasi STACK sehingga bisa melakukan UNDO
  */
 {
-	stack_CreateEmpty(&S);
+	stack_CreateEmpty(&X);
+	stack_CreateEmpty(&Y);
 }
 
 void print_possible_move(MAP P,UNIT U)
@@ -35,22 +36,22 @@ void print_possible_move(MAP P,UNIT U)
  */
 {
 	POINT Loc = Pos(U);
-	for(int i = 1; i <= M_mov(U); i++){
+	for(int i = 1; i <= M_Mov(U); i++){
 		if(Type(Unit(P,Loc.Y + i,Loc.X)) == 'U'){
 			Type(Unit(P,Loc.Y + i,Loc.X)) = '#';
 		}
 	}
-	for(int i = 1; i <= M_mov(U); i++){
+	for(int i = 1; i <= M_Mov(U); i++){
 		if(Type(Unit(P,Loc.Y - i,Loc.X)) == 'U'){
 			Type(Unit(P,Loc.Y - i,Loc.X)) = '#';
 		}
 	}
-	for(int i = 1; i <= M_mov(U); i++){
+	for(int i = 1; i <= M_Mov(U); i++){
 		if(Type(Unit(P,Loc.Y,Loc.X - i)) == 'U'){
 			Type(Unit(P,Loc.Y - i,Loc.X - i)) = '#';
 		}
 	}
-	for(int i = 1; i <= M_mov(U); i++){
+	for(int i = 1; i <= M_Mov(U); i++){
 		if(Type(Unit(P,Loc.Y,Loc.X + i)) == 'U'){
 			Type(Unit(P,Loc.Y,Loc.X + i)) = '#';
 		}
@@ -68,7 +69,7 @@ int check_if_possible(MAP P, UNIT U, int x, int y)
 	int distance = x-Loc.X + y - Loc.Y;
 	if(Type(Unit(P,y,x)) != 'U'){
 		return 0;
-	}else if(absolute(distance) > M_mov(U)){
+	}else if(absolute(distance) > M_Mov(U)){
 		return 0;
 	}else{
 		return 1;
@@ -80,20 +81,20 @@ void move_unit(MAP P, UNIT *U, int x, int y)
  */
 {
 	POINT Loc = Pos(*U);
-	stack_push(&X, Loc.X);
-	stack_push(&Y, Loc.Y);
+	stack_Push(&X, Loc.X);
+	stack_Push(&Y, Loc.Y);
 	Loc.X = x;
 	Loc.Y = y;
 	Pos(*U) = Loc;
-	M_mov(*U) -= 1;
+	M_Mov(*U) -= 1;
 }
 void undo(MAP P, UNIT *U)
 /*prosedur ini mengembalikan state unit ke state sebelum pindah */
 {
 	int xs;
-	stack_pop(&X, &xs);
+	stack_Pop(&X, &xs);
 	int ys;
-	stack_pop(&Y, &ys);
+	stack_Pop(&Y, &ys);
 	move_unit(P, U, xs, ys);
-	M_mov(*U) += 2;
+	M_Mov(*U) += 2;
 }
