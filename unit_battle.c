@@ -34,15 +34,15 @@ void unit_attack(UNIT * Attacker, UNIT * Defender)
             if(Atk_Type(*Attacker)==Atk_Type(*Defender)){
                 Hp(*Defender)-=Atk(*Attacker);
                 printf("Enemy's ");
-                print_type(*Defender);
+                print_unit_type(*Defender);
                 printf("is damaged by %d\n",Atk(*Defender));
                 if(Hp(*Defender)!=0){
                     Hp(*Attacker)-=Atk(*Defender);
                     printf("Enemy's ");
-                    print_type(*Attacker);
+                    print_unit_type(*Attacker);
                     printf("retaliates.\n");
                     printf("Enemy's ");
-                    print_type(*Attacker);
+                    print_unit_type(*Attacker);
                     printf("is damaged by %d\n",Atk(*Attacker));  
                 }else{
                     Type(*Defender)=Nil;
@@ -50,22 +50,22 @@ void unit_attack(UNIT * Attacker, UNIT * Defender)
             }else{
                 Hp(*Defender)-=Atk(*Attacker);
                 printf("Enemy's ");
-                print_type(*Defender);
+                print_unit_type(*Defender);
                 printf("is damaged by %d\n",Atk(*Defender));
             }
         }else{
             Hp(*Defender)-=Atk(*Attacker);
             Hp(*Attacker)-=Atk(*Defender);
             printf("Enemy's ");
-            print_type(*Defender);
+            print_unit_type(*Defender);
             printf("is damaged by %d\n",Atk(*Defender));
             printf("Enemy's ");
-            print_type(*Attacker);
+            print_unit_type(*Attacker);
             printf("is damaged by %d\n",Atk(*Attacker));   
         }
         if(Hp(*Attacker)==0){
             printf("Your ");
-            print_type(*Attacker);
+            print_unit_type(*Attacker);
             printf("is dead :(");
             Type(*Attacker)=Nil;
         }

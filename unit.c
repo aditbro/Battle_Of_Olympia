@@ -8,6 +8,8 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
         M_Hp(*U)		= 100;
         Hp(*U)			= 100;
         Atk(*U)			= 20;
+        Def(*U)         = 15;
+        Heal(*U)        = 0;
         M_Mov(*U)		= 3;
         Mov(*U)		    = 3;
         Cost(*U)		= 2;
@@ -16,6 +18,8 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
         M_Hp(*U)		= 100;
         Hp(*U)			= 100;
         Atk(*U)			= 15;
+        Def(*U)         = 15;
+        Heal(*U)        = 0;
         M_Mov(*U)		= 2;
         Mov(*U)		    = 2;
         Cost(*U)		= 1;
@@ -24,6 +28,8 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
         M_Hp(*U)		= 100;
         Hp(*U)			= 100;
         Atk(*U)			= 25;
+        Def(*U)         = 30;
+        Heal(*U)        = 0;
         M_Mov(*U)		= 1;
         Mov(*U)		    = 1;
         Cost(*U)		= 0;
@@ -32,6 +38,8 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
         M_Hp(*U)		= 100;
         Hp(*U)			= 100;
         Atk(*U)			= 20;
+        Def(*U)         = 5;
+        Heal(*U)        = 25;
         M_Mov(*U)		= 3;
         Mov(*U)		    = 3;
         Cost(*U)		= 5;
@@ -51,16 +59,20 @@ UNIT Create_new_unit(char type,int owner,int x, int y){
 
 void Show_unit_info (UNIT U){
 
-    printf("Unit Type    : %c\n", Type(U));
-    printf("Max HP       : %d\n", M_Hp(U));
-    printf("HP           : %d\n", Hp(U));
-    printf("Atk          : %d\n", Atk(U));
-    printf("Max Movement : %d\n", M_Mov(U));
-    printf("Movement     : %d\n", Mov(U));
-    printf("Cost         : %d\n", Cost(U));
-    printf("Position     : <%d, %d>\n", Absis(Pos(U)), Ordinat((Pos(U))));
-    printf("Attack Type  : %c\n", Atk_Type(U));
-    printf("Can attack   : ");
+    printf("Unit Type            : %c\n", Type(U));
+    printf("Max HP               : %d\n", M_Hp(U));
+    printf("HP                   : %d\n", Hp(U));
+    printf("Atk                  : %d\n", Atk(U));
+    printf("Def                  : %d\n", Def(U));
+    if (Type(U)=='W'){
+        printf("Healing (White Mage) : %d\n", Heal(U));
+    }
+    printf("Max Movement         : %d\n", M_Mov(U));
+    printf("Movement             : %d\n", Mov(U));
+    printf("Cost                 : %d\n", Cost(U));
+    printf("Position             : <%d, %d>\n", Absis(Pos(U)), Ordinat((Pos(U))));
+    printf("Attack Type          : %c\n", Atk_Type(U));
+    printf("Can attack           : ");
 
     if (Can_Atk(U)){
         printf("yes\n");

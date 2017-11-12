@@ -51,7 +51,7 @@ void printInfo(Map M) {
 		print_unit_type(U);
 		printf("\nOwned by player ");
 		printf("%d", Owner(U));
-		printf("\nHealth %d/%d | ATK %d | DEF %d\n", Hp(U),M_Hp(U),ATK(U),GHP(U));
+		printf("\nHealth %d/%d | ATK %d | DEF %d\n", Hp(U),M_Hp(U),ATK(U),Def(U));
 	}
 	else{
 		printf("No unit in cell.\n");

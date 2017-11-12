@@ -12,6 +12,8 @@ typedef struct {
     int max_health;
     int health;
     int attack;
+    int defence;
+    int heal;
     int max_movement;
     int movement;
     int cost;
@@ -26,6 +28,8 @@ typedef struct {
 #define M_Hp(U) (U).max_health
 #define Hp(U) ((U).health)
 #define Atk(U) (U).attack
+#define Def(U) (U).defence
+#define Heal(U) (U).heal
 #define M_Mov(U) (U).max_movement
 #define Mov(U) (U).movement
 #define Cost(U) (U).cost
