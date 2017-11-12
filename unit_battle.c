@@ -43,7 +43,9 @@ void unit_attack(UNIT * Attacker, UNIT * Defender)
                     printf("retaliates.\n");
                     printf("Enemy's ");
                     print_type(*Attacker);
-                    printf("is damaged by %d\n",Atk(*Attacker));   
+                    printf("is damaged by %d\n",Atk(*Attacker));  
+                }else{
+                    Type(*Defender)=Nil;
                 }
             }else{
                 Hp(*Defender)-=Atk(*Attacker);
@@ -65,6 +67,7 @@ void unit_attack(UNIT * Attacker, UNIT * Defender)
             printf("Your ");
             print_type(*Attacker);
             printf("is dead :(");
+            Type(*Attacker)=Nil;
         }
     //}
     //else{
