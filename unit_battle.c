@@ -35,15 +35,15 @@ void unit_attack(UNIT * Attacker, UNIT * Defender)
                 Hp(*Defender)-=Atk(*Attacker);
                 printf("Enemy's ");
                 print_unit_type(*Defender);
-                printf("is damaged by %d\n",Atk(*Defender));
+                printf("is damaged by %d\n",Atk(*Attacker));
                 if(Hp(*Defender)!=0){
-                    Hp(*Attacker)-=Atk(*Defender);
+                    Hp(*Attacker)-=Def(*Defender);
                     printf("Enemy's ");
-                    print_unit_type(*Attacker);
+                    print_unit_type(*Defender);
                     printf("retaliates.\n");
-                    printf("Enemy's ");
+                    printf("Your ");
                     print_unit_type(*Attacker);
-                    printf("is damaged by %d\n",Atk(*Attacker));  
+                    printf("is damaged by %d\n",def(*Defender));  
                 }else{
                     Type(*Defender)=Nil;
                 }
@@ -51,17 +51,20 @@ void unit_attack(UNIT * Attacker, UNIT * Defender)
                 Hp(*Defender)-=Atk(*Attacker);
                 printf("Enemy's ");
                 print_unit_type(*Defender);
-                printf("is damaged by %d\n",Atk(*Defender));
+                printf("is damaged by %d\n",Atk(*Attacker));
             }
         }else{
             Hp(*Defender)-=Atk(*Attacker);
-            Hp(*Attacker)-=Atk(*Defender);
+            Hp(*Attacker)-=Def(*Defender);
             printf("Enemy's ");
             print_unit_type(*Defender);
-            printf("is damaged by %d\n",Atk(*Defender));
+            printf("is damaged by %d\n",Atk(*Attacker));
             printf("Enemy's ");
+            print_unit_type(*Defender);
+            printf("retaliates.\n");
+            printf("Your ");
             print_unit_type(*Attacker);
-            printf("is damaged by %d\n",Atk(*Attacker));   
+            printf("is damaged by %d\n",Def(*Defender));   
         }
         if(Hp(*Attacker)==0){
             printf("Your ");
