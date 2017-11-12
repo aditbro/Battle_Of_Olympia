@@ -5,9 +5,9 @@ int main() {
 	MAP M;
 	int col, row;
 
-	printf("Insert size of map (max is 10x10)\n(e.g. 5 9 means 5x9) : ");
+	printf("Insert size of map (max is 9x10)\n(e.g. 5 9 means 5x9) : ");
 	scanf("%d %d", &col, &row);
-	while (col < 8 || col > 10 || row > 10 || row < 8) {
+	while (col < 8 || col > 9 || row > 10 || row < 8) {
 		printf("Sorry, I think it's too big.\n");
 		printf("or maybe too small?\n");
 		printf("Please insert it again : ");
