@@ -4,29 +4,19 @@
 #include "unit.h"
 #include "building.h"
 #include "ADT/boolean.h"
+#include "ADT/point.h"
 #include <stdio.h>
 
-typedef struct {
-	int Row;
-	int Column;
-} Cell;
-
-#define Row(C)	(C).Row
-#define Col(C)	(C).Column
-
-/* CTOR */
-void CreateCell(Cell *C, int row, int col);
-
-boolean IsUnitInCell(Map M, Cell C);
+boolean IsUnitInCell(Map M, POINT P);
 // Return true jika ada unit di cell dan false jika tidak ada unit di cell
 
-boolean IsBuildingInCell(Map M, Cell C);
+boolean IsBuildingInCell(Map M, POINT P);
 // Return true jika ada building di cell dan false jika tidak ada building di cell
 
-void CellUnit(Map M, Cell C, Unit* U);
+UNIT CellUnit(Map M, POINT P);
 // Return unit di cell
 
-char BuildingInCell(Map M, int row, Cell C);
+Build BuildingInCell(Map M, POINT P);
 // Return tipe building di cell
 
 void printInfo();
