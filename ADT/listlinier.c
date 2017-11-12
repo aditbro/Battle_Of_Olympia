@@ -197,7 +197,7 @@ void list_InsVFirst (List *L, list_infotype X)
 {
     list_address P = list_Alokasi(X);
     if (P != Nil){
-        Insertlist_First(L, P);
+        list_InsertFirst(L, P);
     }
 }
 
@@ -522,8 +522,6 @@ void list_InversList (List *L)
 
 		P = Q;
 		Q = list_elmt_Next(Q);
-
-		P;
 		list_InsertFirst(L, P);
 		list_elmt_Next(First) = Q;
 	}
@@ -673,7 +671,7 @@ void list_Konkat (List L1, List L2, List * L3)
         while ((CP != Nil) && (!stop)){
 
 			temp = list_elmt_Info(CP);
-			tempAdr = Alokasi(temp);
+			tempAdr = list_Alokasi(temp);
 			if (tempAdr != Nil){
 				list_InsertLast(L3, tempAdr);
 				CP = list_elmt_Next(CP);

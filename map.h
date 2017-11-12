@@ -5,6 +5,7 @@
 
 #include "ADT/boolean.h"
 #include "unit.h"
+#include "building.h"
 #include "ADT/pcolor.h"
 
 #define BrsMin 0
@@ -16,7 +17,7 @@
 
 typedef struct {
     UNIT chr;	//karakter
-    char bld;	//building
+    Build bld;	//building
 	boolean move;
 	boolean select;
 } PION;
@@ -34,6 +35,7 @@ typedef struct {
 #define MapElmt(M,i,j)	(M).P[(i)][(j)]
 #define Unit(M,i,j)		(M).P[(i)][(j)].chr
 #define Move(M,i,j)		(M).P[(i)][(j)].move
+#define Build(M,i,j)    (M).P[(i)][(j)].bld
 #define Select(M,i,j)	(M).P[(i)][(j)].select
 
 

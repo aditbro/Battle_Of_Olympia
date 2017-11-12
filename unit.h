@@ -4,10 +4,11 @@
 
 #include "ADT/point.h"
 #include "ADT/boolean.h"
+#include "ADT/matriks.h"
 
 typedef struct {
     char type;
-	int owner;
+    int owner;
     int max_health;
     int health;
     int attack;
@@ -17,7 +18,7 @@ typedef struct {
     POINT position;
     char atk_type;
     boolean can_attack;
-
+    int get_hit_probability; // probabilitas kena serangan, 100 untuk selalu kena serangan, 0 tidak pernah bisa kena serangan
 } UNIT;
 
 #define Type(U) (U).type
@@ -31,22 +32,18 @@ typedef struct {
 #define Pos(U) (U).position
 #define Atk_Type(U) (U).atk_type
 #define Can_Atk(U) (U).can_attack
+#define GHP(U) (U).get_hit_probability
 
-
-
-void Init_unit (UNIT * U);
-
-UNIT Create_new_unit();
+void Init_unit(UNIT * U,char type,int owner,int x, int y);
+UNIT Create_new_unit(char type,int owner,int x, int y);
+void print_type(UNIT U);
+/*I.S. U terdefinisi*/
+/*F.S. menuliskan jenis dari U*/
 
 void Show_unit_info (UNIT U);
 
-void attack(UNIT *Attacker);
-/*I.S. Attacker terdefinisi*/
-/*F.S. menjalankan command attack sesuai kondisi yang terdefinisi*/
-
-void unit_attack(UNIT *Attacker, UNIT *Defender);
-/*I.S. Attacker dan Defender letaknya bersebalahan*/
-/*F.S. health dari Attacker dan Defender berubah sesuai kondisi*/
-
+void show_unit_available(UNIT U,boolean Retaliates);
+/*I.S. U terdefinisi*/
+/*F.S. menuliskan atribut dari unit yang available*/
 
 #endif

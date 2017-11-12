@@ -50,7 +50,7 @@ typedef struct {
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create tabel kosong  */
-void array_MakeEmpty (TabInt * T)
+void array_MakeEmpty (TabInt *T)
 /* I.S. T sembarang */
 /* F.S. Terbentuk tabel T kosong dengan kapasitas IdxMax-IdxMin+1 */
 {
@@ -145,7 +145,7 @@ void array_BacaIsi (TabInt * T)
     while (!((N>=0) && (N <= array_MaxNbEl(*T))));
 
     if (N ==0 ){
-        array_MakeEmpty(&T);
+        array_MakeEmpty(T);
     }
 
     array_Neff(*T) = N;
@@ -154,7 +154,7 @@ void array_BacaIsi (TabInt * T)
         array_Elmt(*T,i) = num;
     }
 
-    if (!IsEmpty(*T)){
+    if (!array_IsEmpty(*T)){
     scanf("%d",&num);
     array_Elmt(*T,array_Neff(*T)) = num;}
 }
@@ -192,7 +192,7 @@ void array_BacaIsiTab (TabInt * T)
     array_Neff(*T) = i-1;
 
     if (array_IsEmpty(*T)){
-        array_MakeEmpty(&T);
+        array_MakeEmpty(T);
     }
 
 }
@@ -685,7 +685,7 @@ void array_DelLastEl (TabInt * T, array_ElType * X)
 /*      Banyaknya elemen tabel berkurang satu */
 /*      Tabel T mungkin menjadi kosong */
 {
-    *X = array_Elmt(*T, GetLastIdx(*T));
+    *X = array_Elmt(*T, array_GetLastIdx(*T));
     array_Neff(*T) -= 1;
 
     // is this X causing 104 - 107 ?? //
@@ -727,7 +727,7 @@ void array_AddElUnik (TabInt * T, array_ElType X)
     /* set sentinel, I suppose */
     array_Elmt(*T, 0) = X;
 
-    if (IsEmpty(*T)){
+    if (array_IsEmpty(*T)){
         array_Elmt(*T, IdxMin) = X;
         array_Neff(*T) = 1;
     }
