@@ -13,7 +13,7 @@ Build create_new_build(char type, int owner) {
 }
 
 void print_build_type(Build B) {
-	type = Build_Type(B);
+	char type = Build_Type(B);
 	if (type=='C'){
 		printf("Castle");
 	}

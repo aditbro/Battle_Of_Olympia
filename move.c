@@ -101,16 +101,18 @@ int check_if_possible(MAP P, UNIT U, int x, int y)
 	}
 }
 
-void move_unit(MAP P, UNIT *U, int x, int y)
+void move_unit(MAP *P, UNIT *U, int x, int y)
 /*prosedur ini akan memindahkan unit menuju sebuah sel yang berkoordinat (x,y)
  * lalu memasukan lokasi sebelumnya ke stack agar bisa melakukan undo
  */
 {
 	POINT Loc = Pos(*U);
+	Unit(*P, Loc.Y,Loc.X).type = '0';
 	stack_Push(&X, Loc.X);
 	stack_Push(&Y, Loc.Y);
 	Loc.X = x;
 	Loc.Y = y;
+	Unit(*P, Loc.Y,Loc.X).type = *U;
 	Pos(*U) = Loc;
 	M_Mov(*U) -= 1;
 }
