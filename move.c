@@ -16,7 +16,7 @@ int absolute(int x){
 	}
 }
 
-void call_move(MAP P, UNIT U)
+void call_move()
 /*prosedur ini berguna ketika player memilih untuk change unit dan di awal turn
  * walaupun player tidak akan menggunakan move
  *
@@ -27,12 +27,19 @@ void call_move(MAP P, UNIT U)
 	stack_CreateEmpty(&Y);
 }
 
+void change_unit(MAP P, UNIT New, UNIT *U)
+/*prosedur ini berguna untuk memilih unit yang akan dipindahkan*/
+{
+	*U = New;
+	call_move();
+}
+
 void possible_move(MAP *P,UNIT U)
-/**prosedur ini menampilkan map yang sudah berisi
+/**prosedur ini mengubah map menjadi map yang sudah berisi
  * semua langkah-langkah yang mungkin
  * dilakukan oleh sebuah unit
  *
- * diasumsikan pada awalnya di setiap lokasi peta diinisialisasi unit bernilai 0
+ * diasumsikan pada awalnya di setiap lokasi peta diinisialisasi unit bernilai '0'
  */
 {
 	POINT Loc = Pos(U);
