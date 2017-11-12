@@ -17,6 +17,7 @@ typedef struct {
     POINT position;
     char atk_type;
     boolean can_attack;
+    int get_hit_probability; // probabilitas kena serangan, 100 untuk selalu kena serangan, 0 tidak pernah bisa kena serangan
 } UNIT;
 
 #define Type(U) (U).type
@@ -30,6 +31,7 @@ typedef struct {
 #define Pos(U) (U).position
 #define Atk_Type(U) (U).atk_type
 #define Can_Atk(U) (U).can_attack
+#define GHP(U) (U).get_hit_probability
 
 
 void print_type(UNIT U);

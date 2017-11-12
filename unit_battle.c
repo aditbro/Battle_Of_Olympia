@@ -1,7 +1,28 @@
 #include "unit.h"
 #include "map.h"
-#include <stdio.h>
 #include "ADT/array.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int getrandom(int low, int high) {
+    int r;
+    srand (time(NULL));
+    r = low + rand() / (RAND_MAX / (high - low + 1) + 1); // using this because the low-order bits of many random number generators are distressingly non-random
+    return r;
+}
+
+int get_hit (UNIT Defender) {
+    TabInt Prob;
+    int i;
+
+    array_Neff(&Prob) = 100;
+    for (i=1;i<=100;i++){
+        array_Elmt(&Prob, i) = (i<=GHP(Defender)) ? 1 : 0;
+    }
+
+    return array_Elmt(Prob, getrandom(1,100));
+}
 
 void unit_attack(UNIT * Attacker, UNIT * Defender)
 /*I.S. Attacker dan Defender letaknya bersebalahan*/
