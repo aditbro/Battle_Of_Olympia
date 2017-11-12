@@ -6,8 +6,8 @@
 
 // ----------Constructor----------
 void createMap(MAP *M, int row, int col) {
-	MapBrsEff(*M) = row;
-	MapKolEff(*M) = col;
+	MapBrsEff(*M) = row-1;
+	MapKolEff(*M) = col-1;
 	
 	for (int i = 0; i <= MapBrsEff(*M); i++) {
 		for (int j = 0; j <= MapKolEff(*M); j++) {
