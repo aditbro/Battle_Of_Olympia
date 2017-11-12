@@ -1,6 +1,7 @@
 #include "unit.h"
 #include "map.h"
 #include "ADT/array.h"
+#include "ADT/boolean.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -12,7 +13,7 @@ int getrandom(int low, int high) {
     return r;
 }
 
-int get_hit (UNIT Defender) {
+boolean get_hit (UNIT Defender) {
     TabInt Prob;
     int i;
 
@@ -21,49 +22,54 @@ int get_hit (UNIT Defender) {
         array_Elmt(&Prob, i) = (i<=GHP(Defender)) ? 1 : 0;
     }
 
-    return array_Elmt(Prob, getrandom(1,100));
+    return (array_Elmt(Prob, getrandom(1,100))==1) ? true : false;
 }
 
 void unit_attack(UNIT * Attacker, UNIT * Defender)
 /*I.S. Attacker dan Defender letaknya bersebalahan*/
 /*F.S. health dari Attacker dan Defender berubah sesuai kondisi*/
 {
-    Can_Atk(*Attacker)=false;
-    if(Type(*Defender)!='K'){
-        if(Atk_Type(*Attacker)==Atk_Type(*Defender)){
-            M_Hp(*Defender)-=Atk(*Attacker);
-            printf("Enemy’s ");
-            print_type(*Defender);
-            printf("is damaged by %d\n",M_Hp(*Defender));
-            if(M_Hp(*Defender)!=0){
-                M_Hp(*Attacker)-=Atk(*Defender);
+    if (get_hit(*Defender)){
+        Can_Atk(*Attacker)=false;
+        if(Type(*Defender)!='K'){
+            if(Atk_Type(*Attacker)==Atk_Type(*Defender)){
+                M_Hp(*Defender)-=Atk(*Attacker);
                 printf("Enemy’s ");
-                print_type(*Attacker);
-                printf("retaliates.\n");
+                print_type(*Defender);
+                printf("is damaged by %d\n",M_Hp(*Defender));
+                if(M_Hp(*Defender)!=0){
+                    M_Hp(*Attacker)-=Atk(*Defender);
+                    printf("Enemy’s ");
+                    print_type(*Attacker);
+                    printf("retaliates.\n");
+                    printf("Enemy’s ");
+                    print_type(*Attacker);
+                    printf("is damaged by %d\n",M_Hp(*Attacker));   
+                }
+            }else{
+                M_Hp(*Defender)-=Atk(*Attacker);
                 printf("Enemy’s ");
-                print_type(*Attacker);
-                printf("is damaged by %d\n",M_Hp(*Attacker));   
+                print_type(*Defender);
+                printf("is damaged by %d\n",M_Hp(*Defender));
             }
         }else{
             M_Hp(*Defender)-=Atk(*Attacker);
+            M_Hp(*Attacker)-=Atk(*Defender);
             printf("Enemy’s ");
             print_type(*Defender);
             printf("is damaged by %d\n",M_Hp(*Defender));
+            printf("Enemy’s ");
+            print_type(*Attacker);
+            printf("is damaged by %d\n",M_Hp(*Attacker));   
         }
-    }else{
-        M_Hp(*Defender)-=Atk(*Attacker);
-        M_Hp(*Attacker)-=Atk(*Defender);
-        printf("Enemy’s ");
-        print_type(*Defender);
-        printf("is damaged by %d\n",M_Hp(*Defender));
-        printf("Enemy’s ");
-        print_type(*Attacker);
-        printf("is damaged by %d\n",M_Hp(*Attacker));   
+        if(M_Hp(*Attacker)==0){
+            printf("Your ");
+            print_type(*Attacker);
+            printf("is dead :(");
+        }
     }
-    if(M_Hp(*Attacker)==0){
-        printf("Your ");
-        print_type(*Attacker);
-        printf("is dead :(");
+    else{
+        printf("Oops, enemy avoided your attack! Better luck next time ;-)");
     }
 
 }
