@@ -85,7 +85,7 @@ void show_unit_available(UNIT U,boolean Retaliates)
 /*I.S. U terdefinisi*/
 /*F.S. menuliskan atribut dari unit yang available*/
 {
-    print_type(U);
+    print_unit_type(U);
     TulisPOINT(Pos(U));
     printf(" | ");
     printf("Health %d/%d  ",Hp(U),M_Hp(U));
