@@ -27,7 +27,7 @@ void call_move()
 	stack_CreateEmpty(&Y);
 }
 
-void change_unit(MAP P, UNIT New, UNIT *U)
+void change_unit(UNIT New, UNIT *U)
 /*prosedur ini berguna untuk memilih unit yang akan dipindahkan*/
 {
 	*U = New;
@@ -47,7 +47,7 @@ void possible_move(MAP *P,UNIT U)
 		if(Type(Unit(*P,Loc.Y + i,Loc.X)) == '0'){
 			Type(Unit(*P,Loc.Y + i,Loc.X)) = '#';
 		}
-		if(Owner(U) != Owner(Unit(*P,Loc.Y+i,Loc.X))){
+		else if(Owner(U) != Owner(Unit(*P,Loc.Y+i,Loc.X))){
 			break;
 		}
 	}
@@ -55,15 +55,15 @@ void possible_move(MAP *P,UNIT U)
 		if(Type(Unit(*P,Loc.Y - i,Loc.X)) == '0'){
 			Type(Unit(*P,Loc.Y - i,Loc.X)) = '#';
 		}
-		if(Owner(U) != Owner(Unit(*P,Loc.Y-i,Loc.X))){
+		else if(Owner(U) != Owner(Unit(*P,Loc.Y-i,Loc.X))){
 			break;
 		}
 	}
 	for(int i = 1; i <= M_Mov(U); i++){
 		if(Type(Unit(*P,Loc.Y,Loc.X - i)) == '0'){
-			Type(Unit(*P,Loc.Y - i,Loc.X - i)) = '#';
+			Type(Unit(*P,Loc.Y,Loc.X - i)) = '#';
 		}
-		if(Owner(U) != Owner(Unit(*P,Loc.Y,Loc.X-i))){
+		else if(Owner(U) != Owner(Unit(*P,Loc.Y,Loc.X-i))){
 			break;
 		}
 	}
@@ -71,7 +71,7 @@ void possible_move(MAP *P,UNIT U)
 		if(Type(Unit(*P,Loc.Y,Loc.X + i)) == '0'){
 			Type(Unit(*P,Loc.Y,Loc.X + i)) = '#';
 		}
-		if(Owner(U) != Owner(Unit(*P,Loc.Y,Loc.X+i))){
+		else if(Owner(U) != Owner(Unit(*P,Loc.Y,Loc.X+i))){
 			break;
 		}
 	}
@@ -107,10 +107,12 @@ void move_unit(MAP *P, UNIT *U, int x, int y)
  */
 {
 	POINT Loc = Pos(*U);
+	Unit(*P, Loc.Y,Loc.X).type = '0';
 	stack_Push(&X, Loc.X);
 	stack_Push(&Y, Loc.Y);
 	Loc.X = x;
 	Loc.Y = y;
+	Unit(*P, Loc.Y,Loc.X).type = *U;
 	Pos(*U) = Loc;
 	M_Mov(*U) -= 1;
 }

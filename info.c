@@ -2,38 +2,33 @@
 
 #include "info.h"
 
-void CreateCell(Cell *C, int row, int col) {
-	Row(*C) = row;
-	Col(*C) = col;
-}
-
-boolean IsUnitInCell(Map M, Cell C) {
-	return (Unit(M, Row(C),Col(C)).type!=Nil);
+boolean IsUnitInCell(Map M, POINT P) {
+	return (Unit(M, Absis(P),Ordinat(P)).type!=Nil);
 }
 // Return true jika ada unit di cell dan false jika tidak ada unit di cell
 
-boolean IsBuildingInCell(Map M, Cell C) {
-	return (Build(M, Row(C),Col(C))!=Nil);
+boolean IsBuildingInCell(Map M, POINT P) {
+	return (Build(M, Absis(P),Ordinat(P))!=Nil);
 }
 // Return true jika ada building di cell dan false jika tidak ada building di cell
 
-UNIT UnitInCell(Map M, Cell C) {
-	return (Unit(M, Row(C), Col(C)));
+UNIT UnitInCell(Map M, POINT P) {
+	return (Unit(M, Absis(P),Ordinat(P)));
 }
 // Return tipe unit di cell
 
-Build BuildingInCell(Map M, Cell C) {
-	return (Build(M, Row(C), Col(C)));
+Build BuildingInCell(Map M, POINT P) {
+	return (Build(M, Absis(P),Ordinat(P)));
 }
 // Return tipe building di cell
 
 void printInfo(Map M) {
 	int row, col;
-	Cell C;
+	POINT C;
 
 	printf("\nEnter the coordinate of the cell: ");
 	scanf("%d %d", &row, %col);
-	CreateCell(&C, row, col);
+	MakePOINT(&row, &col);
 
 	printf("== Cell Info ==\n");
 	if (IsBuildingInCell(M, C)){

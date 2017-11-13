@@ -37,7 +37,7 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
     }else if(type=='W'){
         M_Hp(*U)		= 100;
         Hp(*U)			= 100;
-        Atk(*U)			= 20;
+        Atk(*U)			= 5;
         Def(*U)         = 5;
         Heal(*U)        = 25;
         M_Mov(*U)		= 3;
