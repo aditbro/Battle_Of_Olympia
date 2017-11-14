@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include "unit.h"
+#include "ADT/point.h"
+
 void Init_unit(UNIT * U,char type,int owner,int x, int y){
 
 	Owner(*U)		= owner;
@@ -13,6 +15,7 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
         M_Mov(*U)		= 3;
         Mov(*U)		    = 3;
         Cost(*U)		= 2;
+        GHP(U)          = 90;
         Atk_Type(*U)    = 'M';
     }else if(type=='A'){
         M_Hp(*U)		= 100;
@@ -23,6 +26,7 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
         M_Mov(*U)		= 2;
         Mov(*U)		    = 2;
         Cost(*U)		= 1;
+        GHP(U)          = 90;
         Atk_Type(*U)    = 'R';
     }else if(type=='K'){
         M_Hp(*U)		= 100;
@@ -33,6 +37,7 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
         M_Mov(*U)		= 1;
         Mov(*U)		    = 1;
         Cost(*U)		= 0;
+        GHP(U)          = 90;
         Atk_Type(*U)    = 'M';
     }else if(type=='W'){
         M_Hp(*U)		= 100;
@@ -43,7 +48,22 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
         M_Mov(*U)		= 3;
         Mov(*U)		    = 3;
         Cost(*U)		= 5;
+        GHP(U)          = 90;
         Atk_Type(*U)    = 'M';
+    }
+
+    /* Dummy for unitlist purpose*/
+    else{
+        M_Hp(*U)		= 0;
+        Hp(*U)			= 0;
+        Atk(*U)			= 0;
+        Def(*U)         = 0;
+        Heal(*U)        = 0;
+        M_Mov(*U)		= 0;
+        Mov(*U)		    = 0;
+        Cost(*U)		= 0;
+        GHP(U)          = 0;
+        Atk_Type(*U)    = 'Z';
     }
     Pos(*U)			= MakePOINT(x, y);
     Can_Atk(*U)		= true;

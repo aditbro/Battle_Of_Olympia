@@ -7,12 +7,12 @@
 
 int getrandom(int low, int high) {
     int r;
-    srand (time(NULL));
     r = low + rand() / (RAND_MAX / (high - low + 1) + 1); // using this because the low-order bits of many random number generators are distressingly non-random
     return r;
 }
 
 boolean get_hit (UNIT Defender) {
+    srand (time(NULL));
     TabInt Prob;
     int i;
 
@@ -28,7 +28,7 @@ void unit_attack(UNIT * Attacker, UNIT * Defender)
 /*I.S. Attacker dan Defender letaknya bersebalahan*/
 /*F.S. health dari Attacker dan Defender berubah sesuai kondisi*/
 {
-    //if (get_hit(*Defender)){
+    if (get_hit(*Defender)){
         Can_Atk(*Attacker)=false;
         if(Type(*Defender)!='K'){
             if(Atk_Type(*Attacker)==Atk_Type(*Defender)){
@@ -72,10 +72,10 @@ void unit_attack(UNIT * Attacker, UNIT * Defender)
             printf("is dead :(");
             Type(*Attacker)=Nil;
         }
-    //}
-    //else{
-        //printf("Oops, enemy avoided your attack! Better luck next time ;-)\n");
-    //}
+    }
+    else{
+        printf("Oops, enemy avoided your attack! Better luck next time ;-)\n");
+    }
 
 }
 void attack(UNIT *Attacker, MAP *M)

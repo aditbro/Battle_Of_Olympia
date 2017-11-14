@@ -112,7 +112,7 @@ void move_unit(MAP *P, UNIT *U, int x, int y)
 	stack_Push(&Y, Loc.Y);
 	Loc.X = x;
 	Loc.Y = y;
-	Unit(*P, Loc.Y,Loc.X).type = *U;
+	Unit(*P, Loc.Y,Loc.X) = *U;
 	Pos(*U) = Loc;
 	M_Mov(*U) -= 1;
 }

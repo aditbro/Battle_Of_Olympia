@@ -29,7 +29,7 @@ typedef struct {
 } MAP;
 
 
-// ----------Selektor---------- //
+/* ----------Selektor---------- */
 #define MapBrsEff(M)	(M).NBrsEff
 #define MapKolEff(M)	(M).NKolEff
 #define MapElmt(M,i,j)	(M).P[(i)][(j)]
@@ -39,13 +39,13 @@ typedef struct {
 #define Select(M,i,j)	(M).P[(i)][(j)].select
 
 
-// ----------Constructor---------- //
+/* ----------Constructor---------- */
 void createMap(MAP *M, int row, int col);
-// membuat map berukuran baris row dan kolom col
+/* membuat map berukuran baris row dan kolom col */
 
 
-// ----------Output---------- //
+/* ----------Output---------- */
 void printMap(MAP M);
-// Mengeprint map pada cmd
+/* Mengeprint map pada cmd */
 
 #endif

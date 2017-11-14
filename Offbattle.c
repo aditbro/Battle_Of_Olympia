@@ -50,9 +50,9 @@ void Init_game(MAP *M, int map_x, int map_y){
 
 
     /* Determine the tower and castle position */
-    POINT tower_1 = MakePOINT(map_x -1,        1);
-    POINT tower_2 = MakePOINT(1       , map_y -1);
-    
+    POINT tower_1 = MakePOINT(map_x -2,        1);
+    POINT tower_2 = MakePOINT(1       , map_y -2);
+
     POINT castle_1a = MakePOINT(Absis(tower_1) -1, Ordinat(tower_1)   );
     POINT castle_1b = MakePOINT(Absis(tower_1)   , Ordinat(tower_1) -1);
     POINT castle_1c = MakePOINT(Absis(tower_1) +1, Ordinat(tower_1)   );
@@ -65,7 +65,6 @@ void Init_game(MAP *M, int map_x, int map_y){
 
 
     /* Place tower and castle in position */
-    // [MIGHT NEED SOME ADJUSTMENT, MAP element will be a struct]
     Set_element(M, tower_1, tower_symbol,1);
     Unit(*M, Absis(tower_1), Ordinat(tower_1)).type = 'K';
 	Unit(*M, Absis(tower_1), Ordinat(tower_1)).owner = 1;
