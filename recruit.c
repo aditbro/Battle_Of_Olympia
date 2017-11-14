@@ -1,6 +1,6 @@
 #include "recruit.h"
 
-Build SearchTower(Map M, Unit K) {
+Build SearchTower(MAP M, UNIT K) {
     int owner_unit = Owner(K);
     int i = 0;
     int j = 0;
@@ -23,11 +23,11 @@ Build SearchTower(Map M, Unit K) {
     return Build(M,i,j);
 }
 
-void IsCastleEmpty (Map M, int x, int y){
+void IsCastleEmpty (MAP M, int x, int y){
     return (Unit(M, x, y)==Nil) ? true : false;
 }
 
-boolean castle_available(Map M, Build T) {
+boolean castle_available(MAP M, Build T) {
     POINT tower = Build_Pos(T);
     Build C1, C2, C3, C4;
 
@@ -49,7 +49,7 @@ boolean castle_available(Map M, Build T) {
     }
 }
 
-void recruit_unit(Map M, Unit K, Unit *U){
+void recruit_unit(MAP M, UNIT K, UNIT *U){
     int x, y;
     int choice;
     Build Tower = SearchTower(M, K);

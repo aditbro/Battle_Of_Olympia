@@ -1,10 +1,11 @@
 #include "building.h"
 #include <stdio.h>
+#include "ADT/point.h"
 
 void init_build(Build *B, char type, int owner, int x, int y) {
 	Build_Type(*B) = type;
 	Build_Owner(*B) = owner;
-	Build_Pos(*B) = MakePOINT(x, y);
+	Build_Pos(*B) = MakePOINT(&x, &y)
 }
 
 Build create_new_build(char type, int owner, int x, int y) {

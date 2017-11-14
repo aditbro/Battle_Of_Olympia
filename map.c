@@ -24,22 +24,17 @@ void createMap(MAP *M, int row, int col) {
 void printMap(MAP M) {
 	int i, j;
 
-	printf("  ");
+	printf(" ");
 	for (j = 0; j <= MapKolEff(M); j++) {
-		if (j <= 9) {
-			printf("   %d", j);
-		}
-		else {
-			printf("  %d", j);
-		}
+		printf("   %d", j);
 	}
-	printf("\n   ");
+	printf("\n  ");
 
 	for (i = 0; i <= MapBrsEff(M); i++) {
 		for (j = 0; j <= MapKolEff(M); j++) {
 			printf("****");
 		}
-		printf("*\n   ");
+		printf("*\n  ");
 		for (j = 0; j <= MapKolEff(M); j++) {
 			printf("* ");
 			if (Build_Type(Build(M, i, j)) == Nil) {
@@ -59,12 +54,7 @@ void printMap(MAP M) {
 			}
 		}
 		printf("*\n");
-		if (i <= 9) {
-			printf("%d  ", i);
-		}
-		else {
-			printf("%d ", i);
-		}
+		printf("%d ", i);
 		for (j = 0; j <= MapKolEff(M); j++) {
 			printf("* ");
 			if (Type(Unit(M, i, j)) == Nil) {
@@ -84,11 +74,11 @@ void printMap(MAP M) {
 				}
 			}
 		}
-		printf("*\n   ");
+		printf("*\n  ");
 		for (j = 0; j <= MapKolEff(M); j++) {
 			printf("*   ");
 		}
-		printf("*\n   ");
+		printf("*\n  ");
 	}
 	for (j = 0; j <= MapKolEff(M); j++) {
 		printf("****");

@@ -50,8 +50,8 @@ void Init_game(MAP *M, int map_x, int map_y){
 
 
     /* Determine the tower and castle position */
-    POINT tower_1 = MakePOINT(map_x -1,        1);
-    POINT tower_2 = MakePOINT(1       , map_y -1);
+    POINT tower_1 = MakePOINT(map_x -2,        1);
+    POINT tower_2 = MakePOINT(1       , map_y -2);
     
     POINT castle_1a = MakePOINT(Absis(tower_1) -1, Ordinat(tower_1)   );
     POINT castle_1b = MakePOINT(Absis(tower_1)   , Ordinat(tower_1) -1);

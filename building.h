@@ -2,7 +2,6 @@
 #ifndef BUILDING_H
 #define BUILDING_H
 
-#include "ADT/point.h"
 
 typedef struct {
     char type;

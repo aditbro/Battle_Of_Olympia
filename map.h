@@ -3,13 +3,31 @@
 #ifndef MAP_H
 #define MAP_H
 
-#include "ADT/matriks.h"
 #include "ADT/boolean.h"
+#include "unit.h"
+#include "building.h"
 #include "ADT/pcolor.h"
+
+#define BrsMin 0
+#define BrsMax 10
+#define KolMin 0
+#define KolMax 10
 
 #define Nil '0'
 
-typedef MATRIKS MAP;
+typedef struct {
+    UNIT chr;	//karakter
+    Build bld;	//building
+	boolean move;
+	boolean select;
+} PION;
+
+typedef struct {
+    PION P[BrsMax][KolMax];
+    int NBrsEff; /* banyaknya/ukuran baris yg terdefinisi */
+	int NKolEff; /* banyaknya/ukuran kolom yg terdefinisi */
+} MAP;
+
 
 // ----------Selektor---------- //
 #define MapBrsEff(M)	(M).NBrsEff

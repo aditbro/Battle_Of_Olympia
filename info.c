@@ -2,27 +2,27 @@
 
 #include "info.h"
 
-boolean IsUnitInCell(Map M, POINT P) {
+boolean IsUnitInCell(MAP M, POINT P) {
 	return (Unit(M, Absis(P),Ordinat(P)).type!=Nil);
 }
 // Return true jika ada unit di cell dan false jika tidak ada unit di cell
 
-boolean IsBuildingInCell(Map M, POINT P) {
+boolean IsBuildingInCell(MAP M, POINT P) {
 	return (Build(M, Absis(P),Ordinat(P))!=Nil);
 }
 // Return true jika ada building di cell dan false jika tidak ada building di cell
 
-UNIT UnitInCell(Map M, POINT P) {
+UNIT UnitInCell(MAP M, POINT P) {
 	return (Unit(M, Absis(P),Ordinat(P)));
 }
 // Return tipe unit di cell
 
-Build BuildingInCell(Map M, POINT P) {
+Build BuildingInCell(MAP M, POINT P) {
 	return (Build(M, Absis(P),Ordinat(P)));
 }
 // Return tipe building di cell
 
-void printInfo(Map M) {
+void printInfo(MAP M) {
 	int row, col;
 	POINT C;
 
@@ -40,7 +40,7 @@ void printInfo(Map M) {
 	else{
 		printf("No building in cell.\n");
 	}
-	printf("== Unit Info ==\n");
+	printf("== UNIT Info ==\n");
 	if (IsUnitInCell(M, C)){
 		UNIT U = UnitInCell(M, C);
 		print_unit_type(U);

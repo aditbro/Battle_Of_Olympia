@@ -12,7 +12,6 @@
 
 #include "stackt.h"
 #include <stdio.h>
-
 #define Nil 0
 #define MaxEl 100
 #define stack_Top(S) (S).TOP

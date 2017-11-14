@@ -3,14 +3,14 @@
 #include "building.h"
 #include "info.h"
 
-Build SearchTower (Map M, Unit K);
+Build SearchTower (MAP M, UNIT K);
 // Mencari letak tower milik pemain
 
-void IsCastleEmpty (Map M, int x, int y);
+void IsCastleEmpty (MAP M, int x, int y);
 // Mengecek apakah castle yang dipilih kosong
 
-boolean castle_available (Map M, Build T);
+boolean castle_available (MAP M, Build T);
 // Mengecek apakah ada castle yang kosong (untuk validasi)
 
-void recruit_unit (Map M, Unit K, Unit *U);
+void recruit_unit (MAP M, UNIT K, UNIT *U);
 // Dipanggil di program utama saat user menginput command RECRUIT
