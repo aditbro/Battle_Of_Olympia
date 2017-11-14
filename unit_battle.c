@@ -7,12 +7,12 @@
 
 int getrandom(int low, int high) {
     int r;
-    srand (time(NULL));
     r = low + rand() / (RAND_MAX / (high - low + 1) + 1); // using this because the low-order bits of many random number generators are distressingly non-random
     return r;
 }
 
 boolean get_hit (UNIT Defender) {
+    srand (time(NULL));
     TabInt Prob;
     int i;
 
