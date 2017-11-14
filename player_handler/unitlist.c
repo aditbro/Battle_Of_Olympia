@@ -2,111 +2,103 @@
 /* Module to handle unit list */
 
 #include "unitlist.h"
-
-/* NOTES :
-#define Unit_index(P) (P)->list_index
-#define Unit_info(P) (P)->unit_info
-#define Next(P) (P)->next
-
-UnitList
-
-*/
-
+#include <stdio.h>
 
 /****************** LIST INFO ******************/
-int UnitList_empty (UnitList L)
+int UnitList_empty(address L)
 /* Check wether unit list is empty or not */
 {
-    return Next(L) == Nil;
+    return L == Nil;
 }
 
-UnitList Create_new_unitlist()
-{
-    UnitList L;
-    Unit_index(L) = -999;
-    Unit_info(L) = Create_new_unit('D',0,0,0);
-    Next(L) = Nil;
 
-    return L;
+address Alokasi_point(infotype X, int indeks)
+    /* return Address of new alocated element */
+{
+    ElmtList *P = (ElmtList *) malloc(sizeof(ElmtList));
+
+    if (P != Nil){
+
+        Index(P) = indeks + 1;
+        Info(P) = X;
+        Next(P) = Nil;
+        return P;
+    }
+    else {
+        return Nil;
+    }
+}
+
+
+int NbElmt(UnitList L)
+    /* Element amount */
+{
+    if (!UnitList_empty(L)){
+        return 1 + NbElmt(Tail(L));
+    }
+    else{
+        return 0;
+    }
+}
+
+
+UnitList Tail(UnitList L)
+{
+    return Next(L);
 }
 
 /****************** ADD AND DEL ******************/
-void Insert_unit (UnitList *L, UNIT unit)
-/* Append an unit to list */
+UnitList Insert_unit(UnitList L, POINT unit_pos, int indeks)
+/* Insert a element into list */
 {
-    UnitList New_element = Create_new_unitlist();
-
-    int last_index = 0;
-    address last = L;
-    address Current = L;
-
-
-    /* Search for last element */
-    while(Next(Current) != Nil ){
-        last = Current;
-        last_index = Unit_index(Current);
-
-        Current = Next(Current);
+    if (UnitList_empty(L)){
+        return Alokasi_point(unit_pos, indeks);
     }
 
-    /* Insert */
-    Next(last) = New_element;
-    Unit_info(New_element) = unit;
-    Unit_index(New_element) = last_index + 1 ;
-
+    else{
+        Next(L) = Insert_unit(Tail(L), unit_pos, indeks);
+        return L;
+    }
 }
 
 
-void Delete_unit (UnitList *L, int Index)
+void Delete_unit (UnitList L, int Index)
 /* Delete an element at index X */
 {
 
-    address last = L;
+    address Prec = Nil;
     address Current = L;
-    boolean found = false;
+    int found = 0;
 
-    /* Search for last element */
-    while((Current != Nil) && !found ){
+    while((Current != Nil) && !found){
 
-        last = Current;
-
-        if (Unit_index(Current) == Index){
-            found = true;
+        if (Index(Current) == Index){
+            found = 1;
         }
+
         else{
+
+            Prec = Current;
             Current = Next(Current);
         }
     }
 
-    /* Delete it */
     if (found){
-        Next(last) = Next(Current);
+
+        Next(Prec) = Next(Current);
         free(Current);
     }
 }
 
 /****************** DISPLAY ******************/
-void Display_unit_list (UnitList L){
-
-    if (!UnitList_empty(L)){
-        Show_unit_info(Unit_info(L));
-        Display_unit_list(Next(L));
-    }
-    else{
-        Show_unit_info(Unit_info(L));
-    }
-}
-
-
-/****************** DESTRUCT ******************/
-void Destruct_unit_list (UnitList *L)
-/* Delete all */
+void Display_unit_list (UnitList L)
+    /* Display unit index and unit position */
 {
-    if (!UnitList_empty(*L)){
-        Destruct_unit_list(Next(*L));
-        free(*L);
-    }
-    else{
-        free(*L);
+    if (!UnitList_empty(L)){
+
+        printf("Hero : %d >> ",Index(L));
+        TulisPOINT(Info(L));
+        printf("\n");
+        Display_unit_list(Tail(L));
     }
 }

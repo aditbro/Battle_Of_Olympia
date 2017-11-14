@@ -5,49 +5,56 @@
 #define unitlist_H
 
 #include "../unit.h"
+#include "../ADT/point.h"
 #include <stdlib.h>
 
 #define Nil NULL
 
-typedef struct tElmtList *address;
-typedef struct tElmtList {
-    int list_index;
-	UNIT unit_info;
+typedef POINT infotype;
+typedef struct tElmtlist *address;
+typedef struct tElmtlist {
+    int index;
+	infotype info;
 	address next;
 } ElmtList;
+
 typedef address UnitList;
 
-
-#define Unit_index(P) (P)->list_index
-#define Unit_info(P) (P)->unit_info
+#define Index(P) (P)->index
+#define Info(P) (P)->info
 #define Next(P) (P)->next
 
-/****************** LIST INFO ******************/
-int UnitList_empty (UnitList L);
-/* Check wether unit list is empty or not */
+/* NOTES :
+    - Start off :
+        UnitList UNITLIST = NULL;
+    - Usage :
+        UNITLIST = Insert_unit(UNITLIST, point, NbElmt(UNITLIST));
+        Delete_unit(UNITLIST, 3);
+        Display_unit_list(UNITLIST);
 
-UnitList Create_new_unitlist();
-/* Create Empty list */
+*/
+
 
 /****************** ADD AND DEL ******************/
-void Insert_unit (UnitList *L, UNIT unit);
-/* I.S. L mungkin kosong */
-/* F.S. Melakukan alokasi sebuah elemen dan */
-/* menambahkan elemen pertama dengan nilai X jika alokasi berhasil */
+UnitList Insert_unit(UnitList L, POINT unit_pos, int indeks);
+/* Insert a element into list */
 
-void Delete_unit (UnitList *L, int Index);
+void Delete_unit (UnitList L, int Index);
 /* Delete an element at index X */
+
 
 /****************** DISPLAY ******************/
 void Display_unit_list (UnitList L);
-/* I.S. List mungkin kosong */
-/* F.S. Jika list tidak kosong, iai list dicetak ke kanan: [e1,e2,...,en] */
-/* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
-/* Jika list kosong : menulis [] */
-/* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
+/* Display unit index and unit position */
 
-/****************** DESTRUCT ******************/
-void Destruct_unit_list (UnitList *L);
-/* Delete semua elemen list dan alamat elemen di-dealokasi */
+
+/****************** SHOULD NOT BE USED DIRECTLY ******************/
+int UnitList_empty(address L);
+
+address Alokasi_point(infotype X, int indeks);
+
+int NbElmt(UnitList L);
+
+UnitList Tail(UnitList L);
 
 #endif
