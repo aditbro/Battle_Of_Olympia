@@ -9,7 +9,6 @@
 #include "map.h"
 #include "ADT/matriks.h"
 
-int getrandom(int low, int high);
 boolean get_hit (UNIT Defender);
 void unit_attack(UNIT * Attacker, UNIT * Defender);
 /*I.S. Attacker dan Defender letaknya bersebalahan*/

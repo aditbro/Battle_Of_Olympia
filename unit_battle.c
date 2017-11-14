@@ -5,23 +5,19 @@
 #include <time.h>
 #include "unit_battle.h"
 
-int getrandom(int low, int high) {
-    int r;
-    r = low + rand() / (RAND_MAX / (high - low + 1) + 1); // using this because the low-order bits of many random number generators are distressingly non-random
-    return r;
-}
-
 boolean get_hit (UNIT Defender) {
     srand (time(NULL));
     TabInt Prob;
-    int i;
+    int i, r;
 
     array_Neff(Prob) = 100;
     for (i=1;i<=100;i++){
         array_Elmt(Prob, i) = (i<=GHP(Defender)) ? 1 : 0;
     }
 
-    return (array_Elmt(Prob, getrandom(1,100))==1) ? true : false;
+    r = (rand() % 100) + 1;
+
+    return (array_Elmt(Prob, r)==1) ? true : false;
 }
 
 void unit_attack(UNIT * Attacker, UNIT * Defender)
