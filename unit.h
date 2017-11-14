@@ -40,7 +40,7 @@ typedef struct {
 
 void Init_unit(UNIT * U,char type,int owner,int x, int y);
 UNIT Create_new_unit(char type,int owner,int x, int y);
-void void print_unit_type(UNIT U);
+void print_unit_type(UNIT U);
 /*I.S. U terdefinisi*/
 /*F.S. menuliskan jenis dari U*/
 

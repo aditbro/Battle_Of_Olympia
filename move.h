@@ -18,7 +18,7 @@ void change_unit(MAP P, UNIT New, UNIT *U);
 /*prosedur ini berguna untuk memilih unit yang akan dipindahkan*/
 
 void possible_move(MAP *P,UNIT U);
-/**prosedur ini mengubah map menjadi map yang sudah berisi
+/*prosedur ini mengubah map menjadi map yang sudah berisi
  * semua langkah-langkah yang mungkin
  * dilakukan oleh sebuah unit
  *

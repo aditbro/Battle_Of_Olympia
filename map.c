@@ -1,27 +1,30 @@
-// body map.h
+/* body map.h */
 
 #include "map.h"
 #include <stdio.h>
 
 
-// ----------Constructor----------
+/* ----------Constructor---------- */
 void createMap(MAP *M, int row, int col) {
+    /* membuat map berukuran baris row dan kolom col */
+
 	MapBrsEff(*M) = row-1;
 	MapKolEff(*M) = col-1;
-	
+
 	for (int i = 0; i <= MapBrsEff(*M); i++) {
 		for (int j = 0; j <= MapKolEff(*M); j++) {
 			Build_Type(Build(*M, i, j)) = Nil;
 			Unit(*M, i, j).type = Nil;
 		}
 	}
-	
 }
-// membuat map berukuran baris row dan kolom col
 
 
-// ----------Output----------
+
+/* ----------Output---------- */
 void printMap(MAP M) {
+    /* Print map in CMD */
+
 	int i, j;
 
 	printf(" ");
@@ -85,4 +88,4 @@ void printMap(MAP M) {
 	}
 	printf("*\n");
 }
-// Mengeprint map pada cmd
+

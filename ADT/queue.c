@@ -12,6 +12,8 @@
 #include "queue.h"
 #include "boolean.h"
 #include <stdlib.h>
+#include <stdio.h>
+
 #define Nil 0
 /* Konstanta untuk mendefinisikan address tak terdefinisi */
 /* Versi I : tabel dinamik, queue_Head dan queue_Tail eksplisit, ukuran disimpan */

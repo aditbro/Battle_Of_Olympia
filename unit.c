@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include "unit.h"
+#include "ADT/point.h"
+
 void Init_unit(UNIT * U,char type,int owner,int x, int y){
 
 	Owner(*U)		= owner;
@@ -45,6 +47,19 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
         Cost(*U)		= 5;
         Atk_Type(*U)    = 'M';
     }
+
+    /* Dummy for unitlist purpose*/
+    else{
+        M_Hp(*U)		= 0;
+        Hp(*U)			= 0;
+        Atk(*U)			= 0;
+        Def(*U)         = 0;
+        Heal(*U)        = 0;
+        M_Mov(*U)		= 0;
+        Mov(*U)		    = 0;
+        Cost(*U)		= 0;
+        Atk_Type(*U)    = 'Z';
+    }
     Pos(*U)			= MakePOINT(x, y);
     Can_Atk(*U)		= true;
 
@@ -85,7 +100,7 @@ void show_unit_available(UNIT U,boolean Retaliates)
 /*I.S. U terdefinisi*/
 /*F.S. menuliskan atribut dari unit yang available*/
 {
-    print_type(U);
+    print_unit_type(U);
     TulisPOINT(Pos(U));
     printf(" | ");
     printf("Health %d/%d  ",Hp(U),M_Hp(U));
