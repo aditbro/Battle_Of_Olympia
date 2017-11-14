@@ -6,16 +6,7 @@
 
 #include "../unit.h"
 #include <stdlib.h>
-
-#define Nil NULL
-
-typedef struct tElmtList *address;
-typedef struct tElmtList {
-    int list_index;
-	UNIT unit_info;
-	address next;
-} ElmtList;
-typedef address UnitList;
+#include "../ADT/listlinier.h"
 
 
 #define Unit_index(P) (P)->list_index

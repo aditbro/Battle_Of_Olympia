@@ -1,61 +1,3 @@
-/*------------------*/
-/* Jessin Donnyson  */
-/*     13516112     */
-/*   Praktikum 08   */
-/*   20 OCT 2017    */
-/*------------------*/
-
-/* NOTES
-
-CONSTANT        : Nil = NULL
-STRUCT TYPE     : ElmtList, List
-Selector        : list_elmt_Info(P), list_elmt_Next(P), list_First(L)
-
-Method list:
-
-boolean IsEmpty (List L);
-void list_CreateEmpty (List *L);
-
-list_address Alokasi (list_infotype X);
-void list_Dealokasi (list_address *P);
-
-list_address Search (List L, list_infotype X);
-boolean FSearch (List L, list_address P);
-list_address SearchPrec (List L, list_infotype X);
-
-void list_InsVFirst (List *L, list_infotype X);
-void list_InsVLast (List *L, list_infotype X);
-void list_InsertFirst (List *L, list_address P);
-void list_InsertAfter (List *L, list_address P, list_address Prec);
-void list_InsertLast (List *L, list_address P);
-
-void list_DelVFirst (List *L, list_infotype *X);
-void list_DelVLast (List *L, list_infotype *X);
-void list_DelFirst (List *L, list_address *P);
-void list_DelP (List *L, list_infotype X);
-void list_DelLast (List *L, list_address *P);
-void list_DelAfter (List *L, list_address *Pdel, list_address Prec);
-
-void list_PrintInfo (List L);
-int NbElmt (List L);
-list_infotype Max (List L);
-list_address AdrMax (List L);
-list_infotype Min (List L);
-list_address AdrMin (List L);
-float Average (List L);
-
-void list_DelAll (List *L);
-void list_InversList (List *L);
-List FInversList (List L);
-void list_CopyList (List *L1, List *L2);
-List FCopyList (List L);
-void list_CpAlokList (List Lin, List *Lout);
-
-void list_Konkat (List L1, List L2, List * L3);
-void list_Konkat1 (List *L1, List *L2, List *L3);
-void list_PecahList (List *L1, List *L2, List L);
-*/
-
 #include "listlinier.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -116,7 +58,7 @@ list_address list_Search (List L, list_infotype X)
     if (!list_IsEmpty(L)){
 
         do{
-            if (list_elmt_Info(CP) == X){
+            if (list_elmt_Info(CP).X == X.X && list_elmt_Info(CP).Y == X.Y){
                 found_add = CP;
                 found = true;
             }
@@ -172,7 +114,7 @@ list_address list_SearchPrec (List L, list_infotype X)
     if (!list_IsEmpty(L)){
 
         do{
-            if (list_elmt_Info(CP) == X){
+            if (list_elmt_Info(CP).X == X.X && list_elmt_Info(CP).Y == X.Y){
                 found_add = prec;
                 found = true;
             }
@@ -396,7 +338,7 @@ int list_NbElmt (List L)
 
 /*** Prekondisi untuk Max/Min/rata-rata : List tidak kosong ***/\
 
-list_address list_AdrMax (List L){
+/*list_address list_AdrMax (List L){
 
 	list_address Max = list_First(L);
     list_address CP = list_First(L);
@@ -431,19 +373,19 @@ list_address list_AdrMin (List L){
 }
 
 list_infotype list_Max (List L)
-/* Mengirimkan nilai list_elmt_Info(P) yang maksimum */
+ Mengirimkan nilai list_elmt_Info(P) yang maksimum 
 {
 	return list_elmt_Info(list_AdrMax(L));
 }
 
 list_infotype list_Min (List L)
-/* Mengirimkan nilai list_elmt_Info(P) yang maksimum */
+ Mengirimkan nilai list_elmt_Info(P) yang maksimum 
 {
 	return list_elmt_Info(list_AdrMin(L));
 }
 
 float list_Average (List L)
-/* Mengirimkan nilai rata rata list_elmt_Info(P) */
+ Mengirimkan nilai rata rata list_elmt_Info(P) 
 {
     int Count = 0;
     float Sum = 0;
@@ -459,14 +401,9 @@ float list_Average (List L)
     return (Sum/Count);
 }
 
-/****************** PROSES TERHADAP LIST ******************/
+
 void list_Konkat1 (List *L1, List *L2, List *L3)
-/* I.S. L1 dan L2 sembarang */
-/* F.S. L1 dan L2 kosong, L3 adalah hasil konkatenasi L1 & L2 */
-/* Konkatenasi dua buah list : L1 dan L2    */
-/* menghasilkan L3 yang baru (dengan elemen list L1 dan L2) */
-/* dan L1 serta L2 menjadi list kosong.*/
-/* Tidak ada alokasi/dealokasi pada prosedur ini */
+
 {
     list_CreateEmpty(L3);
 
@@ -489,7 +426,7 @@ void list_Konkat1 (List *L1, List *L2, List *L3)
     list_CreateEmpty(L1);
     list_CreateEmpty(L2);
 
-}
+}*/
 
 /****************** PROSES TERHADAP LIST ******************/
 void list_DelAll (List *L)

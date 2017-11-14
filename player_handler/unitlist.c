@@ -12,7 +12,6 @@ UnitList
 
 */
 
-
 /****************** LIST INFO ******************/
 int UnitList_empty (UnitList L)
 /* Check wether unit list is empty or not */
