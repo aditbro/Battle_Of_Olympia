@@ -29,7 +29,7 @@ void BacaPOINT (POINT * P)
 
     {
         int X,Y;
-        scanf("%f %f", &X, &Y);
+        scanf("%d %d", &X, &Y);
         *P = MakePOINT(X,Y);
     }
 

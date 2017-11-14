@@ -7,16 +7,16 @@
 #include "ADT/point.h"
 #include <stdio.h>
 
-boolean IsUnitInCell(Map M, POINT P);
+boolean IsUnitInCell(MAP M, POINT P);
 // Return true jika ada unit di cell dan false jika tidak ada unit di cell
 
-boolean IsBuildingInCell(Map M, POINT P);
+boolean IsBuildingInCell(MAP M, POINT P);
 // Return true jika ada building di cell dan false jika tidak ada building di cell
 
-UNIT CellUnit(Map M, POINT P);
+UNIT CellUnit(MAP M, POINT P);
 // Return unit di cell
 
-Build BuildingInCell(Map M, POINT P);
+Build BuildingInCell(MAP M, POINT P);
 // Return tipe building di cell
 
 void printInfo();

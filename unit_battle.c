@@ -43,7 +43,7 @@ void unit_attack(UNIT * Attacker, UNIT * Defender)
                     printf("retaliates.\n");
                     printf("Your ");
                     print_unit_type(*Attacker);
-                    printf("is damaged by %d\n",def(*Defender));  
+                    printf("is damaged by %d\n",Def(*Defender));  
                 }else{
                     Type(*Defender)=Nil;
                 }
