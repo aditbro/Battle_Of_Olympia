@@ -86,7 +86,7 @@ void printMap(MAP M) {
 		}
 		printf("*\n   ");
 		for (j = 0; j <= MapKolEff(M); j++) {
-			printf("*    ");
+			printf("*   ");
 		}
 		printf("*\n   ");
 	}
