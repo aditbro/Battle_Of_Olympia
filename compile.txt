@@ -1,1 +1,0 @@
-gcc main.c map.c ADT/pcolor.c ADT/matriks.c unit.c ADT/point.c ADT/array.c Offbattle.c unit_battle.c building.c move.c ADT/stackt.c -o main
