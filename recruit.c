@@ -8,7 +8,7 @@ Build SearchTower(MAP M, UNIT K) {
 
     while (i<=MapBrsEff(M) && found==false) {
         while (j<=MapKolEff(M) && found==false) {
-            if (Build_Type(Build(M,i,j)=='T') && Build_Owner(Build(M,i,j))==owner_unit) {
+            if (Build_Type(Build(M,i,j)) == 'T' && Build_Owner(Build(M,i,j)) == owner_unit) {
                 found = true;
             }
             else{
@@ -23,25 +23,31 @@ Build SearchTower(MAP M, UNIT K) {
     return Build(M,i,j);
 }
 
-void IsCastleEmpty (MAP M, int x, int y){
-    return (Unit(M, x, y)==Nil) ? true : false;
+boolean IsCastleEmpty (MAP M, int x, int y){
+    return (Type(Unit(M, x, y)) == Nil) ? true : false;
 }
 
 boolean castle_available(MAP M, Build T) {
     POINT tower = Build_Pos(T);
+    POINT PC1, PC2, PC3, PC4;
     Build C1, C2, C3, C4;
 
-    PC1 = MakePOINT(Absis(tower)+1, Ordinat(tower));
-    PC2 = MakePOINT(Absis(tower), Ordinat(tower)+1);
-    PC3 = MakePOINT(Absis(tower)-1, Ordinat(tower));
-    PC4 = MakePOINT(Absis(tower), Ordinat(tower)-1);
-
+    /* Get castle building info */
     C1 = Build(M, Absis(tower)+1, Ordinat(tower));
     C2 = Build(M, Absis(tower), Ordinat(tower)+1);
     C3 = Build(M, Absis(tower)-1, Ordinat(tower));
     C4 = Build(M, Absis(tower), Ordinat(tower)-1);
 
-    if (IsCastleEmpty(C1) || IsCastleEmpty(C2) || IsCastleEmpty(C3) || IsCastleEmpty(C4)) {
+    /* Get castle position */
+    PC1 = Build_Pos(C1);
+    PC2 = Build_Pos(C2);
+    PC3 = Build_Pos(C3);
+    PC4 = Build_Pos(C4);
+
+    /* Check if there's availabe castle */
+    boolean castle_available = IsCastleEmpty(M, Absis(PC1), Ordinat(PC1)) || IsCastleEmpty(M, Absis(PC2), Ordinat(PC2)) || IsCastleEmpty(M, Absis(PC3), Ordinat(PC3)) || IsCastleEmpty(M, Absis(PC4), Ordinat(PC4)) ;
+
+    if (castle_available) {
         return true;
     }
     else{
@@ -54,7 +60,8 @@ void recruit_unit(MAP M, UNIT K, UNIT *U){
     int choice;
     Build Tower = SearchTower(M, K);
 
-    if (Pos(K)==Build_Pos(Tower)){
+
+    if (point_EQ(Pos(K), Build_Pos(Tower))){
         if (castle_available(M, Tower)){
             do {
                 printf("Enter coordinate of empty castle: ");

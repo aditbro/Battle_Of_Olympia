@@ -512,7 +512,6 @@ void list_InversList (List *L)
 {
 
 	list_address P,Q;
-	list_address temp;
 	list_address First = list_First(*L);
 
 	P = list_First(*L);

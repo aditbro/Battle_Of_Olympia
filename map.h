@@ -7,6 +7,7 @@
 #include "unit.h"
 #include "building.h"
 #include "ADT/pcolor.h"
+#include <stdio.h>
 
 #define BrsMin 0
 #define BrsMax 10

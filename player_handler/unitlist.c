@@ -8,7 +8,7 @@
 int UnitList_empty(address L)
 /* Check wether unit list is empty or not */
 {
-    return L == Nil;
+    return L == NULL;
 }
 
 
@@ -17,15 +17,15 @@ address Alokasi_point(infotype X, int indeks)
 {
     ElmtList *P = (ElmtList *) malloc(sizeof(ElmtList));
 
-    if (P != Nil){
+    if (P != NULL){
 
         Index(P) = indeks + 1;
         Info(P) = X;
-        Next(P) = Nil;
+        Next(P) = NULL;
         return P;
     }
     else {
-        return Nil;
+        return NULL;
     }
 }
 
@@ -66,11 +66,11 @@ void Delete_unit (UnitList L, int Index)
 /* Delete an element at index X */
 {
 
-    address Prec = Nil;
+    address Prec = NULL;
     address Current = L;
     int found = 0;
 
-    while((Current != Nil) && !found){
+    while((Current != NULL) && !found){
 
         if (Index(Current) == Index){
             found = 1;
@@ -90,15 +90,58 @@ void Delete_unit (UnitList L, int Index)
     }
 }
 
+POINT get_unit_position(UnitList L, int Index){
+    /* Function to return unit position stored in unitlist by indexing */
+
+    if (UnitList_empty(L)){
+        return MakePOINT(-999,-999);
+    }
+
+    else if (Index(L) == Index){
+        return Info(L);
+    }
+
+    else{
+        return get_unit_position(Tail(L), Index);
+    }
+}
+
+
+void select_unit(MAP Map, UnitList Unit_list, UNIT * Current_unit, int Index){
+
+    POINT unit_pos = get_unit_position(Unit_list, Index);
+    int i = Absis(unit_pos);
+    int j = Ordinat(unit_pos);
+
+    if ( (i >= 0) && (i <= MapBrsEff(Map)) && (j >= 0) && (j <= MapKolEff(Map))){
+         *Current_unit = Unit(Map,i,j);
+    }
+    else{
+        printf("You don't have such unit...\n");
+    }
+}
+
+
 /****************** DISPLAY ******************/
-void Display_unit_list (UnitList L)
+void Display_unit_list (MAP M, UnitList L)
     /* Display unit index and unit position */
 {
     if (!UnitList_empty(L)){
 
-        printf("Hero : %d >> ",Index(L));
-        TulisPOINT(Info(L));
+        printf("%d. ",Index(L));
+
+        POINT unit_pos = get_unit_position(L, Index(L));
+        show_unit_in_list(Unit(M, Absis(unit_pos), Ordinat(unit_pos)));
         printf("\n");
-        Display_unit_list(Tail(L));
+        Display_unit_list(M, Tail(L));
     }
+}
+
+void show_unit_in_list(UNIT U){
+/* Function to show unit data */
+    print_unit_type(U);
+    printf("  ");
+    TulisPOINT(Pos(U));
+    printf(" | ");
+    printf("Health %d", Hp(U));
 }

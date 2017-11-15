@@ -5,10 +5,9 @@
 #define unitlist_H
 
 #include "../unit.h"
+#include "../map.h"
 #include "../ADT/point.h"
 #include <stdlib.h>
-
-#define Nil NULL
 
 typedef POINT infotype;
 typedef struct tElmtlist *address;
@@ -32,6 +31,35 @@ typedef address UnitList;
         Delete_unit(UNITLIST, 3);
         Display_unit_list(UNITLIST);
 
+    - Testing program :
+
+    int main (void){
+        POINT point;
+        UnitList UNITLIST = NULL;
+        UNIT Current_unit;
+
+        point = Pos(Unit(M, 1, 1));
+        printf("\nInserting unit1\n");
+        UNITLIST = Insert_unit(UNITLIST, point, NbElmt(UNITLIST));
+
+        point = Pos(Unit(M, 1, 2));
+        printf("\nInserting unit2\n");
+        UNITLIST = Insert_unit(UNITLIST, point, NbElmt(UNITLIST));
+
+        printf("\nDisplaying unit\n");
+        Display_unit_list(M, UNITLIST);
+
+        printf("\nShow current unit (unit 1) info...\n");
+        select_unit(M, UNITLIST, &Current_unit, 1);
+        Show_unit_info(Current_unit);
+
+        printf("\nChange unit...");
+        printf("\nShow current unit (unit 2) info...\n");
+        select_unit(M, UNITLIST, &Current_unit, 2);
+        Show_unit_info(Current_unit);
+
+        return 0;
+    }
 */
 
 
@@ -42,11 +70,15 @@ UnitList Insert_unit(UnitList L, POINT unit_pos, int indeks);
 void Delete_unit (UnitList L, int Index);
 /* Delete an element at index X */
 
+POINT get_unit_position(UnitList L, int Index);
 
+void select_unit(MAP Map, UnitList Unit_list, UNIT * Current_unit, int Index);
 /****************** DISPLAY ******************/
-void Display_unit_list (UnitList L);
+void Display_unit_list (MAP M, UnitList L);
 /* Display unit index and unit position */
 
+void show_unit_in_list(UNIT U);
+/* Function to show unit data  */
 
 /****************** SHOULD NOT BE USED DIRECTLY ******************/
 int UnitList_empty(address L);

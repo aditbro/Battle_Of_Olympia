@@ -8,7 +8,7 @@ boolean IsUnitInCell(MAP M, POINT P) {
 // Return true jika ada unit di cell dan false jika tidak ada unit di cell
 
 boolean IsBuildingInCell(MAP M, POINT P) {
-	return (Build(M, Absis(P),Ordinat(P))!=Nil);
+	return (Build_Type(Build(M, Absis(P),Ordinat(P))) != Nil);
 }
 // Return true jika ada building di cell dan false jika tidak ada building di cell
 
@@ -27,8 +27,8 @@ void printInfo(MAP M) {
 	POINT C;
 
 	printf("\nEnter the coordinate of the cell: ");
-	scanf("%d %d", &row, %col);
-	MakePOINT(&row, &col);
+	scanf("%d %d", &row, &col);
+	MakePOINT(row, col);
 
 	printf("== Cell Info ==\n");
 	if (IsBuildingInCell(M, C)){
@@ -46,7 +46,7 @@ void printInfo(MAP M) {
 		print_unit_type(U);
 		printf("\nOwned by player ");
 		printf("%d", Owner(U));
-		printf("\nHealth %d/%d | ATK %d | DEF %d\n", Hp(U),M_Hp(U),ATK(U),Def(U));
+		printf("\nHealth %d/%d | ATK %d | DEF %d\n", Hp(U),M_Hp(U),Atk(U),Def(U));
 	}
 	else{
 		printf("No unit in cell.\n");

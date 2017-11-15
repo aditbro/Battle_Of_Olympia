@@ -42,8 +42,10 @@ void possible_move(MAP *P,UNIT U)
  * diasumsikan pada awalnya di setiap lokasi peta diinisialisasi unit bernilai '0'
  */
 {
+    int i;
+
 	POINT Loc = Pos(U);
-	for(int i = 1; i <= M_Mov(U); i++){
+	for( i = 1; i <= M_Mov(U); i++){
 		if(Type(Unit(*P,Loc.Y + i,Loc.X)) == '0'){
 			Type(Unit(*P,Loc.Y + i,Loc.X)) = '#';
 		}
@@ -51,7 +53,7 @@ void possible_move(MAP *P,UNIT U)
 			break;
 		}
 	}
-	for(int i = 1; i <= M_Mov(U); i++){
+	for( i = 1; i <= M_Mov(U); i++){
 		if(Type(Unit(*P,Loc.Y - i,Loc.X)) == '0'){
 			Type(Unit(*P,Loc.Y - i,Loc.X)) = '#';
 		}
@@ -59,7 +61,7 @@ void possible_move(MAP *P,UNIT U)
 			break;
 		}
 	}
-	for(int i = 1; i <= M_Mov(U); i++){
+	for( i = 1; i <= M_Mov(U); i++){
 		if(Type(Unit(*P,Loc.Y,Loc.X - i)) == '0'){
 			Type(Unit(*P,Loc.Y,Loc.X - i)) = '#';
 		}
@@ -67,7 +69,7 @@ void possible_move(MAP *P,UNIT U)
 			break;
 		}
 	}
-	for(int i = 1; i <= M_Mov(U); i++){
+	for( i = 1; i <= M_Mov(U); i++){
 		if(Type(Unit(*P,Loc.Y,Loc.X + i)) == '0'){
 			Type(Unit(*P,Loc.Y,Loc.X + i)) = '#';
 		}

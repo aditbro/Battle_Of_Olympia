@@ -84,9 +84,6 @@ void Init_game(MAP *M, int map_x, int map_y){
 
 
     /* Setup villages */
-    int village_area_x = map_x - 5;
-    int village_area_y = map_y - 5;
-
     while(village_count != 0){
 
         /* Create village location */

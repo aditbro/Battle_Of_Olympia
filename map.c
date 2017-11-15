@@ -1,18 +1,17 @@
 /* body map.h */
 
 #include "map.h"
-#include <stdio.h>
-
 
 /* ----------Constructor---------- */
 void createMap(MAP *M, int row, int col) {
     /* membuat map berukuran baris row dan kolom col */
 
+    int i,j;
 	MapBrsEff(*M) = row-1;
 	MapKolEff(*M) = col-1;
 
-	for (int i = 0; i <= MapBrsEff(*M); i++) {
-		for (int j = 0; j <= MapKolEff(*M); j++) {
+	for ( i = 0; i <= MapBrsEff(*M); i++) {
+		for ( j = 0; j <= MapKolEff(*M); j++) {
 			Build_Type(Build(*M, i, j)) = Nil;
 			Unit(*M, i, j).type = Nil;
 		}

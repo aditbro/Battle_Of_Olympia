@@ -7,6 +7,8 @@
 #include "ADT/point.h"
 #include <stdio.h>
 
+#define Nil '0'
+
 boolean IsUnitInCell(MAP M, POINT P);
 // Return true jika ada unit di cell dan false jika tidak ada unit di cell
 
