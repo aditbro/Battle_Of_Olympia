@@ -33,7 +33,7 @@ int main() {
 
 	scanf("%c",&inp);
 	while(inp!='Q'){
-		printMap(M);
+		// printMap(M);
 		if(inp=='A'){
 			attack(&Unit(M, 1, 1),&M);
 		}else if(inp=='S'){

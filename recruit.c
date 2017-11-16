@@ -1,7 +1,7 @@
 #include "recruit.h"
 
-Build SearchTower(MAP M, UNIT K) {
-    int owner_unit = Owner(K);
+Build SearchTower(MAP M, Player P) {
+    int owner_unit = ID(P);
     int i = 0;
     int j = 0;
     boolean found = false;
@@ -55,10 +55,10 @@ boolean castle_available(MAP M, Build T) {
     }
 }
 
-void recruit_unit(MAP M, UNIT K, UNIT *U){
+void recruit_unit(MAP M, Player *P, UNIT K, UNIT *U){
     int x, y;
     int choice;
-    Build Tower = SearchTower(M, K);
+    Build Tower = SearchTower(M, *P);
 
 
     if (point_EQ(Pos(K), Build_Pos(Tower))){
@@ -79,18 +79,42 @@ void recruit_unit(MAP M, UNIT K, UNIT *U){
             scanf("%d", &choice);
 
             if (choice==1) {
-                *U = Create_new_unit('A', Owner(K), x, y);
+                if (gold(*P)>=3) {
+                    *U = Create_new_unit('A', ID(*P), x, y);
+                    units(*P) = Insert_unit(units(*P), Pos(*U), UnitNbElmt(units(*P))+1);
+                    printf("You have successfully recruited a(n) ");
+                    print_unit_type(*U);
+                    printf("!\n");
+                }
+                else {
+                    printf("You don't have any money.");
+                }
             }
             else if (choice==2) {
-                *U = Create_new_unit('S', Owner(K), x, y);
+                if (gold(*P)>=1) {
+                    *U = Create_new_unit('S', ID(*P), x, y);
+                    units(*P) = Insert_unit(units(*P), Pos(*U), UnitNbElmt(units(*P))+1);
+                    printf("You have successfully recruited a(n) ");
+                    print_unit_type(*U);
+                    printf("!\n");
+                }
+                else {
+                    printf("You don't have any money.");
+                }
             }
             else if (choice==3) {
-                *U = Create_new_unit('W', Owner(K), x, y);
+                if (gold(*P)>=5) {
+                    *U = Create_new_unit('W', ID(*P), x, y);
+                    units(*P) = Insert_unit(units(*P), Pos(*U), UnitNbElmt(units(*P))+1);
+                    printf("You have successfully recruited a(n) ");
+                    print_unit_type(*U);
+                    printf("!\n");
+                }
+                else {
+                    printf("You don't have any money.");
+                }
             }
 
-            printf("You have successfully recruited an ");
-            print_unit_type(*U);
-            printf("!\n");
         }
         else{
             printf("You don't have any availabe tower.\n");

@@ -30,11 +30,11 @@ address Alokasi_point(infotype X, int indeks)
 }
 
 
-int NbElmt(UnitList L)
+int UnitNbElmt(UnitList L)
     /* Element amount */
 {
     if (!UnitList_empty(L)){
-        return 1 + NbElmt(Tail(L));
+        return 1 + UnitNbElmt(Tail(L));
     }
     else{
         return 0;

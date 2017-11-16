@@ -14,7 +14,7 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
         M_Mov(*U)		= 3;
         Mov(*U)		    = 3;
         Cost(*U)		= 2;
-        GHP(*U)          = 90;
+        GHP(*U)          = 50;
         Atk_Type(*U)    = 'M';
     }else if(type=='A'){
         M_Hp(*U)		= 100;

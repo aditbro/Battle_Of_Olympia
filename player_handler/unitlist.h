@@ -85,7 +85,7 @@ int UnitList_empty(address L);
 
 address Alokasi_point(infotype X, int indeks);
 
-int NbElmt(UnitList L);
+int UnitNbElmt(UnitList L);
 
 UnitList Tail(UnitList L);
 
