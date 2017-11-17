@@ -3,33 +3,15 @@
 #ifndef MAP_H
 #define MAP_H
 
-#include "ADT/boolean.h"
-#include "unit.h"
-#include "building.h"
+#include "ADT/matriks.h"
 #include "ADT/pcolor.h"
-
-#define BrsMin 0
-#define BrsMax 10
-#define KolMin 0
-#define KolMax 10
 
 #define Nil '0'
 
-typedef struct {
-    UNIT chr;	//karakter
-    Build bld;	//building
-	boolean move;
-	boolean select;
-} PION;
-
-typedef struct {
-    PION P[BrsMax][KolMax];
-    int NBrsEff; /* banyaknya/ukuran baris yg terdefinisi */
-	int NKolEff; /* banyaknya/ukuran kolom yg terdefinisi */
-} MAP;
+typedef MATRIKS MAP;
 
 
-/* ----------Selektor---------- */
+// ----------Selektor---------- //
 #define MapBrsEff(M)	(M).NBrsEff
 #define MapKolEff(M)	(M).NKolEff
 #define MapElmt(M,i,j)	(M).P[(i)][(j)]
@@ -39,13 +21,15 @@ typedef struct {
 #define Select(M,i,j)	(M).P[(i)][(j)].select
 
 
-/* ----------Constructor---------- */
+// ----------Constructor---------- //
 void createMap(MAP *M, int row, int col);
-/* membuat map berukuran baris row dan kolom col */
+// membuat map berukuran baris row dan kolom col
 
 
-/* ----------Output---------- */
+// ----------Output---------- //
 void printMap(MAP M);
-/* Mengeprint map pada cmd */
+// Mengeprint map pada cmd
 
+// Selektor
+boolean map_IsIdxValid(int row, int col);
 #endif

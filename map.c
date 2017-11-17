@@ -1,43 +1,44 @@
-/* body map.h */
+// body map.h
 
 #include "map.h"
 #include <stdio.h>
 
 
-/* ----------Constructor---------- */
+// ----------Constructor----------
 void createMap(MAP *M, int row, int col) {
-    /* membuat map berukuran baris row dan kolom col */
-
-	MapBrsEff(*M) = row-1;
-	MapKolEff(*M) = col-1;
-
+	matriks_MakeMATRIKS(row, col, M);
+	
 	for (int i = 0; i <= MapBrsEff(*M); i++) {
 		for (int j = 0; j <= MapKolEff(*M); j++) {
 			Build_Type(Build(*M, i, j)) = Nil;
 			Unit(*M, i, j).type = Nil;
 		}
 	}
+	
 }
+// membuat map berukuran baris row dan kolom col
 
 
-
-/* ----------Output---------- */
+// ----------Output----------
 void printMap(MAP M) {
-    /* Print map in CMD */
-
 	int i, j;
 
-	printf(" ");
+	printf("  ");
 	for (j = 0; j <= MapKolEff(M); j++) {
-		printf("   %d", j);
+		if (j <= 9) {
+			printf("   %d", j);
+		}
+		else {
+			printf("  %d", j);
+		}
 	}
-	printf("\n  ");
+	printf("\n   ");
 
 	for (i = 0; i <= MapBrsEff(M); i++) {
 		for (j = 0; j <= MapKolEff(M); j++) {
 			printf("****");
 		}
-		printf("*\n  ");
+		printf("*\n   ");
 		for (j = 0; j <= MapKolEff(M); j++) {
 			printf("* ");
 			if (Build_Type(Build(M, i, j)) == Nil) {
@@ -57,7 +58,12 @@ void printMap(MAP M) {
 			}
 		}
 		printf("*\n");
-		printf("%d ", i);
+		if (i <= 9) {
+			printf("%d  ", i);
+		}
+		else {
+			printf("%d ", i);
+		}
 		for (j = 0; j <= MapKolEff(M); j++) {
 			printf("* ");
 			if (Type(Unit(M, i, j)) == Nil) {
@@ -77,11 +83,11 @@ void printMap(MAP M) {
 				}
 			}
 		}
-		printf("*\n  ");
+		printf("*\n   ");
 		for (j = 0; j <= MapKolEff(M); j++) {
 			printf("*   ");
 		}
-		printf("*\n  ");
+		printf("*\n   ");
 	}
 	for (j = 0; j <= MapKolEff(M); j++) {
 		printf("****");
@@ -89,3 +95,7 @@ void printMap(MAP M) {
 	printf("*\n");
 }
 
+boolean map_IsIdxValid(int row, int col) {
+	return col >= 8 && col <= KolMax && row <= BrsMax && row >= 8;
+}
+// Mengeprint map pada cmd

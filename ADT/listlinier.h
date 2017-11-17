@@ -7,10 +7,10 @@
 #define listlinier_H
 
 #include "boolean.h"
-#include "point.h"
+
 #define Nil NULL
 
-typedef POINT list_infotype;
+typedef int list_infotype;
 typedef struct tElmtlist *list_address;
 typedef struct tElmtlist { 
 	list_infotype info;
@@ -27,6 +27,7 @@ typedef struct {
 #define list_elmt_Info(P) (P)->info
 #define list_elmt_Next(P) (P)->next
 #define list_First(L) ((L).First)
+
 /* PROTOTYPE */
 /****************** TEST LIST KOSONG ******************/
 boolean list_IsEmpty (List L);

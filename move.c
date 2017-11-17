@@ -42,8 +42,10 @@ void possible_move(MAP *P,UNIT U)
  * diasumsikan pada awalnya di setiap lokasi peta diinisialisasi unit bernilai '0'
  */
 {
+    int i;
+
 	POINT Loc = Pos(U);
-	for(int i = 1; i <= M_Mov(U); i++){
+	for( i = 1; i <= M_Mov(U) && Loc.Y + i <= MapKolEff(*P); i++){
 		if(Type(Unit(*P,Loc.Y + i,Loc.X)) == '0'){
 			Type(Unit(*P,Loc.Y + i,Loc.X)) = '#';
 		}
@@ -51,7 +53,7 @@ void possible_move(MAP *P,UNIT U)
 			break;
 		}
 	}
-	for(int i = 1; i <= M_Mov(U); i++){
+	for( i = 1; i <= M_Mov(U) && Loc.Y - i >= 0; i++){
 		if(Type(Unit(*P,Loc.Y - i,Loc.X)) == '0'){
 			Type(Unit(*P,Loc.Y - i,Loc.X)) = '#';
 		}
@@ -59,7 +61,7 @@ void possible_move(MAP *P,UNIT U)
 			break;
 		}
 	}
-	for(int i = 1; i <= M_Mov(U); i++){
+	for( i = 1; i <= M_Mov(U) && Loc.X - i >= 0; i++){
 		if(Type(Unit(*P,Loc.Y,Loc.X - i)) == '0'){
 			Type(Unit(*P,Loc.Y,Loc.X - i)) = '#';
 		}
@@ -67,7 +69,7 @@ void possible_move(MAP *P,UNIT U)
 			break;
 		}
 	}
-	for(int i = 1; i <= M_Mov(U); i++){
+	for( i = 1; i <= M_Mov(U) && Loc.Y + i <= MapBrsEff(*P); i++){
 		if(Type(Unit(*P,Loc.Y,Loc.X + i)) == '0'){
 			Type(Unit(*P,Loc.Y,Loc.X + i)) = '#';
 		}
@@ -108,11 +110,12 @@ void move_unit(MAP *P, UNIT *U, int x, int y)
 {
 	POINT Loc = Pos(*U);
 	Unit(*P, Loc.Y,Loc.X).type = '0';
+	Unit(*P, Loc.Y,Loc.X).owner = 0;
 	stack_Push(&X, Loc.X);
 	stack_Push(&Y, Loc.Y);
-	Loc.X = x;
-	Loc.Y = y;
-	Unit(*P, Loc.Y,Loc.X) = *U;
+	Loc.X = y;
+	Loc.Y = x;
+	Unit(*P,x,y) = *U;
 	Pos(*U) = Loc;
 	M_Mov(*U) -= 1;
 }
