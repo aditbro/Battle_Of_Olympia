@@ -30,7 +30,7 @@ int main() {
 
 	
 	// DUMMY TEST material (for attack and move )
-
+	/*
 	POINT point;
 	Unit(M, 1, 1) = Create_new_unit('S',1,1,1);
 	point = MakePOINT(1,1);
@@ -39,6 +39,7 @@ int main() {
 	Unit(M, 1, 2) = Create_new_unit('S',2,1,2);
 	point = MakePOINT(1,2);
 	units(player_2) = Insert_unit(units(player_2), point, UnitNbElmt(units(player_2)));
+	*/
 
 	while(input != 'Q'){
 
