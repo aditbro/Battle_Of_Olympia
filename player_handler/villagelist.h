@@ -1,10 +1,69 @@
+
+/* Module to handle village list */
+
+#ifndef villagelist_H
+#define villagelist_H
+
+#include "../unit.h"
+#include "../map.h"
+#include "../ADT/point.h"
+#include <stdlib.h>
+
+typedef POINT infotype;
+typedef struct tElmtlist *address;
+typedef struct tElmtlist {
+    int index;
+	infotype info;
+	address next;
+} ElmtList;
+
+typedef address VillageList;
+
+#define Index(P) (P)->index
+#define Info(P) (P)->info
+#define Next(P) (P)->next
+
+/* NOTES :
+    - Start off :
+        VillageList UNITLIST = NULL;
+    - Usage :
+        UNITLIST = Insert_village(UNITLIST, point, NbElmt(UNITLIST));
+        Delete_village(UNITLIST, 3);
+        Display_village_list(UNITLIST);
+
+/****************** ADD AND DEL ******************/
+VillageList Insert_village(VillageList L, POINT village_pos, int indeks);
+/* Insert a element into list */
+
+void Delete_village (VillageList L, int Index);
+/* Delete an element at index X */
+
+POINT get_village_position(VillageList L, int Index);
+
+/****************** DISPLAY ******************/
+void Display_village_list (MAP M, VillageList L);
+/* Display village index and village position */
+
+void show_village_in_list(Build B);
+/* Function to show village data  */
+
+/****************** SHOULD NOT BE USED DIRECTLY ******************/
+int VillageList_empty(address L);
+
+int VillageNbElmt(VillageList L);
+
+VillageList VillageTail(VillageList L);
+
+#endif
+
+
 // /* Representasi villagelist_address dengan pointer */
 // /* villagelist_infotype adalah Building */
 
 // #ifndef villagelist_H
 // #define villagelist_H
 
-// #include "../unit.h"
+// #include "../village.h"
 // #include "../ADT/boolean.h"
 // #include <stdlib.h>
 
