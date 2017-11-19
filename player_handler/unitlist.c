@@ -114,7 +114,8 @@ void select_unit(MAP Map, UnitList Unit_list, UNIT * Current_unit, int Index){
     int j = Ordinat(unit_pos);
 
     if ( (i >= 0) && (i <= MapBrsEff(Map)) && (j >= 0) && (j <= MapKolEff(Map))){
-         *Current_unit = Unit(Map,i,j);
+        *Current_unit = Unit(Map,i,j);
+        printf("current unit : unit < %.2d > \n", Index);
     }
     else{
         printf("You don't have such unit...\n");

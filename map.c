@@ -14,9 +14,31 @@ void createMap(MAP *M, int row, int col) {
 			Unit(*M, i, j).type = Nil;
 		}
 	}
-	
 }
 // membuat map berukuran baris row dan kolom col
+
+
+
+MAP Init_map(){
+	/* Function to initialize map based on user input */
+
+	MAP New_map;
+	int row, col;
+
+	printf("First, let's define the map size !\n(e.g. 8 9 means 8 x 9) : ");
+	scanf("%d %d", &row, &col);
+	while (!map_IsIdxValid(row,col)) {
+		printf("Sorry, I think it's too big or maybe too small?\n");
+		printf("Please insert it again (range 8 - 25) : ");
+		scanf("%d %d", &row, &col);
+	}
+	createMap(&New_map, row, col);
+
+	return New_map;
+}
+
+
+
 
 
 // ----------Output----------

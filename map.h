@@ -1,4 +1,4 @@
-// Map didefinisikan sebagai matriks dalam bentuk array 2 dimensi statik dan
+/* Map didefinisikan sebagai matriks dalam bentuk array 2 dimensi statik */
 
 #ifndef MAP_H
 #define MAP_H
@@ -11,7 +11,7 @@
 typedef MATRIKS MAP;
 
 
-// ----------Selektor---------- //
+/* ----------Selektor---------- */
 #define MapBrsEff(M)	(M).NBrsEff
 #define MapKolEff(M)	(M).NKolEff
 #define MapElmt(M,i,j)	(M).P[(i)][(j)]
@@ -21,15 +21,17 @@ typedef MATRIKS MAP;
 #define Select(M,i,j)	(M).P[(i)][(j)].select
 
 
-// ----------Constructor---------- //
+/* ----------Constructor---------- */
 void createMap(MAP *M, int row, int col);
-// membuat map berukuran baris row dan kolom col
+/* membuat map berukuran baris row dan kolom col */
 
+MAP Init_map();
+/* Function to initialize map based on user input */
 
-// ----------Output---------- //
+/* ----------Output---------- */
 void printMap(MAP M);
-// Mengeprint map pada cmd
+/* Mengeprint map pada cmd */
 
-// Selektor
 boolean map_IsIdxValid(int row, int col);
+
 #endif

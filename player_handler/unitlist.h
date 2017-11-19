@@ -23,45 +23,6 @@ typedef address UnitList;
 #define Info(P) (P)->info
 #define Next(P) (P)->next
 
-/* NOTES :
-    - Start off :
-        UnitList UNITLIST = NULL;
-    - Usage :
-        UNITLIST = Insert_unit(UNITLIST, point, NbElmt(UNITLIST));
-        Delete_unit(UNITLIST, 3);
-        Display_unit_list(UNITLIST);
-
-    - Testing program :
-
-    int main (void){
-        POINT point;
-        UnitList UNITLIST = NULL;
-        UNIT Current_unit;
-
-        point = Pos(Unit(M, 1, 1));
-        printf("\nInserting unit1\n");
-        UNITLIST = Insert_unit(UNITLIST, point, NbElmt(UNITLIST));
-
-        point = Pos(Unit(M, 1, 2));
-        printf("\nInserting unit2\n");
-        UNITLIST = Insert_unit(UNITLIST, point, NbElmt(UNITLIST));
-
-        printf("\nDisplaying unit\n");
-        Display_unit_list(M, UNITLIST);
-
-        printf("\nShow current unit (unit 1) info...\n");
-        select_unit(M, UNITLIST, &Current_unit, 1);
-        Show_unit_info(Current_unit);
-
-        printf("\nChange unit...");
-        printf("\nShow current unit (unit 2) info...\n");
-        select_unit(M, UNITLIST, &Current_unit, 2);
-        Show_unit_info(Current_unit);
-
-        return 0;
-    }
-*/
-
 
 /****************** ADD AND DEL ******************/
 UnitList Insert_unit(UnitList L, POINT unit_pos, int indeks);

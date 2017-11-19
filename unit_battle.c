@@ -92,7 +92,7 @@ void attack(UNIT *Attacker, MAP *M)
             array_AddAsLastEl(&lokasi,1);
             count+=1;
             if(count==1){
-                printf("Please select enemy you want to attack:\n");
+                printf("\nPlease select enemy you want to attack:\n\n");
             }
             printf("%d. ",count);
             if(Atk_Type(Unit(*M,Xatk+1,Yatk))==Atk_Type(*Attacker)){
@@ -106,7 +106,7 @@ void attack(UNIT *Attacker, MAP *M)
             array_AddAsLastEl(&lokasi,2);
             count+=1;
             if(count==1){
-                printf("Please select enemy you want to attack:\n");
+                printf("\nPlease select enemy you want to attack:\n\n");
             }
             printf("%d. ",count);
             if(Atk_Type(Unit(*M,Xatk-1,Yatk))==Atk_Type(*Attacker)){
@@ -120,7 +120,7 @@ void attack(UNIT *Attacker, MAP *M)
             array_AddAsLastEl(&lokasi,3);
             count+=1;
             if(count==1){
-                printf("Please select enemy you want to attack:\n");
+                printf("\nPlease select enemy you want to attack:\n\n");
             }
             printf("%d. ",count);
             if(Atk_Type(Unit(*M,Xatk,Yatk+1))==Atk_Type(*Attacker)){
@@ -134,7 +134,7 @@ void attack(UNIT *Attacker, MAP *M)
             array_AddAsLastEl(&lokasi,4);
             count+=1;
             if(count==1){
-                printf("Please select enemy you want to attack:\n");
+                printf("\nPlease select enemy you want to attack:\n\n");
             }
             printf("%d. ",count);
             if(Atk_Type(Unit(*M,Xatk,Yatk-1))==Atk_Type(*Attacker)){
@@ -144,9 +144,10 @@ void attack(UNIT *Attacker, MAP *M)
             }
         }
         if(Found){
-            printf("Select enemy you want to attack : ");
+            printf("\nSelect enemy you want to attack : ");
             do{
                 scanf("%d",&inp);
+                printf("\n\nBattle logs : \n");
                 if(inp<=count){
                     inpmusuh=array_Elmt(lokasi,inp);
                     if(inpmusuh==1){     
@@ -168,6 +169,6 @@ void attack(UNIT *Attacker, MAP *M)
             printf("Enemy not found\n");
         }
     }else{
-        printf("You have attacked\n");
+        printf("Your unit is resting...\n");
     }
 }

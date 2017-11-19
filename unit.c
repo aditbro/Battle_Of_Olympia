@@ -28,8 +28,8 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
         GHP(*U)          = 90;
         Atk_Type(*U)    = 'R';
     }else if(type=='K'){
-        M_Hp(*U)		= 100;
-        Hp(*U)			= 100;
+        M_Hp(*U)		= 300;
+        Hp(*U)			= 300;
         Atk(*U)			= 25;
         Def(*U)         = 30;
         Heal(*U)        = 0;
@@ -78,7 +78,7 @@ UNIT Create_new_unit(char type,int owner,int x, int y){
 
 void Show_unit_info (UNIT U){
 
-    printf("Unit Type            : %c\n", Type(U));
+    printf("Unit Type            : ");print_unit_type(U);printf(" \n");
     printf("Max HP               : %d\n", M_Hp(U));
     printf("HP                   : %d\n", Hp(U));
     printf("Atk                  : %d\n", Atk(U));

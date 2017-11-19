@@ -2,8 +2,9 @@
 #define PLAYER_H
 
 #include "../ADT/pcolor.h"
-// #include "villagelist.h"
 #include "unitlist.h"
+#include "villagelist.h"
+
 
 typedef struct {
 	int ID;
@@ -12,7 +13,7 @@ typedef struct {
 	int upkeep;
 	char color;
 	UnitList units;
-	// List villages;
+	VillageList villages;
 } Player;
 
 #define ID(P)		(P).ID
@@ -25,6 +26,6 @@ typedef struct {
 
 void InitializeNewPlayer(Player *P, int ID);
 
-Player new_player(int D);
+Player create_new_player(int D);
 
 #endif
