@@ -16,7 +16,7 @@ boolean IsCastleEmpty (MAP M, int x, int y);
 boolean castle_available (MAP M, Build T);
 /* Mengecek apakah ada castle yang kosong (untuk validasi) */
 
-void recruit_unit (MAP M, Player *P, UNIT K, UNIT *U);
+void recruit_unit(MAP *M, Player *P, UNIT K);
 /* Dipanggil di program utama saat user menginput command RECRUIT */
 
 #endif

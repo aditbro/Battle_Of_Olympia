@@ -4,6 +4,7 @@
 #include "unit.h"
 #include "unit_battle.h"
 #include "move.h"
+#include "recruit.h"
 #include "turn.h"
 #include "player_handler/player.h"
 #include "player_handler/unitlist.h"
@@ -80,6 +81,19 @@ int main() {
 			scanf("%d", &unit_list_index);
 			select_unit(M, units(*Current_player), Current_unit, unit_list_index);
     		
+		}
+
+		else if(input == 'R'){
+			/* Recruit unit */
+			
+			recruit_unit (&M, Current_player, *Current_unit);
+
+		}
+
+		else if(input == 'I'){
+			/* Show info of specific tile */
+
+			printInfo(M);
 		}
 
 		else if(input == 'S'){

@@ -20,6 +20,7 @@ void Init_game(MAP *M, Player *P1, Player *P2){
 
         Build_Type(Build(*M, Absis(index), Ordinat(index))) = symbol;
         Build_Owner(Build(*M, Absis(index), Ordinat(index))) = owner;
+        Build_Pos(Build(*M, Absis(index), Ordinat(index))) = index;
     }
 
     int Village_too_close(POINT index, int map_x, int map_y){
