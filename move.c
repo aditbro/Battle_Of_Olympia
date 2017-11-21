@@ -45,35 +45,35 @@ void possible_move(MAP *P,UNIT U)
     int i;
 
 	POINT Loc = Pos(U);
-	for( i = 1; i <= M_Mov(U) && Loc.Y + i <= MapKolEff(*P); i++){
-		if(Type(Unit(*P,Loc.Y + i,Loc.X)) == '0'){
-			Type(Unit(*P,Loc.Y + i,Loc.X)) = '#';
+	for( i = 1; i <= M_Mov(U) && Loc.X + i <= MapKolEff(*P); i++){
+		if(Type(Unit(*P,Loc.X + i,Loc.Y)) == '0'){
+			Type(Unit(*P,Loc.X + i,Loc.Y)) = '#';
 		}
-		else if(Owner(U) != Owner(Unit(*P,Loc.Y+i,Loc.X))){
-			break;
-		}
-	}
-	for( i = 1; i <= M_Mov(U) && Loc.Y - i >= 0; i++){
-		if(Type(Unit(*P,Loc.Y - i,Loc.X)) == '0'){
-			Type(Unit(*P,Loc.Y - i,Loc.X)) = '#';
-		}
-		else if(Owner(U) != Owner(Unit(*P,Loc.Y-i,Loc.X))){
+		else if(Owner(U) != Owner(Unit(*P,Loc.X+i,Loc.Y))){
 			break;
 		}
 	}
 	for( i = 1; i <= M_Mov(U) && Loc.X - i >= 0; i++){
-		if(Type(Unit(*P,Loc.Y,Loc.X - i)) == '0'){
-			Type(Unit(*P,Loc.Y,Loc.X - i)) = '#';
+		if(Type(Unit(*P,Loc.X - i,Loc.Y)) == '0'){
+			Type(Unit(*P,Loc.X - i,Loc.Y)) = '#';
 		}
-		else if(Owner(U) != Owner(Unit(*P,Loc.Y,Loc.X-i))){
+		else if(Owner(U) != Owner(Unit(*P,Loc.X-i,Loc.Y))){
+			break;
+		}
+	}
+	for( i = 1; i <= M_Mov(U) && Loc.Y - i >= 0; i++){
+		if(Type(Unit(*P,Loc.X,Loc.Y - i)) == '0'){
+			Type(Unit(*P,Loc.X,Loc.Y - i)) = '#';
+		}
+		else if(Owner(U) != Owner(Unit(*P,Loc.X,Loc.Y-i))){
 			break;
 		}
 	}
 	for( i = 1; i <= M_Mov(U) && Loc.Y + i <= MapBrsEff(*P); i++){
-		if(Type(Unit(*P,Loc.Y,Loc.X + i)) == '0'){
-			Type(Unit(*P,Loc.Y,Loc.X + i)) = '#';
+		if(Type(Unit(*P,Loc.X,Loc.Y + i)) == '0'){
+			Type(Unit(*P,Loc.X,Loc.Y + i)) = '#';
 		}
-		else if(Owner(U) != Owner(Unit(*P,Loc.Y,Loc.X+i))){
+		else if(Owner(U) != Owner(Unit(*P,Loc.X,Loc.Y+i))){
 			break;
 		}
 	}
@@ -96,7 +96,7 @@ int check_if_possible(MAP P, UNIT U, int x, int y)
 {
 	MAP temp = P;
 	possible_move(&temp, U);
-	if(Unit(temp, y, x).type != '#'){
+	if(Unit(temp, x, y).type != '#'){
 		return 0;
 	}else{
 		return 1;
@@ -109,24 +109,38 @@ void move_unit(MAP *P, UNIT *U, int x, int y)
  */
 {
 	POINT Loc = Pos(*U);
-	Unit(*P, Loc.Y,Loc.X).type = '0';
-	Unit(*P, Loc.Y,Loc.X).owner = 0;
+	Unit(*P, Loc.X,Loc.Y).type = '0';
+	Unit(*P, Loc.X,Loc.Y).owner = 0;
 	stack_Push(&X, Loc.X);
 	stack_Push(&Y, Loc.Y);
-	Loc.X = y;
-	Loc.Y = x;
+	Loc.X = x;
+	Loc.Y = y;
 	Unit(*P,x,y) = *U;
 	Pos(*U) = Loc;
-	M_Mov(*U) -= 1;
+	if(Build(*P, x, y).type == 'V'){
+		M_Mov(*U) = 0;
+	}else{
+		M_Mov(*U) -= 1;
+	}
 }
 
 void undo(MAP *P, UNIT *U)
 /*prosedur ini mengembalikan state unit ke state sebelum pindah */
 {
+	if(stack_IsEmpty(Y) || stack_IsEmpty(X)){
+		printf("there's no move to undo\n");
+		return;
+	}
 	int xs;
 	stack_Pop(&X, &xs);
 	int ys;
 	stack_Pop(&Y, &ys);
-	move_unit(P, U, xs, ys);
-	M_Mov(*U) += 2;
+	POINT Loc = Pos(*U);
+	Unit(*P, Loc.X,Loc.Y).type = '0';
+	Unit(*P, Loc.X,Loc.Y).owner = 0;
+	Loc.X = xs;
+	Loc.Y = ys;
+	Unit(*P,xs,ys) = *U;
+	Pos(*U) = Loc;
+	M_Mov(*U) += 1;
 }

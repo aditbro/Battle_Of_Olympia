@@ -56,7 +56,6 @@ int main() {
 
 		else if(input == 'M'){
 			/* Command to move unit */
-
 			int x,y;
 
 			print_possible_move(M, *Current_unit);
@@ -75,12 +74,11 @@ int main() {
 			/* Switching current unit */
 
 			int unit_list_index;
-
 			Display_unit_list(M, units(*Current_player));
 			printf("Switching into unit : ");
 			scanf("%d", &unit_list_index);
 			select_unit(M, units(*Current_player), Current_unit, unit_list_index);
-    		
+    		call_move();
 		}
 
 		else if(input == 'R'){
@@ -118,6 +116,8 @@ int main() {
 			}
 
 			// increase gold , decrease gold , healing 
+		}else if(input == 'U'){
+			undo(&M, Current_unit);
 		}
 
 
