@@ -60,7 +60,10 @@ void recruit_unit(MAP *M, Player *P, UNIT K){
                 if (!IsCastleEmpty(*M, x, y)){
                     printf("That castle is occupied!\n");
                 }
-            } while (!IsCastleEmpty(*M, x, y));
+                if(Build_Owner(Build(*M,x,y))!=ID(*P)){
+                    printf("That's not your castle!\n");
+                }
+            } while (!IsCastleEmpty(*M, x, y) || Build_Owner(Build(*M,x,y))!=ID(*P));
 
             printf("\n=== List of Recruits ===\n");
             printf("1. Archer | Health 100 | ATK 15 | DEF 15 | 10G\n");
