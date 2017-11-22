@@ -19,6 +19,20 @@ void createMap(MAP *M, int row, int col) {
 }
 // membuat map berukuran baris row dan kolom col
 
+MAP Init_map() {
+	MAP M;
+	int col, row;
+	printf("Insert size of map (max is 25x25)\n(e.g. 8 9 means 8x9) : ");
+	scanf("%d %d", &row, &col);
+	while (!map_IsIdxValid(row,col)) {
+		printf("Sorry, I think it's too big.\n");
+		printf("or maybe too small?\n");
+		printf("Please insert it again : ");
+		scanf("%d %d", &row, &col);
+	}
+	createMap(&M,row,col);
+	return M;
+}
 
 // ----------Output----------
 void printMap(MAP M) {

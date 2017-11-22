@@ -25,6 +25,8 @@ typedef MATRIKS MAP;
 void createMap(MAP *M, int row, int col);
 // membuat map berukuran baris row dan kolom col
 
+MAP Init_map();
+// inisiasi map
 
 // ----------Output---------- //
 void printMap(MAP M);
