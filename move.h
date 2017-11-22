@@ -7,6 +7,8 @@
 
 Stack X,Y;
 
+int absolute(int x);
+
 void call_move();
 /*prosedur ini berguna ketika player memilih untuk change unit dan di awal turn
  * walaupun player tidak akan menggunakan move
@@ -14,8 +16,6 @@ void call_move();
  * prosedur ini akan menginisialisasi STACK sehingga bisa melakukan UNDO
  */
 
-void change_unit(MAP P, UNIT New, UNIT *U);
-/*prosedur ini berguna untuk memilih unit yang akan dipindahkan*/
 
 void possible_move(MAP *P,UNIT U);
 /*prosedur ini mengubah map menjadi map yang sudah berisi
