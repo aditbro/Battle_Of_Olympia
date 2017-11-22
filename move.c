@@ -1,6 +1,6 @@
 #include "move.h"
 
-Stack X,Y;
+Stack X,Y,C;
 
 
 int absolute(int x){
@@ -20,6 +20,7 @@ void call_move()
 {
 	stack_CreateEmpty(&X);
 	stack_CreateEmpty(&Y);
+	stack_CreateEmpty(&C);
 }
 
 
@@ -65,6 +66,38 @@ void possible_move(MAP *P,UNIT U)
 		else if(Owner(U) != Owner(Unit(*P,Loc.X,Loc.Y+i))){
 			break;
 		}
+	}
+	for( i = 1; i <= M_Mov(U)/2 && Loc.Y + i <= MapBrsEff(*P) && Loc.X + i <= MapBrsEff(*P); i++){
+		if(Type(Unit(*P,Loc.X + i,Loc.Y + i)) == '0'){
+			Type(Unit(*P,Loc.X + i,Loc.Y + i)) = '#';
+		}
+		else if(Owner(U) != Owner(Unit(*P,Loc.X + i,Loc.Y+i))){
+			break;
+		}			
+	}
+	for( i = 1; i <= M_Mov(U)/2 && Loc.Y - i >= 0 && Loc.X + i <= MapBrsEff(*P); i++){
+		if(Type(Unit(*P,Loc.X + i,Loc.Y - i)) == '0'){
+			Type(Unit(*P,Loc.X + i,Loc.Y - i)) = '#';
+		}
+		else if(Owner(U) != Owner(Unit(*P,Loc.X + i,Loc.Y-i))){
+			break;
+		}			
+	}
+	for( i = 1; i <= M_Mov(U)/2 && Loc.Y + i <= MapBrsEff(*P) && Loc.X - i >= 0; i++){
+		if(Type(Unit(*P,Loc.X - i,Loc.Y + i)) == '0'){
+			Type(Unit(*P,Loc.X - i,Loc.Y + i)) = '#';
+		}
+		else if(Owner(U) != Owner(Unit(*P,Loc.X-i,Loc.Y+i))){
+			break;
+		}			
+	}
+	for( i = 1; i <= M_Mov(U)/2 && Loc.Y - i >= 0 && Loc.X - i >= 0;i++){
+		if(Type(Unit(*P,Loc.X - i,Loc.Y - i)) == '0'){
+			Type(Unit(*P,Loc.X - i,Loc.Y - i)) = '#';
+		}
+		else if(Owner(U) != Owner(Unit(*P,Loc.X - i,Loc.Y-i))){
+			break;
+		}			
 	}
 	//printMap(P);
 }
@@ -114,21 +147,25 @@ void move_unit(MAP *P, UNIT *U, int x, int y)
 	Pos(*U) = Loc;
 	
 	if(Build(*P, x, y).type == 'V'){
+
 		Mov(*U) = 0;
 
 	}else{
+
 		if(x1 - x == 0 || y - y1 == 0){
+
 			Mov(*U) -= absolute((x1-x)+(y1-y));
 		}
 		else{
+			
 			Mov(*U) -= absolute((x1-x));
+
 		}
 	}
 
 	/* assign unit to correct place ONLY AFTER all compulsory variable changes */
 	Unit(*P,x,y) = *U; 
 }
-
 void undo(MAP *P, UNIT *U)
 /*prosedur ini mengembalikan state unit ke state sebelum pindah */
 {
@@ -143,6 +180,11 @@ void undo(MAP *P, UNIT *U)
 	POINT Loc = Pos(*U);
 	Unit(*P, Loc.X,Loc.Y).type = '0';
 	Unit(*P, Loc.X,Loc.Y).owner = 0;
+	if(Build(*P, Loc.X, Loc.Y).type == 'V'){
+		int conquered = 0;
+		stack_Pop(&C, &conquered);
+		Build(*P, Loc.X, Loc.Y).owner = conquered;
+	}
 	Loc.X = xs;
 	Loc.Y = ys;
 
@@ -152,3 +194,4 @@ void undo(MAP *P, UNIT *U)
 	/* assign unit to correct place ONLY AFTER all compulsory variable changes */
 	Unit(*P,xs,ys) = *U;
 }
+

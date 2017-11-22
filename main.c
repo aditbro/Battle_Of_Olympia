@@ -120,6 +120,7 @@ int main() {
 			/* End turn */
 			if(!dummy){
 				gold(*Current_player)=gold(*Current_player)-upkeep(*Current_player);
+				gold(*Current_player)=gold(*Current_player)+income(*Current_player);
 			}else{
 				dummy=false;
 			}
