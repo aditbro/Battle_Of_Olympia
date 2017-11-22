@@ -77,6 +77,38 @@ void possible_move(MAP *P,UNIT U)
 			break;
 		}
 	}
+	for( i = 1; i <= M_Mov(U)/2 && Loc.Y + i <= MapBrsEff(*P) && Loc.X + i <= MapBrsEff(*P); i++){
+		if(Type(Unit(*P,Loc.X + i,Loc.Y + i)) == '0'){
+			Type(Unit(*P,Loc.X + i,Loc.Y + i)) = '#';
+		}
+		else if(Owner(U) != Owner(Unit(*P,Loc.X + i,Loc.Y+i))){
+			break;
+		}			
+	}
+	for( i = 1; i <= M_Mov(U)/2 && Loc.Y - i >= 0 && Loc.X + i <= MapBrsEff(*P); i++){
+		if(Type(Unit(*P,Loc.X + i,Loc.Y - i)) == '0'){
+			Type(Unit(*P,Loc.X + i,Loc.Y - i)) = '#';
+		}
+		else if(Owner(U) != Owner(Unit(*P,Loc.X + i,Loc.Y-i))){
+			break;
+		}			
+	}
+	for( i = 1; i <= M_Mov(U)/2 && Loc.Y + i <= MapBrsEff(*P) && Loc.X - i >= 0; i++){
+		if(Type(Unit(*P,Loc.X - i,Loc.Y + i)) == '0'){
+			Type(Unit(*P,Loc.X - i,Loc.Y + i)) = '#';
+		}
+		else if(Owner(U) != Owner(Unit(*P,Loc.X-i,Loc.Y+i))){
+			break;
+		}			
+	}
+	for( i = 1; i <= M_Mov(U)/2 && Loc.Y - i >= 0 && Loc.X - i >= 0;i++){
+		if(Type(Unit(*P,Loc.X - i,Loc.Y - i)) == '0'){
+			Type(Unit(*P,Loc.X - i,Loc.Y - i)) = '#';
+		}
+		else if(Owner(U) != Owner(Unit(*P,Loc.X - i,Loc.Y-i))){
+			break;
+		}			
+	}
 	//printMap(P);
 }
 
@@ -122,12 +154,8 @@ void move_unit(MAP *P, UNIT *U, int x, int y)
 	if(Build(*P, x, y).type == 'V'){
 		M_Mov(*U) = 0;
 	}else{
-		if(x1 - x == 0 || y - y1 == 0){
-			M_Mov(*U) -= absolute((x1-x)+(y1-y));
-		}
-		else{
-			M_Mov(*U) -= absolute((x1-x));
-		}
+		M_Mov(*U) -= absolute((x1-x)+(y1-y));
+		//printf("%d\n",absolute((x1-x)+(y1-y)));
 	}
 }
 
