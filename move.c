@@ -162,6 +162,8 @@ void move_unit(MAP *P, UNIT *U, int x, int y)
 		}else{
 			M_Mov(*U) -= absolute((x1-x));
 		}
+	}
+}
 void undo(MAP *P, UNIT *U)
 /*prosedur ini mengembalikan state unit ke state sebelum pindah */
 {
