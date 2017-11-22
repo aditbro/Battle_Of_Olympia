@@ -65,8 +65,14 @@ int main() {
 				printf("Moving into : ");
 				scanf("%d %d", &x, &y);
 				if(check_if_possible(M, *Current_unit, x, y)){
+
+					int unit_index_in_list;
+					units(*Current_player) = change_unit_position_pre(units(*Current_player), Current_unit, &unit_index_in_list);
 					move_unit(&M, Current_unit, x, y);
+					units(*Current_player) = change_unit_position_post(units(*Current_player), Current_unit, unit_index_in_list);
+
 					printf("Unit moved\n");
+
 				}
 				else{
 					printf("\nThat unit can't be placed there...\n");
@@ -128,8 +134,13 @@ int main() {
 			}
 			printf("Cash: %dG | Income: %dG | Upkeep: %dG\n",gold(*Current_player),income(*Current_player),upkeep(*Current_player));
 			// increase gold , decrease gold , healing 
+
 		}else if(input == 'U'){
+
+			int unit_index_in_list;
+			units(*Current_player) = change_unit_position_pre(units(*Current_player), Current_unit, &unit_index_in_list);
 			undo(&M, Current_unit);
+			units(*Current_player) = change_unit_position_post(units(*Current_player), Current_unit, unit_index_in_list);
 		}
 
 

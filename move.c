@@ -1,9 +1,4 @@
-#include "map.h"
-#include "unit.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include "ADT/stackt.h"
-#include "ADT/point.h"
+#include "move.h"
 
 Stack X,Y,C;
 
@@ -28,12 +23,6 @@ void call_move()
 	stack_CreateEmpty(&C);
 }
 
-void change_unit(UNIT New, UNIT *U)
-/*prosedur ini berguna untuk memilih unit yang akan dipindahkan*/
-{
-	*U = New;
-	call_move();
-}
 
 void possible_move(MAP *P,UNIT U)
 /**prosedur ini mengubah map menjadi map yang sudah berisi
@@ -141,28 +130,41 @@ void move_unit(MAP *P, UNIT *U, int x, int y)
  * lalu memasukan lokasi sebelumnya ke stack agar bisa melakukan undo
  */
 {
+	
 	POINT Loc = Pos(*U);
 	Unit(*P, Loc.X,Loc.Y).type = '0';
 	Unit(*P, Loc.X,Loc.Y).owner = 0;
+
 	stack_Push(&X, Loc.X);
 	stack_Push(&Y, Loc.Y);
+
 	int x1 = Loc.X;
 	int y1 = Loc.Y;
+
 	Loc.X = x;
 	Loc.Y = y;
-	Unit(*P,x,y) = *U;
+
 	Pos(*U) = Loc;
+	
 	if(Build(*P, x, y).type == 'V'){
-		M_Mov(*U) = 0;
-		stack_Push(&C, Build(*P,x,y).owner);
-		Build(*P,x,y).owner = Owner(*U);
+
+		Mov(*U) = 0;
+
 	}else{
+
 		if(x1 - x == 0 || y - y1 == 0){
-			M_Mov(*U) -= absolute((x1-x)+(y1-y));
-		}else{
-			M_Mov(*U) -= absolute((x1-x));
+
+			Mov(*U) -= absolute((x1-x)+(y1-y));
+		}
+		else{
+			
+			Mov(*U) -= absolute((x1-x));
+
 		}
 	}
+
+	/* assign unit to correct place ONLY AFTER all compulsory variable changes */
+	Unit(*P,x,y) = *U; 
 }
 void undo(MAP *P, UNIT *U)
 /*prosedur ini mengembalikan state unit ke state sebelum pindah */
@@ -185,7 +187,11 @@ void undo(MAP *P, UNIT *U)
 	}
 	Loc.X = xs;
 	Loc.Y = ys;
-	Unit(*P,xs,ys) = *U;
+
 	Pos(*U) = Loc;
-	M_Mov(*U) += 1;
+	Mov(*U) += 1;
+
+	/* assign unit to correct place ONLY AFTER all compulsory variable changes */
+	Unit(*P,xs,ys) = *U;
 }
+

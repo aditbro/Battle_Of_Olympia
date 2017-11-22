@@ -51,7 +51,9 @@ UnitList Tail(UnitList L)
 UnitList Insert_unit(UnitList L, POINT unit_pos, int indeks)
 /* Insert a element into list */
 {
+
     if (UnitList_empty(L)){
+        
         return Alokasi_point(unit_pos, indeks);
     }
 
@@ -62,12 +64,12 @@ UnitList Insert_unit(UnitList L, POINT unit_pos, int indeks)
 }
 
 
-void Delete_unit (UnitList L, int Index)
+void Delete_unit (UnitList *L, int Index)
 /* Delete an element at index X */
 {
 
     address Prec = NULL;
-    address Current = L;
+    address Current = *L;
     int found = 0;
 
     while((Current != NULL) && !found){
@@ -85,8 +87,14 @@ void Delete_unit (UnitList L, int Index)
 
     if (found){
 
-        Next(Prec) = Next(Current);
-        free(Current);
+        if (Prec != NULL){
+            Next(Prec) = Next(Current);
+            free(Current);
+        }
+        else{
+            *L = Next(Current);
+            free(Current);
+        }
     }
 }
 
@@ -108,6 +116,7 @@ POINT get_unit_position(UnitList L, int Index){
 
 
 void select_unit(MAP Map, UnitList Unit_list, UNIT * Current_unit, int Index){
+    /* Change value of current unit by selecting unit in unitlist by index */
 
     POINT unit_pos = get_unit_position(Unit_list, Index);
     int i = Absis(unit_pos);
@@ -122,6 +131,54 @@ void select_unit(MAP Map, UnitList Unit_list, UNIT * Current_unit, int Index){
     }
 }
 
+UnitList  change_unit_position_pre(UnitList Unit_list, UNIT *Current_unit, int *unit_index_in_list){
+/* Function to delete unit in unitlist and store index */
+
+    *unit_index_in_list = search_current_unit_index(Unit_list, Current_unit);
+
+    /* If current unit is in list */
+    if (unit_index_in_list != 0){
+        Delete_unit(&Unit_list, *unit_index_in_list);
+    }
+
+    return Unit_list;
+}
+
+
+UnitList change_unit_position_post(UnitList Unit_list, UNIT *Current_unit, int unit_index_in_list) {
+    /* Function to insert unit in unitlist after the position is modified */
+
+    if (unit_index_in_list != 0){
+
+        return Insert_unit(Unit_list, Pos(*Current_unit), unit_index_in_list-1);
+
+    }
+    else{
+
+        return NULL;
+    }
+}
+
+int search_current_unit_index(UnitList Unit_list, UNIT *Current_unit){
+    /* Function to return index of current unit in unitlist */
+
+    if (UnitList_empty(Unit_list)){
+        return 0;
+    }
+
+    else{
+
+        if (point_EQ(Info(Unit_list), Pos(*Current_unit))){
+            return Index(Unit_list);
+        }
+
+        else{
+            return search_current_unit_index(Tail(Unit_list), Current_unit);
+        }
+    }
+
+}
+
 
 /****************** DISPLAY ******************/
 void Display_unit_list (MAP M, UnitList L)
@@ -132,6 +189,7 @@ void Display_unit_list (MAP M, UnitList L)
         printf("%d. ",Index(L));
 
         POINT unit_pos = get_unit_position(L, Index(L));
+
         show_unit_in_list(Unit(M, Absis(unit_pos), Ordinat(unit_pos)));
         printf("\n");
         Display_unit_list(M, Tail(L));
@@ -146,3 +204,5 @@ void show_unit_in_list(UNIT U){
     printf(" | ");
     printf("Health %d", Hp(U));
 }
+
+
