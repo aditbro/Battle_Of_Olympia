@@ -5,7 +5,7 @@
 #include "ADT/stackt.h"
 #include "ADT/point.h"
 
-Stack X,Y;
+Stack X,Y,C;
 
 
 int absolute(int x){
@@ -25,6 +25,7 @@ void call_move()
 {
 	stack_CreateEmpty(&X);
 	stack_CreateEmpty(&Y);
+	stack_CreateEmpty(&C);
 }
 
 void change_unit(UNIT New, UNIT *U)
@@ -153,9 +154,12 @@ void move_unit(MAP *P, UNIT *U, int x, int y)
 	Pos(*U) = Loc;
 	if(Build(*P, x, y).type == 'V'){
 		M_Mov(*U) = 0;
+		stack_Push(&C, Build(*P,x,y).owner);
+		Build(*P,x,y).owner = Owner(*U);
 	}else{
 		M_Mov(*U) -= absolute((x1-x)+(y1-y));
-		//printf("%d\n",absolute((x1-x)+(y1-y)));
+		printf("%d\n",absolute(absolute(x1-x)+absolute(y1-y)));
+		stack_Push(&C, 0);
 	}
 }
 
@@ -173,6 +177,11 @@ void undo(MAP *P, UNIT *U)
 	POINT Loc = Pos(*U);
 	Unit(*P, Loc.X,Loc.Y).type = '0';
 	Unit(*P, Loc.X,Loc.Y).owner = 0;
+	if(Build(*P, Loc.X, Loc.Y).type == 'V'){
+		int conquered = 0;
+		stack_Pop(&C, &conquered);
+		Build(*P, Loc.X, Loc.Y).owner = conquered;
+	}
 	Loc.X = xs;
 	Loc.Y = ys;
 	Unit(*P,xs,ys) = *U;
