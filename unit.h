@@ -16,6 +16,7 @@ typedef struct {
     int max_movement;
     int movement;
     int cost;
+    int upkeep;
     POINT position;
     char atk_type;
     boolean can_attack;
@@ -32,6 +33,7 @@ typedef struct {
 #define M_Mov(U) (U).max_movement
 #define Mov(U) (U).movement
 #define Cost(U) (U).cost
+#define Upkeep(U) (U).upkeep
 #define Pos(U) (U).position
 #define Atk_Type(U) (U).atk_type
 #define Can_Atk(U) (U).can_attack
