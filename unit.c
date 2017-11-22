@@ -84,6 +84,7 @@ void Show_unit_info (UNIT U){
 
     printf("Unit Type            : ");print_unit_type(U);printf(" \n");
     printf("Max HP               : %d\n", M_Hp(U));
+    printf("Owner                : %d\n", Owner(U));
     printf("HP                   : %d\n", Hp(U));
     printf("Atk                  : %d\n", Atk(U));
     printf("Def                  : %d\n", Def(U));

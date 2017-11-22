@@ -59,7 +59,7 @@ int main() {
 		else if(input == 'M'){
 			/* Command to move unit */
 			int x,y;
-
+			//move rejected when you tried move unit that max mov ==0
 			if(M_Mov(*Current_unit)!=0){
 				print_possible_move(M, *Current_unit);
 				printf("Moving into : ");
@@ -118,7 +118,7 @@ int main() {
 			}else{
 				dummy=false;
 			}
-
+			
 			Switch_turn(&TURN, &Current_player_int);
 			if (Current_player_int == 1){
 				Current_player = &player_1;
