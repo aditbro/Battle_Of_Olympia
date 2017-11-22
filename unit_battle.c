@@ -5,6 +5,26 @@
 #include <time.h>
 #include "unit_battle.h"
 
+void heal(UNIT  Mage, MAP *M)
+/* Heal other unit */
+{
+    int Xmage=Absis(Pos(Mage));
+    int Ymage=Ordinat(Pos(Mage));
+    if(Type(Unit(*M,Xmage+1,Ymage))!=Nil&& Owner(Unit(*M,Xmage+1,Ymage))==Owner(Mage)&&Hp(Unit(*M,Xmage+1,Ymage))!=0&&Hp(Unit(*M,Xmage+1,Ymage))!=100){
+        Hp(Unit(*M,Xmage+1,Ymage))+=Heal(Mage);
+    }
+    if(Type(Unit(*M,Xmage-1,Ymage))!=Nil&& Owner(Unit(*M,Xmage-1,Ymage))==Owner(Mage)&&Hp(Unit(*M,Xmage-1,Ymage))!=0&&Hp(Unit(*M,Xmage-1,Ymage))!=100){
+        Hp(Unit(*M,Xmage-1,Ymage))+=Heal(Mage);
+    }
+    if(Type(Unit(*M,Xmage,Ymage+1))!=Nil&& Owner(Unit(*M,Xmage,Ymage+1))==Owner(Mage)&&Hp(Unit(*M,Xmage,Ymage+1))!=0&&Hp(Unit(*M,Xmage,Ymage+1))!=100){
+        Hp(Unit(*M,Xmage,Ymage+1))+=Heal(Mage);
+    }
+    if(Type(Unit(*M,Xmage,Ymage-1))!=Nil&& Owner(Unit(*M,Xmage,Ymage-1))==Owner(Mage)&&Hp(Unit(*M,Xmage,Ymage-1))!=0&&Hp(Unit(*M,Xmage+1,Ymage-1))!=100){
+        Hp(Unit(*M,Xmage,Ymage-1))+=Heal(Mage);
+    }
+}
+
+
 boolean get_hit (UNIT Defender) {
     srand (time(NULL));
     TabInt Prob;
@@ -24,8 +44,8 @@ void unit_attack(UNIT * Attacker, UNIT * Defender)
 /*I.S. Attacker dan Defender letaknya bersebalahan*/
 /*F.S. health dari Attacker dan Defender berubah sesuai kondisi*/
 {
+    Can_Atk(*Attacker)=false;
     if (get_hit(*Defender)){
-        Can_Atk(*Attacker)=false;
         if(Type(*Defender)!='K'){
             if(Atk_Type(*Attacker)==Atk_Type(*Defender)){
                 Hp(*Defender)-=Atk(*Attacker);

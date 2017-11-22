@@ -9,6 +9,9 @@
 #include "map.h"
 #include "ADT/matriks.h"
 
+
+void heal(UNIT  Mage, MAP *M);
+/* Heal other unit */
 boolean get_hit (UNIT Defender);
 void unit_attack(UNIT * Attacker, UNIT * Defender);
 /*I.S. Attacker dan Defender letaknya bersebalahan*/

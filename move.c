@@ -35,7 +35,7 @@ void possible_move(MAP *P,UNIT U)
     int i;
 
 	POINT Loc = Pos(U);
-	for( i = 1; i <= M_Mov(U) && Loc.X + i <= MapKolEff(*P); i++){
+	for( i = 1; i <= Mov(U) && Loc.X + i <= MapKolEff(*P); i++){
 		if(Type(Unit(*P,Loc.X + i,Loc.Y)) == '0'){
 			Type(Unit(*P,Loc.X + i,Loc.Y)) = '#';
 		}
@@ -43,7 +43,7 @@ void possible_move(MAP *P,UNIT U)
 			break;
 		}
 	}
-	for( i = 1; i <= M_Mov(U) && Loc.X - i >= 0; i++){
+	for( i = 1; i <= Mov(U) && Loc.X - i >= 0; i++){
 		if(Type(Unit(*P,Loc.X - i,Loc.Y)) == '0'){
 			Type(Unit(*P,Loc.X - i,Loc.Y)) = '#';
 		}
@@ -51,7 +51,7 @@ void possible_move(MAP *P,UNIT U)
 			break;
 		}
 	}
-	for( i = 1; i <= M_Mov(U) && Loc.Y - i >= 0; i++){
+	for( i = 1; i <= Mov(U) && Loc.Y - i >= 0; i++){
 		if(Type(Unit(*P,Loc.X,Loc.Y - i)) == '0'){
 			Type(Unit(*P,Loc.X,Loc.Y - i)) = '#';
 		}
@@ -59,7 +59,7 @@ void possible_move(MAP *P,UNIT U)
 			break;
 		}
 	}
-	for( i = 1; i <= M_Mov(U) && Loc.Y + i <= MapBrsEff(*P); i++){
+	for( i = 1; i <= Mov(U) && Loc.Y + i <= MapBrsEff(*P); i++){
 		if(Type(Unit(*P,Loc.X,Loc.Y + i)) == '0'){
 			Type(Unit(*P,Loc.X,Loc.Y + i)) = '#';
 		}
@@ -67,7 +67,7 @@ void possible_move(MAP *P,UNIT U)
 			break;
 		}
 	}
-	for( i = 1; i <= M_Mov(U)/2 && Loc.Y + i <= MapBrsEff(*P) && Loc.X + i <= MapBrsEff(*P); i++){
+	for( i = 1; i <= Mov(U)/2 && Loc.Y + i <= MapBrsEff(*P) && Loc.X + i <= MapBrsEff(*P); i++){
 		if(Type(Unit(*P,Loc.X + i,Loc.Y + i)) == '0'){
 			Type(Unit(*P,Loc.X + i,Loc.Y + i)) = '#';
 		}
@@ -75,7 +75,7 @@ void possible_move(MAP *P,UNIT U)
 			break;
 		}			
 	}
-	for( i = 1; i <= M_Mov(U)/2 && Loc.Y - i >= 0 && Loc.X + i <= MapBrsEff(*P); i++){
+	for( i = 1; i <= Mov(U)/2 && Loc.Y - i >= 0 && Loc.X + i <= MapBrsEff(*P); i++){
 		if(Type(Unit(*P,Loc.X + i,Loc.Y - i)) == '0'){
 			Type(Unit(*P,Loc.X + i,Loc.Y - i)) = '#';
 		}
@@ -83,7 +83,7 @@ void possible_move(MAP *P,UNIT U)
 			break;
 		}			
 	}
-	for( i = 1; i <= M_Mov(U)/2 && Loc.Y + i <= MapBrsEff(*P) && Loc.X - i >= 0; i++){
+	for( i = 1; i <= Mov(U)/2 && Loc.Y + i <= MapBrsEff(*P) && Loc.X - i >= 0; i++){
 		if(Type(Unit(*P,Loc.X - i,Loc.Y + i)) == '0'){
 			Type(Unit(*P,Loc.X - i,Loc.Y + i)) = '#';
 		}
@@ -91,7 +91,7 @@ void possible_move(MAP *P,UNIT U)
 			break;
 		}			
 	}
-	for( i = 1; i <= M_Mov(U)/2 && Loc.Y - i >= 0 && Loc.X - i >= 0;i++){
+	for( i = 1; i <= Mov(U)/2 && Loc.Y - i >= 0 && Loc.X - i >= 0;i++){
 		if(Type(Unit(*P,Loc.X - i,Loc.Y - i)) == '0'){
 			Type(Unit(*P,Loc.X - i,Loc.Y - i)) = '#';
 		}

@@ -205,4 +205,29 @@ void show_unit_in_list(UNIT U){
     printf("Health %d", Hp(U));
 }
 
+void refresh_unit_list(MAP *M,UnitList L)
+/* Refresh Can_Atk,Mov all Unit in UnitList*/
+{
+    if(!UnitList_empty(L)){
+        
+        POINT unit_pos = get_unit_position(L,Index(L));
 
+        Mov(Unit(*M, Absis(unit_pos), Ordinat(unit_pos)))=M_Mov(Unit(*M, Absis(unit_pos), Ordinat(unit_pos)));
+        refresh_unit_list(M,Tail(L));
+    }
+}
+
+void do_heal(MAP *M,UnitList L)
+/* Heal with your white mage */
+{
+    if(!UnitList_empty(L)){
+        
+        POINT unit_pos = get_unit_position(L,Index(L));
+
+        if(Type(Unit(*M, Absis(unit_pos), Ordinat(unit_pos)))=='W'){
+            heal(Unit(*M, Absis(unit_pos), Ordinat(unit_pos)),M);
+        }
+
+        do_heal(M,Tail(L));
+    }
+}

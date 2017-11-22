@@ -60,7 +60,7 @@ int main() {
 			/* Command to move unit */
 			int x,y;
 			//move rejected when you tried move unit that max mov ==0
-			if(M_Mov(*Current_unit)!=0){
+			if(Mov(*Current_unit)!=0){
 				print_possible_move(M, *Current_unit);
 				printf("Moving into : ");
 				scanf("%d %d", &x, &y);
@@ -121,16 +121,24 @@ int main() {
 			if(!dummy){
 				gold(*Current_player)=gold(*Current_player)-upkeep(*Current_player);
 				gold(*Current_player)=gold(*Current_player)+income(*Current_player);
+				refresh_unit_list(&M, units(*Current_player));
+				do_heal(&M, units(*Current_player));
+
 			}else{
+				printf("Please change your unit first!\n");
 				dummy=false;
 			}
 			
 			Switch_turn(&TURN, &Current_player_int);
 			if (Current_player_int == 1){
 				Current_player = &player_1;
+				Current_unit = &Dummy_unit;
+				char input = 'E';
 			}
 			else if(Current_player_int == 2){
 				Current_player = &player_2;
+				Current_unit = &Dummy_unit;
+				char input = 'E';
 			}
 			printf("Cash: %dG | Income: %dG | Upkeep: %dG\n",gold(*Current_player),income(*Current_player),upkeep(*Current_player));
 			// increase gold , decrease gold , healing 

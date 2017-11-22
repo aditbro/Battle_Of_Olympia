@@ -5,6 +5,7 @@
 #define unitlist_H
 
 #include "../unit.h"
+#include "../unit_battle.h"
 #include "../map.h"
 #include "../ADT/point.h"
 #include <stdlib.h>
@@ -52,6 +53,12 @@ void Display_unit_list (MAP M, UnitList L);
 
 void show_unit_in_list(UNIT U);
 /* Function to show unit data  */
+
+void refresh_unit_list(MAP *M,UnitList L);
+/* Refresh Can_Atk,Mov all Unit in UnitList */
+
+void do_heal(MAP *M,UnitList L);
+/* Heal with your white mage */
 
 /****************** SHOULD NOT BE USED DIRECTLY ******************/
 int UnitList_empty(address L);
