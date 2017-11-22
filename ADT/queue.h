@@ -7,7 +7,6 @@
 
 #include "boolean.h"
 
-#define Nil 0
 /* Konstanta untuk mendefinisikan queue_address tak terdefinisi */
 
 /* Definisi elemen dan address */

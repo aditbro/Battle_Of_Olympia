@@ -1,13 +1,12 @@
 #include "player.h"
-#include "unitlist.h"
-#include "villagelist.h"
+
 
 void InitializeNewPlayer(Player *P, int ID){
 	ID(*P) = ID;
 	gold(*P) = 40;
 	income(*P) = 0;
 	upkeep(*P) = 0;
-	creteEmpty_unit(units(*P));
+
 	if (ID==1){
 		color(*P) = 'R';
 	}
@@ -26,6 +25,10 @@ void InitializeNewPlayer(Player *P, int ID){
 	else if (ID==1){
 		color(*P) = 'C';
 	}
+
+	units(*P) = NULL;
+	villages(*P) = NULL;
+
 }
 
 Player create_new_player(int ID){

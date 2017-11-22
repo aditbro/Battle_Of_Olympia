@@ -4,77 +4,138 @@
 #include "unit.h"
 #include "unit_battle.h"
 #include "move.h"
+#include "recruit.h"
+#include "turn.h"
+#include "player_handler/player.h"
 #include "player_handler/unitlist.h"
 
+
 int main() {
-	MAP M;
-	int col, row;
-	int x,y;
-	char inp;//ubah ke string nnt pake mesin kata
-	printf("Insert size of map (max is 25x25)\n(e.g. 8 9 means 8x9) : ");
-	scanf("%d %d", &col, &row);
-	while (!map_IsIdxValid(row,col)) {
-		printf("Sorry, I think it's too big.\n");
-		printf("or maybe too small?\n");
-		printf("Please insert it again : ");
-		scanf("%d %d", &col, &row);
-	}
 
-	createMap(&M, row, col);
-	Init_game(&M,row,col);
+	Show_title();
+
+	boolean dummy=true;
+
+	/* Initialization */
+	Player player_1 = create_new_player(1);
+	Player player_2 = create_new_player(2);
+	Player* Current_player; int Current_player_int;
+
+	MAP M = Init_map();
+	Queue TURN = Init_turn();
+
+	Init_game(&M, &player_1, &player_2);
+
+	UNIT Dummy_unit = Create_new_unit('Z', 0, 0, 0); // dummy unit
+	UNIT* Current_unit = &Dummy_unit;
+	
+	char input = 'E'; //automatic start first turn
+
+	
+	// DUMMY TEST material (for attack and move )
+	/*
+	POINT point;
 	Unit(M, 1, 1) = Create_new_unit('S',1,1,1);
+	point = MakePOINT(1,1);
+	units(player_1) = Insert_unit(units(player_1), point, UnitNbElmt(units(player_1)));
+	
 	Unit(M, 1, 2) = Create_new_unit('S',2,1,2);
-	/*Unit(M, 3, 5).type = 'K';
-	Unit(M, 3, 5).owner = 0;
+	point = MakePOINT(1,2);
+	units(player_2) = Insert_unit(units(player_2), point, UnitNbElmt(units(player_2)));
+	*/
 
+	while(input != 'Q'){
 
-	MapElmt(M, 2, 3).bld = 'V';
-	//scanf("%c",inp);*/
-
-	scanf("%c",&inp);
-	while(inp!='Q'){
-		printMap(M);
-		if(inp=='A'){
-			attack(&Unit(M, 1, 1),&M);
-		}else if(inp=='S'){
-			Show_unit_info(Unit(M, 1, 1));
+		if (input == 'W'){
+			/* Print map */
+			printMap(M);
 		}
-		else if(inp=='M'){
-			print_possible_move(M,Unit(M, 1, 1));
-			scanf("%d %d",&x,&y);
-			if(check_if_possible(M,Unit(M, 1, 1),x,y)){
-				move_unit(&M,&Unit(M, 1, 1),x,y);
+
+		else if(input == 'A'){
+			/* Command to declare attack using current unit */
+			attack(Current_unit, &M);
+		}
+
+		else if(input == 'M'){
+			/* Command to move unit */
+			int x,y;
+
+			if(M_Mov(*Current_unit)!=0){
+				print_possible_move(M, *Current_unit);
+				printf("Moving into : ");
+				scanf("%d %d", &x, &y);
+				if(check_if_possible(M, *Current_unit, x, y)){
+					move_unit(&M, Current_unit, x, y);
+					printf("Unit moved\n");
+				}
+				else{
+					printf("\nThat unit can't be placed there...\n");
+				}
+			}else{
+				printf("You can't move anymore\n");
 			}
 		}
-		scanf("%c",&inp);
+
+		else if(input == 'C'){
+			/* Switching current unit */
+
+			int unit_list_index;
+			Display_unit_list(M, units(*Current_player));
+			printf("Switching into unit : ");
+			scanf("%d", &unit_list_index);
+			select_unit(M, units(*Current_player), Current_unit, unit_list_index);
+    		call_move();
+		}
+
+		else if(input == 'R'){
+			/* Recruit unit */
+			
+			recruit_unit (&M, Current_player, *Current_unit);
+
+		}
+
+		else if(input == 'I'){
+			/* Show info of specific tile */
+
+			printInfo(M);
+		}
+
+		else if(input == 'S'){
+			/* Show current unit info */
+			
+			printf(" ========================\n");
+		    printf("|    Player %d's Unit     |\n",Owner(*Current_unit));
+		    printf(" ========================\n");
+			Show_unit_info(*Current_unit);
+			printf("\n");
+		}
+
+		else if(input == 'E'){
+			/* End turn */
+			if(!dummy){
+				gold(*Current_player)=gold(*Current_player)-upkeep(*Current_player);
+			}else{
+				dummy=false;
+			}
+
+			Switch_turn(&TURN, &Current_player_int);
+			if (Current_player_int == 1){
+				Current_player = &player_1;
+			}
+			else if(Current_player_int == 2){
+				Current_player = &player_2;
+			}
+			printf("Cash: %dG | Income: %dG | Upkeep: %dG\n",gold(*Current_player),income(*Current_player),upkeep(*Current_player));
+			// increase gold , decrease gold , healing 
+		}else if(input == 'U'){
+			undo(&M, Current_unit);
+		}
+
+
+		/* Get new input */
+		scanf("%c",&input); // remove enter at last 
+		printf("\ninput your next command ! >> ");
+		scanf("%c",&input);
+		printf("\n");
 	}
-
-
-    /*
-	POINT point;
-	UnitList UNITLIST = NULL;
-	UNIT Current_unit;
-
-    point = Pos(Unit(M, 1, 1));
-    printf("\nInserting unit1\n");
-	UNITLIST = Insert_unit(UNITLIST, point, NbElmt(UNITLIST));
-
-    point = Pos(Unit(M, 1, 2));
-    printf("\nInserting unit2\n");
-	UNITLIST = Insert_unit(UNITLIST, point, NbElmt(UNITLIST));
-
-	printf("\nDisplaying unit\n");
-    Display_unit_list(M, UNITLIST);
-
-    printf("\nShow current unit (unit 1) info...\n");
-    select_unit(M, UNITLIST, &Current_unit, 1);
-    Show_unit_info(Current_unit);
-
-    printf("\nChange unit...");
-    printf("\nShow current unit (unit 2) info...\n");
-    select_unit(M, UNITLIST, &Current_unit, 2);
-    Show_unit_info(Current_unit);
-
-	return 0;
-	*/
 }

@@ -1,13 +1,8 @@
 
 /* Module to handle unit list */
 
-#include "unitlist.h"   
+#include "unitlist.h"
 #include <stdio.h>
-
-
-void createEmpty_unit(UnitList *L){
-    *L=Nil;
-}
 
 /****************** LIST INFO ******************/
 int UnitList_empty(address L)
@@ -35,11 +30,11 @@ address Alokasi_point(infotype X, int indeks)
 }
 
 
-int NbElmt(UnitList L)
+int UnitNbElmt(UnitList L)
     /* Element amount */
 {
     if (!UnitList_empty(L)){
-        return 1 + NbElmt(Tail(L));
+        return 1 + UnitNbElmt(Tail(L));
     }
     else{
         return 0;
@@ -119,7 +114,8 @@ void select_unit(MAP Map, UnitList Unit_list, UNIT * Current_unit, int Index){
     int j = Ordinat(unit_pos);
 
     if ( (i >= 0) && (i <= MapBrsEff(Map)) && (j >= 0) && (j <= MapKolEff(Map))){
-         *Current_unit = Unit(Map,i,j);
+        *Current_unit = Unit(Map,i,j);
+        printf("current unit : unit < %.2d > \n", Index);
     }
     else{
         printf("You don't have such unit...\n");

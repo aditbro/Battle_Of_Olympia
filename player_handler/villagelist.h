@@ -1,141 +1,60 @@
-/* Representasi villagelist_address dengan pointer */
-/* villagelist_infotype adalah Building */
+
+/* Module to handle village list */
 
 #ifndef villagelist_H
 #define villagelist_H
 
 #include "../unit.h"
-#include "../ADT/boolean.h"
+#include "../map.h"
+#include "../ADT/point.h"
 #include <stdlib.h>
 
-#define Nil NULL
+typedef POINT infotype;
+typedef struct tVillageElmtlist *village_address;
+typedef struct tVillageElmtlist {
+    int index;
+	infotype info;
+	village_address next;
+} VillageElmtList;
 
-typedef Build villagelist_infotype;
-typedef struct tElmtlists *villagelist_address;
-typedef struct tElmtlist { 
-	villagelist_infotype info;
-	villagelist_address next;
-} ElmtList;
-typedef struct {
-	villagelist_address First;
-} UnitList;
+typedef village_address VillageList;
 
-/* Definisi list : */
-/* List kosong : First(L) = Nil */
-/* Setiap elemen dengan villagelist_address P dapat diacu Info(P), Next(P) */
-/* Elemen terakhir list : jika villagelist_addressnya Last, maka Next(Last)=Nil */
-#define villagelist_elmt_Info(P) (P)->info
-#define villagelist_elmt_Next(P) (P)->next
-#define villagelist_First(L) ((L).First)
+#define Index(P) (P)->index
+#define Info(P) (P)->info
+#define Next(P) (P)->next
 
-/* PROTOTYPE */
-/****************** TEST LIST KOSONG ******************/
-boolean villagelist_IsEmpty (List L);
-/* Mengirim true jika list kosong */
+/* NOTES :
+    - Start off :
+        VillageList UNITLIST = NULL;
+    - Usage :
+        UNITLIST = Insert_village(UNITLIST, point, NbElmt(UNITLIST));
+        Delete_village(UNITLIST, 3);
+        Display_village_list(UNITLIST);
 
-/****************** PEMBUATAN LIST KOSONG ******************/
-void villagelist_CreateEmpty (List *L);
-/* I.S. sembarang             */
-/* F.S. Terbentuk list kosong */
+/****************** ADD AND DEL ******************/
+VillageList Insert_village(VillageList L, POINT village_pos, int indeks);
+/* Insert a element into list */
 
-/****************** Manajemen Memori ******************/
-villagelist_address villagelist_Alokasi (villagelist_infotype X);
-/* Mengirimkan villagelist_address hasil alokasi sebuah elemen */
-/* Jika alokasi berhasil, maka villagelist_address tidak nil, dan misalnya */
-/* menghasilkan P, maka info(P)=X, Next(P)=Nil */
-/* Jika alokasi gagal, mengirimkan Nil */
-void villagelist_Dealokasi (villagelist_address *P);
-/* I.S. P terdefinisi */
-/* F.S. P dikembalikan ke sistem */
-/* Melakukan dealokasi/pengembalian villagelist_address P */
+village_address Alokasi_village_point(infotype X, int indeks);
+/* Function to alocate point to store village position */
 
-/****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
-villagelist_address villagelist_Search (List L, villagelist_infotype X);
-/* Mencari apakah ada elemen list dengan info(P)= X */
-/* Jika ada, mengirimkan villagelist_address elemen tersebut. */
-/* Jika tidak ada, mengirimkan Nil */
-boolean villagelist_FSearch (List L, villagelist_address P);
-/* Mencari apakah ada elemen list yang beralamat P */
-/* Mengirimkan true jika ada, false jika tidak ada */
-villagelist_address villagelist_SearchPrec (List L, villagelist_infotype X);
-/* Mengirimkan villagelist_address elemen sebelum elemen yang nilainya=X */
-/* Mencari apakah ada elemen list dengan Info(P)=X */
-/* Jika ada, mengirimkan villagelist_address Prec, dengan Next(Prec)=P dan Info(P)=X. */
-/* Jika tidak ada, mengirimkan Nil */
-/* Jika P adalah elemen pertama, maka Prec=Nil */
-/* Search dengan spesifikasi seperti ini menghindari */
-/* traversal ulang jika setelah Search akan dilakukan operasi lain */
+void Delete_village (VillageList L, int Index);
+/* Delete an element at index X */
 
-/****************** PRIMITIF BERDASARKAN NILAI ******************/
-/*** PENAMBAHAN ELEMEN ***/
-void villagelist_InsVFirst (List *L, villagelist_infotype X);
-/* I.S. L mungkin kosong */
-/* F.S. Melakukan alokasi sebuah elemen dan */
-/* menambahkan elemen pertama dengan nilai X jika alokasi berhasil */
-void villagelist_InsVLast (List *L, villagelist_infotype X);
-/* I.S. L mungkin kosong */
-/* F.S. Melakukan alokasi sebuah elemen dan */
-/* menambahkan elemen list di akhir: elemen terakhir yang baru */
-/* bernilai X jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
+POINT get_village_position(VillageList L, int Index);
 
-/*** PENGHAPUSAN ELEMEN ***/
-void villagelist_DelVFirst (List *L, villagelist_infotype *X);
-/* I.S. List L tidak kosong  */
-/* F.S. Elemen pertama list dihapus: nilai info disimpan pada X */
-/*      dan alamat elemen pertama di-dealokasi */
-void villagelist_DelVLast (List *L, villagelist_infotype *X);
-/* I.S. list tidak kosong */
-/* F.S. Elemen terakhir list dihapus: nilai info disimpan pada X */
-/*      dan alamat elemen terakhir di-dealokasi */
+/****************** DISPLAY ******************/
+void Display_village_list (MAP M, VillageList L);
+/* Display village index and village position */
 
-/****************** PRIMITIF BERDASARKAN ALAMAT ******************/
-/*** PENAMBAHAN ELEMEN BERDASARKAN ALAMAT ***/
-void villagelist_InsertFirst (List *L, villagelist_address P);
-/* I.S. Sembarang, P sudah dialokasi  */
-/* F.S. Menambahkan elemen ber-villagelist_address P sebagai elemen pertama */
-void villagelist_InsertAfter (List *L, villagelist_address P, villagelist_address Prec);
-/* I.S. Prec pastilah elemen list dan bukan elemen terakhir, */
-/*      P sudah dialokasi  */
-/* F.S. Insert P sebagai elemen sesudah elemen beralamat Prec */
-void villagelist_InsertLast (List *L, villagelist_address P);
-/* I.S. Sembarang, P sudah dialokasi  */
-/* F.S. P ditambahkan sebagai elemen terakhir yang baru */
+void show_village_in_list(Build B);
+/* Function to show village data  */
 
-/*** PENGHAPUSAN SEBUAH ELEMEN ***/
-void villagelist_DelFirst (List *L, villagelist_address *P);
-/* I.S. List tidak kosong */
-/* F.S. P adalah alamat elemen pertama list sebelum penghapusan */
-/*      Elemen list berkurang satu (mungkin menjadi kosong) */
-/* First element yg baru adalah suksesor elemen pertama yang lama */
-void villagelist_DelP (List *L, villagelist_infotype X);
-/* I.S. Sembarang */
-/* F.S. Jika ada elemen list bervillagelist_address P, dengan info(P)=X  */
-/* Maka P dihapus dari list dan di-dealokasi */
-/* Jika tidak ada elemen list dengan info(P)=X, maka list tetap */
-/* List mungkin menjadi kosong karena penghapusan */
-void villagelist_DelLast (List *L, villagelist_address *P);
-/* I.S. List tidak kosong */
-/* F.S. P adalah alamat elemen terakhir list sebelum penghapusan  */
-/*      Elemen list berkurang satu (mungkin menjadi kosong) */
-/* Last element baru adalah predesesor elemen terakhir yg lama, */
-/* jika ada */
-void villagelist_DelAfter (List *L, villagelist_address *Pdel, villagelist_address Prec);
-/* I.S. List tidak kosong. Prec adalah anggota list  */
-/* F.S. Menghapus Next(Prec): */
-/*      Pdel adalah alamat elemen list yang dihapus  */
+/****************** SHOULD NOT BE USED DIRECTLY ******************/
+int VillageList_empty(village_address L);
 
-/****************** PROSES SEMUA ELEMEN LIST ******************/
-void villagelist_PrintInfo (List L);
-/* I.S. List mungkin kosong */
-/* F.S. Jika list tidak kosong, iai list dicetak ke kanan: [e1,e2,...,en] */
-/* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
-/* Jika list kosong : menulis [] */
-/* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
-int villagelist_NbElmt (List L);
-/* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
+int VillageNbElmt(VillageList L);
 
-/****************** PROSES TERHADAP LIST ******************/
-void villagelist_DelAll (List *L);
-/* Delete semua elemen list dan alamat elemen di-dealokasi */
+VillageList VillageTail(VillageList L);
 
 #endif

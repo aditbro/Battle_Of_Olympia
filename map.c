@@ -2,6 +2,7 @@
 
 #include "map.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 
 // ----------Constructor----------
@@ -18,6 +19,20 @@ void createMap(MAP *M, int row, int col) {
 }
 // membuat map berukuran baris row dan kolom col
 
+MAP Init_map() {
+	MAP M;
+	int col, row;
+	printf("Insert size of map (max is 25x25)\n(e.g. 8 9 means 8x9) : ");
+	scanf("%d %d", &row, &col);
+	while (!map_IsIdxValid(row,col)) {
+		printf("Sorry, I think it's too big.\n");
+		printf("or maybe too small?\n");
+		printf("Please insert it again : ");
+		scanf("%d %d", &row, &col);
+	}
+	createMap(&M,row,col);
+	return M;
+}
 
 // ----------Output----------
 void printMap(MAP M) {
@@ -98,4 +113,20 @@ void printMap(MAP M) {
 boolean map_IsIdxValid(int row, int col) {
 	return col >= 8 && col <= KolMax && row <= BrsMax && row >= 8;
 }
-// Mengeprint map pada cmd
+
+// Save and Load
+void saveMap(MAP M) {
+	FILE *file = fopen("savefile", "wb");
+	if (file != NULL) {
+		fwrite(&M, sizeof(MAP), 1, file);
+		fclose(file);
+	}
+}
+
+void loadMap(MAP M) {
+	FILE *file = fopen("savefile", "rb");
+	if (file != NULL) {
+		fread(&M, sizeof(MAP), 1, file);
+		fclose(file);
+	}
+}
