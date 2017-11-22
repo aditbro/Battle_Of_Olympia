@@ -15,7 +15,6 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
         Mov(*U)		    = 3;
         Cost(*U)		= 20;
         Upkeep(*U)      = 4;
-        Upkeep(*U)       = 2;
         GHP(*U)          = 50;
         Atk_Type(*U)    = 'M';
     }else if(type=='A'){
@@ -50,7 +49,7 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
         Heal(*U)        = 25;
         M_Mov(*U)		= 3;
         Mov(*U)		    = 3;
-        Cost(*U)		= 50;S
+        Cost(*U)		= 50;
         Upkeep(*U)      = 10;
         GHP(*U)          = 90;
         Atk_Type(*U)    = 'M';

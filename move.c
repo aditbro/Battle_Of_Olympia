@@ -159,7 +159,7 @@ void move_unit(MAP *P, UNIT *U, int x, int y)
 	}else{
 		if(x1 - x == 0 || y - y1 == 0){
 			M_Mov(*U) -= absolute((x1-x)+(y1-y));
-		else{
+		}else{
 			M_Mov(*U) -= absolute((x1-x));
 		}
 void undo(MAP *P, UNIT *U)
