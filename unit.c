@@ -14,14 +14,8 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
         M_Mov(*U)		= 3;
         Mov(*U)		    = 3;
         Cost(*U)		= 20;
-<<<<<<< HEAD
         Upkeep(*U)      = 4;
-=======
         Upkeep(*U)       = 2;
-<<<<<<< HEAD
-=======
->>>>>>> eeb512e466b6db63b4f062d49e17faa29b808985
->>>>>>> eaf91fa5bbe6ef0f1dd4b0ff6c8b3b25fb78a5b8
         GHP(*U)          = 50;
         Atk_Type(*U)    = 'M';
     }else if(type=='A'){
@@ -33,14 +27,7 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
         M_Mov(*U)		= 2;
         Mov(*U)		    = 2;
         Cost(*U)		= 10;
-<<<<<<< HEAD
         Upkeep(*U)      = 2;
-=======
-        Upkeep(*U)       = 1;
-<<<<<<< HEAD
-=======
->>>>>>> eeb512e466b6db63b4f062d49e17faa29b808985
->>>>>>> eaf91fa5bbe6ef0f1dd4b0ff6c8b3b25fb78a5b8
         GHP(*U)          = 90;
         Atk_Type(*U)    = 'R';
     }else if(type=='K'){
@@ -52,15 +39,7 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
         M_Mov(*U)		= 1;
         Mov(*U)		    = 1;
         Cost(*U)		= 0;
-<<<<<<< HEAD
         Upkeep(*U)       = 0;
-=======
-<<<<<<< HEAD
-        Upkeep(*U)      = 0;
-=======
-        Upkeep(*U)       = 0;
->>>>>>> eeb512e466b6db63b4f062d49e17faa29b808985
->>>>>>> eaf91fa5bbe6ef0f1dd4b0ff6c8b3b25fb78a5b8
         GHP(*U)          = 90;
         Atk_Type(*U)    = 'M';
     }else if(type=='W'){
@@ -71,15 +50,8 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
         Heal(*U)        = 25;
         M_Mov(*U)		= 3;
         Mov(*U)		    = 3;
-        Cost(*U)		= 50;
-<<<<<<< HEAD
+        Cost(*U)		= 50;S
         Upkeep(*U)      = 10;
-=======
-        Upkeep(*U)       = 5;
-<<<<<<< HEAD
-=======
->>>>>>> eeb512e466b6db63b4f062d49e17faa29b808985
->>>>>>> eaf91fa5bbe6ef0f1dd4b0ff6c8b3b25fb78a5b8
         GHP(*U)          = 90;
         Atk_Type(*U)    = 'M';
     }
