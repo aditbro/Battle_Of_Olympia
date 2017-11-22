@@ -41,6 +41,29 @@ int UnitNbElmt(UnitList L)
     }
 }
 
+int Index_Max(UnitList L)
+    /* Return max index used in list */
+{
+    if (UnitList_empty(L)){
+        return -999;
+    }
+
+    else{
+
+        int Prev_Max = Index_Max(Tail(L));
+
+        if (Index(L) > Prev_Max){
+            return Index(L);
+        }
+
+        else{
+            return Prev_Max;
+        }
+
+        
+    }
+}
+
 
 UnitList Tail(UnitList L)
 {
