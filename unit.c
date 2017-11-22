@@ -14,7 +14,11 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
         M_Mov(*U)		= 3;
         Mov(*U)		    = 3;
         Cost(*U)		= 20;
+<<<<<<< HEAD
         Upkeep(*U)      = 4;
+=======
+        Upkeep(*U)       = 2;
+>>>>>>> eeb512e466b6db63b4f062d49e17faa29b808985
         GHP(*U)          = 50;
         Atk_Type(*U)    = 'M';
     }else if(type=='A'){
@@ -26,19 +30,27 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
         M_Mov(*U)		= 2;
         Mov(*U)		    = 2;
         Cost(*U)		= 10;
+<<<<<<< HEAD
         Upkeep(*U)      = 2;
+=======
+        Upkeep(*U)       = 1;
+>>>>>>> eeb512e466b6db63b4f062d49e17faa29b808985
         GHP(*U)          = 90;
         Atk_Type(*U)    = 'R';
     }else if(type=='K'){
-        M_Hp(*U)		= 100;
-        Hp(*U)			= 100;
+        M_Hp(*U)		= 300;
+        Hp(*U)			= 300;
         Atk(*U)			= 25;
         Def(*U)         = 30;
         Heal(*U)        = 0;
         M_Mov(*U)		= 1;
         Mov(*U)		    = 1;
         Cost(*U)		= 0;
+<<<<<<< HEAD
         Upkeep(*U)      = 0;
+=======
+        Upkeep(*U)       = 0;
+>>>>>>> eeb512e466b6db63b4f062d49e17faa29b808985
         GHP(*U)          = 90;
         Atk_Type(*U)    = 'M';
     }else if(type=='W'){
@@ -50,7 +62,11 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
         M_Mov(*U)		= 3;
         Mov(*U)		    = 3;
         Cost(*U)		= 50;
+<<<<<<< HEAD
         Upkeep(*U)      = 10;
+=======
+        Upkeep(*U)       = 5;
+>>>>>>> eeb512e466b6db63b4f062d49e17faa29b808985
         GHP(*U)          = 90;
         Atk_Type(*U)    = 'M';
     }
@@ -82,7 +98,7 @@ UNIT Create_new_unit(char type,int owner,int x, int y){
 
 void Show_unit_info (UNIT U){
 
-    printf("Unit Type            : %c\n", Type(U));
+    printf("Unit Type            : ");print_unit_type(U);printf(" \n");
     printf("Max HP               : %d\n", M_Hp(U));
     printf("HP                   : %d\n", Hp(U));
     printf("Atk                  : %d\n", Atk(U));
@@ -93,6 +109,7 @@ void Show_unit_info (UNIT U){
     printf("Max Movement         : %d\n", M_Mov(U));
     printf("Movement             : %d\n", Mov(U));
     printf("Cost                 : %d\n", Cost(U));
+    printf("Upkeep               : %d\n", Upkeep(U));
     printf("Position             : <%d, %d>\n", Absis(Pos(U)), Ordinat((Pos(U))));
     printf("Attack Type          : %c\n", Atk_Type(U));
     printf("Can attack           : ");

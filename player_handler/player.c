@@ -1,8 +1,13 @@
 #include "player.h"
 
+
 void InitializeNewPlayer(Player *P, int ID){
 	ID(*P) = ID;
+<<<<<<< HEAD
+	gold(*P) = 40;
+=======
 	gold(*P) = 20;
+>>>>>>> 478169e362eabd5b1acd66479cad5bd0183309be
 	income(*P) = 0;
 	upkeep(*P) = 0;
 
@@ -24,6 +29,10 @@ void InitializeNewPlayer(Player *P, int ID){
 	else if (ID==1){
 		color(*P) = 'C';
 	}
+
+	units(*P) = NULL;
+	villages(*P) = NULL;
+
 }
 
 Player create_new_player(int ID){

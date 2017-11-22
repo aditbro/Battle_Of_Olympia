@@ -6,9 +6,7 @@
 #define stackt_H
 
 #include "boolean.h"
-
-//#define Nil 0
-#define MaxEl 100
+#define StackMaxEl 100
 /* Nil adalah stack dengan elemen kosong . */
 /* Karena indeks dalam bhs C dimulai 0 maka tabel dg indeks 0 tidak dipakai */
 
@@ -18,7 +16,7 @@ typedef int stack_address;   /* indeks tabel */
 /* Contoh deklarasi variabel bertype stack dengan ciri TOP : */
 /* Versi I : dengan menyimpan tabel dan alamat top secara eksplisit*/
 typedef struct { 
-	stack_infotype T[MaxEl+1]; /* tabel penyimpan elemen */
+	stack_infotype T[StackMaxEl+1]; /* tabel penyimpan elemen */
 	stack_address TOP;  /* alamat TOP: elemen puncak */
 } Stack;
 /* Definisi stack S kosong : S.TOP = Nil */
