@@ -32,4 +32,9 @@ void printMap(MAP M);
 
 // Selektor
 boolean map_IsIdxValid(int row, int col);
+
+// Save and Load
+void saveMap(MAP M);
+
+void loadMap(MAP M);
 #endif

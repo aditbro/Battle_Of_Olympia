@@ -2,19 +2,20 @@
 
 #include "map.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 
 // ----------Constructor----------
 void createMap(MAP *M, int row, int col) {
 	matriks_MakeMATRIKS(row, col, M);
-	
+
 	for (int i = 0; i <= MapBrsEff(*M); i++) {
 		for (int j = 0; j <= MapKolEff(*M); j++) {
 			Build_Type(Build(*M, i, j)) = Nil;
 			Unit(*M, i, j).type = Nil;
 		}
 	}
-	
+
 }
 // membuat map berukuran baris row dan kolom col
 
@@ -45,13 +46,15 @@ void printMap(MAP M) {
 				printf("  ");
 			}
 			else {
-				if(Build_Owner(Build(M, i, j))==1){
+				if (Build_Owner(Build(M, i, j)) == 1) {
 					print_red(Build_Type(Build(M, i, j)));
 					printf(" ");
-				}else if(Build_Owner(Build(M, i, j))==2){
+				}
+				else if (Build_Owner(Build(M, i, j)) == 2) {
 					print_blue(Build_Type(Build(M, i, j)));
 					printf(" ");
-				}else{
+				}
+				else {
 					print_magenta(Build_Type(Build(M, i, j)));
 					printf(" ");
 				}
@@ -98,4 +101,20 @@ void printMap(MAP M) {
 boolean map_IsIdxValid(int row, int col) {
 	return col >= 8 && col <= KolMax && row <= BrsMax && row >= 8;
 }
-// Mengeprint map pada cmd
+
+// Save and Load
+void saveMap(MAP M) {
+	FILE *file = fopen("savefile", "wb");
+	if (file != NULL) {
+		fwrite(&M, sizeof(MAP), 1, file);
+		fclose(file);
+	}
+}
+
+void loadMap(MAP M) {
+	FILE *file = fopen("savefile", "rb");
+	if (file != NULL) {
+		fread(&M, sizeof(MAP), 1, file);
+		fclose(file);
+	}
+}

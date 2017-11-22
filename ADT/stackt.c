@@ -13,7 +13,6 @@
 #include "stackt.h"
 #include <stdio.h>
 #define Nil 0
-#define MaxEl 100
 #define stack_Top(S) (S).TOP
 #define stack_InfoTop(S) (S).T[(S).TOP]
 
@@ -38,7 +37,7 @@ boolean stack_IsEmpty (Stack S)
 boolean stack_IsFull (Stack S)
 /* Mengirim true jika tabel penampung nilai elemen stack penuh */
 {
-    return stack_Top(S) == MaxEl;
+    return stack_Top(S) == StackMaxEl;
 }
 
 /* ************ Menambahkan sebuah elemen ke Stack ************ */

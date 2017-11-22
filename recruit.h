@@ -1,9 +1,13 @@
+#ifndef RECRUIT_H
+#define RECRUIT_H
+
+#include "player_handler/player.h"
 #include "map.h"
 #include "unit.h"
 #include "building.h"
 #include "info.h"
 
-Build SearchTower (MAP M, UNIT K);
+Build SearchTower (MAP M, Player P);
 /* Mencari letak tower milik pemain */
 
 boolean IsCastleEmpty (MAP M, int x, int y);
@@ -12,6 +16,7 @@ boolean IsCastleEmpty (MAP M, int x, int y);
 boolean castle_available (MAP M, Build T);
 /* Mengecek apakah ada castle yang kosong (untuk validasi) */
 
-void recruit_unit (MAP M, UNIT K, UNIT *U);
+void recruit_unit(MAP *M, Player *P, UNIT K);
 /* Dipanggil di program utama saat user menginput command RECRUIT */
 
+#endif

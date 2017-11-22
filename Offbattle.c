@@ -1,14 +1,11 @@
 
-#include "ADT/matriks.h"
-#include "ADT/point.h"
 #include "Offbattle.h"
-#include "unit.h"
-#include <stdlib.h>
-#include <time.h>
-/* LAST UPDATE : 11 NOV 2017 - 23 : 16 */
 
-void Init_game(MAP *M, int map_x, int map_y){
-    /* Function to setup tower, castle, and villages before game starts */
+void Init_game(MAP *M, Player *P1, Player *P2){
+    /* Function to setup kings, tower, castle, and villages before game starts */
+
+    int map_x = MapBrsEff(*M);
+    int map_y = MapKolEff(*M);
 
     /* Constants */
     char tower_symbol = 'T';
@@ -23,6 +20,7 @@ void Init_game(MAP *M, int map_x, int map_y){
 
         Build_Type(Build(*M, Absis(index), Ordinat(index))) = symbol;
         Build_Owner(Build(*M, Absis(index), Ordinat(index))) = owner;
+        Build_Pos(Build(*M, Absis(index), Ordinat(index))) = index;
     }
 
     int Village_too_close(POINT index, int map_x, int map_y){
@@ -48,10 +46,9 @@ void Init_game(MAP *M, int map_x, int map_y){
         }
     }
 
-
     /* Determine the tower and castle position */
-    POINT tower_1 = MakePOINT(map_x -2,        1);
-    POINT tower_2 = MakePOINT(1       , map_y -2);
+    POINT tower_1 = MakePOINT(map_x -1,        1);
+    POINT tower_2 = MakePOINT(1       , map_y -1);
 
     POINT castle_1a = MakePOINT(Absis(tower_1) -1, Ordinat(tower_1)   );
     POINT castle_1b = MakePOINT(Absis(tower_1)   , Ordinat(tower_1) -1);
@@ -101,4 +98,42 @@ void Init_game(MAP *M, int map_x, int map_y){
 
         }
     }
+
+    /* Create kings ! */
+    Unit(*M, Absis(tower_1), Ordinat(tower_1)) = Create_new_unit('K', 1, Absis(tower_1) ,Ordinat(tower_1));
+    Unit(*M, Absis(tower_2), Ordinat(tower_2)) = Create_new_unit('K', 2, Absis(tower_2) ,Ordinat(tower_2));
+    units(*P1) = Insert_unit(units(*P1), tower_1, UnitNbElmt(units(*P1)));
+    units(*P2) = Insert_unit(units(*P2), tower_2, UnitNbElmt(units(*P2)));
+
+}
+
+
+void Show_title(){
+    /* Function to show title, well ~ */
+    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    printf("                                                                                                                                                                     \n");  
+    printf("      ##### ##                               ###                               /##            # ###  ###                                                             \n");
+    printf("   ######  /##                                ###                            #/ ###         /  /###   ###                                            #               \n");
+    printf("  /#   /  / ##                  #        #     ##                           ##   ###       /  /  ###   ##                                           ###              \n");
+    printf(" /    /  /  ##                 ##       ##     ##                           ##            /  ##   ###  ##                                            #               \n");
+    printf("     /  /   /                  ##       ##     ##                           ##           /  ###    ### ##                                                            \n");
+    printf("    ## ##  /        /###     ######## ######## ##      /##          /###    ######      ##   ##     ## ##  ##   ####    ### /### /###       /###   ###       /###    \n");
+    printf("    ## ## /        / ###  / ######## ########  ##     / ###        / ###  / #####       ##   ##     ## ##   ##    ###  / ##/ ###/ /##  /   / ###  / ###     / ###  / \n");
+    printf("    ## ##/        /   ###/     ##       ##     ##    /   ###      /   ###/  ##          ##   ##     ## ##   ##     ###/   ##  ###/ ###/   /   ###/   ##    /   ###/  \n");
+    printf("    ## ## ###    ##    ##      ##       ##     ##   ##    ###    ##    ##   ##          ##   ##     ## ##   ##      ##    ##   ##   ##   ##    ##    ##   ##    ##   \n");
+    printf("    ## ##   ###  ##    ##      ##       ##     ##   ########     ##    ##   ##          ##   ##     ## ##   ##      ##    ##   ##   ##   ##    ##    ##   ##    ##   \n");
+    printf("    #  ##     ## ##    ##      ##       ##     ##   #######      ##    ##   ##           ##  ##     ## ##   ##      ##    ##   ##   ##   ##    ##    ##   ##    ##   \n");
+    printf("       /      ## ##    ##      ##       ##     ##   ##           ##    ##   ##            ## #      /  ##   ##      ##    ##   ##   ##   ##    ##    ##   ##    ##   \n");
+    printf("   /##/     ###  ##    /#      ##       ##     ##   ####    /    ##    ##   ##             ###     /   ##   ##      ##    ##   ##   ##   ##    ##    ##   ##    /#   \n");
+    printf("  /  ########     ####/ ##     ##       ##     ### / ######/      ######    ##              ######/    ### / #########    ###  ###  ###  #######     ### / ####/ ##  \n");
+    printf(" /     ####        ###   ##     ##       ##     ##/   #####        ####      ##               ###       ##/    #### ###    ###  ###  ### ######       ##/   ###   ## \n");
+    printf(" #                                                                                                                   ###                 ##                          \n");
+    printf("  ##                                                                                                          #####   ###                ##                          \n");
+    printf("                                                                                                            /#######  /#                 ##                          \n");
+    printf("                                                                                                           /      ###/                    ##                         \n");
+
+    printf("\n\n\n\n\n\n\n\n\n\n");
+    printf("                                         Welcome to Battle of Olympia, where no victory is too small and no defeat is too great...\n");
+    printf("\n\n\n\n\n\n\n\n");
+    printf("without further waitings, let's get started...\n\n");
 }
