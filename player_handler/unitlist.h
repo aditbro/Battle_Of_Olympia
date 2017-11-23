@@ -41,6 +41,9 @@ UnitList  change_unit_position_pre(UnitList Unit_list, UNIT *Current_unit, int *
 UnitList change_unit_position_post(UnitList Unit_list, UNIT *Current_unit, int unit_index_in_list);
 /* Function to insert unit in unitlist after the position is modified */
 
+void selected_on_map_ON(MAP *Map, UNIT *Current_unit, int Cond);
+/* Function to turn on and off 'select' atribut in map */
+
 /****************** DISPLAY ******************/
 void Display_unit_list (MAP M, UnitList L);
 /* Display unit index and unit position */

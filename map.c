@@ -8,14 +8,14 @@
 // ----------Constructor----------
 void createMap(MAP *M, int row, int col) {
 	matriks_MakeMATRIKS(row, col, M);
-	
-	for (int i = 0; i <= MapBrsEff(*M); i++) {
-		for (int j = 0; j <= MapKolEff(*M); j++) {
+	int i, j;
+	for ( i = 0; i <= MapBrsEff(*M); i++) {
+		for ( j = 0; j <= MapKolEff(*M); j++) {
 			Build_Type(Build(*M, i, j)) = Nil;
 			Unit(*M, i, j).type = Nil;
 		}
 	}
-	
+
 }
 // membuat map berukuran baris row dan kolom col
 

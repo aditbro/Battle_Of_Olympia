@@ -28,17 +28,17 @@ int main() {
 
 	UNIT Dummy_unit = Create_new_unit('Z', 0, 0, 0); // dummy unit
 	UNIT* Current_unit = &Dummy_unit;
-	
+
 	char input = 'E'; //automatic start first turn
 
-	
+
 	// DUMMY TEST material (for attack and move )
 	/*
 	POINT point;
 	Unit(M, 1, 1) = Create_new_unit('S',1,1,1);
 	point = MakePOINT(1,1);
 	units(player_1) = Insert_unit(units(player_1), point, UnitNbElmt(units(player_1)));
-	
+
 	Unit(M, 1, 2) = Create_new_unit('S',2,1,2);
 	point = MakePOINT(1,2);
 	units(player_2) = Insert_unit(units(player_2), point, UnitNbElmt(units(player_2)));
@@ -67,8 +67,12 @@ int main() {
 				if(check_if_possible(M, *Current_unit, x, y)){
 
 					int unit_index_in_list;
+					selected_on_map_ON(&M, Current_unit, 0);
 					units(*Current_player) = change_unit_position_pre(units(*Current_player), Current_unit, &unit_index_in_list);
+
 					move_unit(&M, Current_unit, x, y);
+
+					selected_on_map_ON(&M, Current_unit, 1);
 					units(*Current_player) = change_unit_position_post(units(*Current_player), Current_unit, unit_index_in_list);
 
 					printf("Unit moved\n");
@@ -89,13 +93,18 @@ int main() {
 			Display_unit_list(M, units(*Current_player));
 			printf("Switching into unit : ");
 			scanf("%d", &unit_list_index);
+
+			/* Change the selected unit on map and on list */
+			selected_on_map_ON(&M, Current_unit, 0);
 			select_unit(M, units(*Current_player), Current_unit, unit_list_index);
+			selected_on_map_ON(&M, Current_unit, 1);
+
     		call_move();
 		}
 
 		else if(input == 'R'){
 			/* Recruit unit */
-			
+
 			recruit_unit (&M, Current_player, *Current_unit);
 
 		}
@@ -108,7 +117,7 @@ int main() {
 
 		else if(input == 'S'){
 			/* Show current unit info */
-			
+
 			printf(" ========================\n");
 		    printf("|    Player %d's Unit     |\n",Owner(*Current_unit));
 		    printf(" ========================\n");
@@ -128,7 +137,7 @@ int main() {
 				printf("Please change your unit first!\n");
 				dummy=false;
 			}
-			
+
 			Switch_turn(&TURN, &Current_player_int);
 			if (Current_player_int == 1){
 				Current_player = &player_1;
@@ -141,19 +150,24 @@ int main() {
 				char input = 'E';
 			}
 			printf("Cash: %dG | Income: %dG | Upkeep: %dG\n",gold(*Current_player),income(*Current_player),upkeep(*Current_player));
-			// increase gold , decrease gold , healing 
+			// increase gold , decrease gold , healing
 
 		}else if(input == 'U'){
 
 			int unit_index_in_list;
+
+			selected_on_map_ON(&M, Current_unit, 0);
 			units(*Current_player) = change_unit_position_pre(units(*Current_player), Current_unit, &unit_index_in_list);
+
 			undo(&M, Current_unit);
+
+			selected_on_map_ON(&M, Current_unit, 1);
 			units(*Current_player) = change_unit_position_post(units(*Current_player), Current_unit, unit_index_in_list);
 		}
 
 
 		/* Get new input */
-		scanf("%c",&input); // remove enter at last 
+		scanf("%c",&input); // remove enter at last
 		printf("\ninput your next command ! >> ");
 		scanf("%c",&input);
 		printf("\n");
