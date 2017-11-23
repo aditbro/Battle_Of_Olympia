@@ -8,8 +8,8 @@
 #include "turn.h"
 #include "player_handler/player.h"
 #include "player_handler/unitlist.h"
+#include "file_handler/save.h"
 #include <string.h>
-
 
 
 int main() {
@@ -173,6 +173,7 @@ int main() {
 			if (strcmp(input, "y") == 0) {
 				printf("Saving game... \n");
 				saveMap(M);
+				SaveGame(player_1, player_2);
 				printf("Saved.\n");
 			}
 			else {
@@ -186,6 +187,7 @@ int main() {
 			if (strcmp(input, "y") == 0) {
 				printf("Loading game.. \n");
 				loadMap(&M);
+				LoadGame(&player_1, &player_2);
 				printf("Loaded.\n");
 			}
 			else {
