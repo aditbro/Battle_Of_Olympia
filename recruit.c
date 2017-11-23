@@ -66,8 +66,8 @@ void recruit_unit(MAP *M, Player *P, UNIT K){
             } while (!IsCastleEmpty(*M, x, y) || Build_Owner(Build(*M,x,y))!=ID(*P));
 
             printf("\n=== List of Recruits ===\n");
-            printf("1. Archer | Health 100 | ATK 15 | DEF 15 | 10G\n");
-            printf("2. Swordsman | Health 100 | ATK 20 | DEF 15 | 20G\n");
+            printf("1. Archer | Health 100 | ATK 50 | DEF 30 | 10G\n");
+            printf("2. Swordsman | Health 100 | ATK 60 | DEF 30 | 20G\n");
             printf("3. White Mage | Health 100 | ATK 5 | DEF 5 | HEAL 25 | 50G\n");
             printf("\n");
             printf("Enter no. of unit you want to recruit: ");

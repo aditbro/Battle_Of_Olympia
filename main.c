@@ -54,7 +54,17 @@ int main() {
 
 		else if (strcmp(input, "ATTACK") == 0) {
 			/* Command to declare attack using current unit */
-			attack(Current_unit, &M);
+			boolean Win;
+			attack(Current_unit, &M, &Win);
+			POINT P = get_unit_position(units(*Current_player),1);
+			if(Win){
+				printf("You Win\n");
+				break;
+			}
+			if(Type(Unit(M,P.X,P.Y))=='0'){
+				printf("You Lose");
+				break;
+			}
 		}
 
 		else if (strcmp(input, "MOVE") == 0) {

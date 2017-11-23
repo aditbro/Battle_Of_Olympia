@@ -9,7 +9,7 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
         M_Hp(*U)		= 100;
         Hp(*U)			= 100;
         Atk(*U)			= 60;
-        Def(*U)         = 20;
+        Def(*U)         = 30;
         Heal(*U)        = 0;
         M_Mov(*U)		= 3;
         Mov(*U)		    = 3;
@@ -21,7 +21,7 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
         M_Hp(*U)		= 100;
         Hp(*U)			= 100;
         Atk(*U)			= 50;
-        Def(*U)         = 30;
+        Def(*U)         = 20;
         Heal(*U)        = 0;
         M_Mov(*U)		= 2;
         Mov(*U)		    = 2;
@@ -30,8 +30,8 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
         GHP(*U)          = 90;
         Atk_Type(*U)    = 'R';
     }else if(type=='K'){
-        M_Hp(*U)		= 300;
-        Hp(*U)			= 300;
+        M_Hp(*U)		= 10;
+        Hp(*U)			= 10;
         Atk(*U)			= 10;
         Def(*U)         = 50;
         Heal(*U)        = 0;
