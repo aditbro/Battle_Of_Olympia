@@ -53,13 +53,17 @@ void unit_attack(UNIT * Attacker, UNIT * Defender)
                 print_unit_type(*Defender);
                 printf("is damaged by %d\n",Atk(*Attacker));
                 if(Hp(*Defender)!=0){
-                    Hp(*Attacker)-=Def(*Defender);
                     printf("Enemy's ");
                     print_unit_type(*Defender);
                     printf("retaliates.\n");
-                    printf("Your ");
-                    print_unit_type(*Attacker);
-                    printf("is damaged by %d\n",Def(*Defender));  
+                    if(get_hit(*Attacker)){
+                        Hp(*Attacker)-=Def(*Defender);
+                        printf("Your ");
+                        print_unit_type(*Attacker);
+                        printf("is damaged by %d\n",Def(*Defender));  
+                    }else{
+                        printf("But your unit avoided their attack\n");
+                    }
                 }else{
                     Type(*Defender)=Nil;
                 }
@@ -71,16 +75,20 @@ void unit_attack(UNIT * Attacker, UNIT * Defender)
             }
         }else{
             Hp(*Defender)-=Atk(*Attacker);
-            Hp(*Attacker)-=Def(*Defender);
             printf("Enemy's ");
             print_unit_type(*Defender);
             printf("is damaged by %d\n",Atk(*Attacker));
             printf("Enemy's ");
             print_unit_type(*Defender);
             printf("retaliates.\n");
-            printf("Your ");
-            print_unit_type(*Attacker);
-            printf("is damaged by %d\n",Def(*Defender));   
+            if(get_hit(*Attacker)){
+                Hp(*Attacker)-=Def(*Defender);
+                printf("Your ");
+                print_unit_type(*Attacker);
+                printf("is damaged by %d\n",Def(*Defender));   
+            }else{
+                printf("But your unit avoided their attack\n");
+            }
         }
         if(Hp(*Attacker)==0){
             printf("Your ");

@@ -136,23 +136,24 @@ POINT get_unit_position(UnitList L, int Index){
 }
 
 
-void select_unit(MAP Map, UnitList Unit_list, UNIT * Current_unit, int Index){
+void select_unit(MAP *Map, UnitList Unit_list, UNIT * Current_unit, int Index){
     /* Change value of current unit by selecting unit in unitlist by index */
 
     POINT unit_pos = get_unit_position(Unit_list, Index);
     int i = Absis(unit_pos);
     int j = Ordinat(unit_pos);
 
-    if ( (i >= 0) && (i <= MapBrsEff(Map)) && (j >= 0) && (j <= MapKolEff(Map))){
-        *Current_unit = Unit(Map,i,j);
+    if ( (i >= 0) && (i <= MapBrsEff(*Map)) && (j >= 0) && (j <= MapKolEff(*Map))){
+        *Current_unit = Unit(*Map,i,j);
         printf("current unit : unit < %.2d > \n", Index);
+        selected_on_map_ON(Map, Current_unit, true);
     }
     else{
         printf("You don't have such unit...\n");
     }
 }
 
-void selected_on_map_ON(MAP *Map, UNIT *Current_unit, int Cond){
+void selected_on_map_ON(MAP *Map, UNIT *Current_unit, boolean Cond){
     /* Function to turn on and off 'select' atribut in map */
 
     Select(*Map, Absis(Pos(*Current_unit)), Ordinat(Pos(*Current_unit))) = Cond;
@@ -239,8 +240,10 @@ void refresh_unit_list(MAP *M,UnitList L)
     if(!UnitList_empty(L)){
         POINT unit_pos = get_unit_position(L,Index(L));
 
+        Can_Atk(Unit(*M, Absis(unit_pos), Ordinat(unit_pos)))=true;
         Mov(Unit(*M, Absis(unit_pos), Ordinat(unit_pos)))=M_Mov(Unit(*M, Absis(unit_pos), Ordinat(unit_pos)));
         refresh_unit_list(M,Tail(L));
+        refreshMap(M,L);
     }
 }
 
@@ -255,5 +258,16 @@ void do_heal(MAP *M,UnitList L)
         }
 
         do_heal(M,Tail(L));
+    }
+}
+
+void refreshMap(MAP *M,UnitList L)
+/* Refresh Can_Atk,Mov all Unit in UnitList*/
+{
+    if(!UnitList_empty(L)){
+        POINT unit_pos = get_unit_position(L,Index(L));
+
+        selected_on_map_ON(M, &Unit(*M,Absis(unit_pos), Ordinat(unit_pos)), false);
+        refreshMap(M,Tail(L));
     }
 }

@@ -31,7 +31,7 @@ int main() {
 	UNIT Dummy_unit = Create_new_unit('Z', 0, 0, 0); // dummy unit
 	UNIT* Current_unit = &Dummy_unit;
 
-	char input[100] = "End"; //automatic start first turn
+	char input[100] = "END_TURN"; //automatic start first turn
 
 
 							 // DUMMY TEST material (for attack and move )
@@ -48,17 +48,17 @@ int main() {
 
 	while (strcmp(input, "Quit") != 0) {
 
-		if (strcmp(input, "Map") == 0) {
+		if (strcmp(input, "MAP") == 0) {
 			/* Print map */
 			printMap(M);
 		}
 
-		else if (strcmp(input, "Attack") == 0) {
+		else if (strcmp(input, "ATTACK") == 0) {
 			/* Command to declare attack using current unit */
 			attack(Current_unit, &M);
 		}
 
-		else if (strcmp(input, "Move") == 0) {
+		else if (strcmp(input, "MOVE") == 0) {
 			/* Command to move unit */
 			int x, y;
 			//move rejected when you tried move unit that max mov ==0
@@ -84,32 +84,32 @@ int main() {
 				printf("You can't move anymore\n");
 			}
 		}
-
-		else if (strcmp(input, "Switch") == 0) {
+		else if (strcmp(input, "CHANGE_UNIT") == 0) {
 			/* Switching current unit */
 
+			refreshMap(&M,units(*Current_player));
 			int unit_list_index;
 			Display_unit_list(M, units(*Current_player));
 			printf("Switching into unit : ");
 			scanf("%d", &unit_list_index);
-			select_unit(M, units(*Current_player), Current_unit, unit_list_index);
+			select_unit(&M, units(*Current_player), Current_unit, unit_list_index);
 			call_move();
 		}
 
-		else if (strcmp(input, "Recruit") == 0) {
+		else if (strcmp(input, "RECRUIT") == 0) {
 			/* Recruit unit */
 
 			recruit_unit(&M, Current_player, *Current_unit);
 
 		}
 
-		else if (strcmp(input, "Info") == 0) {
+		else if (strcmp(input, "INFO") == 0) {
 			/* Show info of specific tile */
 
 			printInfo(M);
 		}
 
-		else if (strcmp(input, "Status") == 0) {
+		else if (strcmp(input, "STATUS") == 0) {
 			/* Show current unit info */
 
 			printf(" ========================\n");
@@ -119,9 +119,10 @@ int main() {
 			printf("\n");
 		}
 
-		else if (strcmp(input, "End") == 0) {
+		else if (strcmp(input, "END_TURN") == 0) {
 			/* End turn */
 			if (!dummy) {
+				printf("Please change your unit first!\n");
 				gold(*Current_player) = gold(*Current_player) - upkeep(*Current_player);
 				gold(*Current_player) = gold(*Current_player) + income(*Current_player);
 				refresh_unit_list(&M, units(*Current_player));
@@ -148,18 +149,21 @@ int main() {
 			// increase gold , decrease gold , healing 
 
 		}
-		else if (strcmp(input, "Unit") == 0) {
+		else if (strcmp(input, "UNDO") == 0) {
 
 			int unit_index_in_list;
 			units(*Current_player) = change_unit_position_pre(units(*Current_player), Current_unit, &unit_index_in_list);
 			undo(&M, Current_unit);
 			units(*Current_player) = change_unit_position_post(units(*Current_player), Current_unit, unit_index_in_list);
 		}
-		else if (strcmp(input, "Save") == 0) {
-			printf("Save this game?(y/n)\n");
+		else if (strcmp(input, "SAVE") == 0) {
+			printf("Save current game? (y/n)\n");
+			
+			print_red('!');
+			printf("! Saving your game will result in ending your current turn.\n");
 			scanf("%s", input);
 			if (strcmp(input, "y") == 0) {
-				printf("Saving game.. \n");
+				printf("Saving game... \n");
 				saveMap(M);
 				printf("Saved.\n");
 			}
@@ -167,7 +171,7 @@ int main() {
 				printf("Canceled.\n");
 			}
 		}
-		else if (strcmp(input, "Load") == 0) {
+		else if (strcmp(input, "LOAD") == 0) {
 			printf("Load previous saved game?(y/n)\n");
 			printf("Be careful! You'll lost your current game.\n");
 			scanf("%s", input);

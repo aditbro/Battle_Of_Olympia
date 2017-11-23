@@ -85,7 +85,7 @@ void printMap(MAP M) {
 				printf("  ");
 			}
 			else {
-				if (Select(M, i, j) == 1) {
+				if (Select(M, i, j)==true) {
 					print_green(Type(Unit(M, i, j)));
 					printf(" ");
 				}

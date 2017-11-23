@@ -134,6 +134,7 @@ void move_unit(MAP *P, UNIT *U, int x, int y)
 	POINT Loc = Pos(*U);
 	Unit(*P, Loc.X,Loc.Y).type = '0';
 	Unit(*P, Loc.X,Loc.Y).owner = 0;
+	Select(*P, Loc.X,Loc.Y) = false;
 
 	stack_Push(&X, Loc.X);
 	stack_Push(&Y, Loc.Y);
@@ -146,6 +147,8 @@ void move_unit(MAP *P, UNIT *U, int x, int y)
 
 	Pos(*U) = Loc;
 	
+	Select(*P, Loc.X,Loc.Y) = true;
+
 	if(Build(*P, x, y).type == 'V'){
 
 		Mov(*U) = 0;
@@ -180,6 +183,7 @@ void undo(MAP *P, UNIT *U)
 	POINT Loc = Pos(*U);
 	Unit(*P, Loc.X,Loc.Y).type = '0';
 	Unit(*P, Loc.X,Loc.Y).owner = 0;
+	Select(*P, Loc.X,Loc.Y) = false;
 	if(Build(*P, Loc.X, Loc.Y).type == 'V'){
 		int conquered = 0;
 		stack_Pop(&C, &conquered);
@@ -187,7 +191,8 @@ void undo(MAP *P, UNIT *U)
 	}
 	Loc.X = xs;
 	Loc.Y = ys;
-
+	Select(*P, Loc.X,Loc.Y) = true;
+	
 	Pos(*U) = Loc;
 	Mov(*U) += 1;
 
