@@ -6,7 +6,7 @@
 #include "ADT/stackt.h"
 #include "ADT/point.h"
 
-Stack X,Y,C;
+Stack X,Y,C,H,M;
 
 
 int absolute(int x){
@@ -27,6 +27,8 @@ void call_move()
 	stack_CreateEmpty(&X);
 	stack_CreateEmpty(&Y);
 	stack_CreateEmpty(&C);
+	stack_CreateEmpty(&H);
+	stack_CreateEmpty(&M);
 }
 
 void change_unit(UNIT New, UNIT *U)
@@ -147,6 +149,7 @@ void move_unit(Player *p1,Player *p2, MAP *P, UNIT *U, int x, int y)
 	Unit(*P, Loc.X,Loc.Y).owner = 0;
 	stack_Push(&X, Loc.X);
 	stack_Push(&Y, Loc.Y);
+	stack_Push(&M, M_Mov(*U));
 	int x1 = Loc.X;
 	int y1 = Loc.Y;
 	Loc.X = x;
@@ -169,7 +172,7 @@ void move_unit(Player *p1,Player *p2, MAP *P, UNIT *U, int x, int y)
 		Build(*P,x,y).owner = Owner(*U);
 
 	}else{
-		M_Mov(*U) -= absolute((x1-x)+(y1-y));
+		M_Mov(*U) -= absolute(absolute(x1-x)+absolute(y1-y));
 		printf("%d\n",absolute(absolute(x1-x)+absolute(y1-y)));
 		stack_Push(&C, 0);
 	}
@@ -195,12 +198,12 @@ void undo(Player *p1, Player *p2,MAP *P, UNIT *U)
 		Build(*P, Loc.X, Loc.Y).owner = conquered;
 		if(Owner(*U) == 2){
 			income(*p2) += 80;
-		}else{
+		}else if(Owner(*U) == 1){
 			income(*p1) += 80;
 		}
 		if(Build(*P,Loc.X,Loc.Y).owner == 1){
 			income(*p1) -= 80;
-		}else{
+		}else if(Owner(*U) == 1){
 			income(*p2) -= 80;
 		}
 	}
@@ -208,5 +211,7 @@ void undo(Player *p1, Player *p2,MAP *P, UNIT *U)
 	Loc.Y = ys;
 	Unit(*P,xs,ys) = *U;
 	Pos(*U) = Loc;
-	M_Mov(*U) += 1;
+	int L;
+	stack_Pop(&M, &L);
+	M_Mov(*U) = L;
 }
