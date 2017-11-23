@@ -5,6 +5,26 @@
 #include <time.h>
 #include "unit_battle.h"
 
+void heal(UNIT  Mage, MAP *M)
+/* Heal other unit */
+{
+    int Xmage=Absis(Pos(Mage));
+    int Ymage=Ordinat(Pos(Mage));
+    if(Type(Unit(*M,Xmage+1,Ymage))!=Nil&& Owner(Unit(*M,Xmage+1,Ymage))==Owner(Mage)&&Hp(Unit(*M,Xmage+1,Ymage))!=0&&Hp(Unit(*M,Xmage+1,Ymage))!=100){
+        Hp(Unit(*M,Xmage+1,Ymage))+=Heal(Mage);
+    }
+    if(Type(Unit(*M,Xmage-1,Ymage))!=Nil&& Owner(Unit(*M,Xmage-1,Ymage))==Owner(Mage)&&Hp(Unit(*M,Xmage-1,Ymage))!=0&&Hp(Unit(*M,Xmage-1,Ymage))!=100){
+        Hp(Unit(*M,Xmage-1,Ymage))+=Heal(Mage);
+    }
+    if(Type(Unit(*M,Xmage,Ymage+1))!=Nil&& Owner(Unit(*M,Xmage,Ymage+1))==Owner(Mage)&&Hp(Unit(*M,Xmage,Ymage+1))!=0&&Hp(Unit(*M,Xmage,Ymage+1))!=100){
+        Hp(Unit(*M,Xmage,Ymage+1))+=Heal(Mage);
+    }
+    if(Type(Unit(*M,Xmage,Ymage-1))!=Nil&& Owner(Unit(*M,Xmage,Ymage-1))==Owner(Mage)&&Hp(Unit(*M,Xmage,Ymage-1))!=0&&Hp(Unit(*M,Xmage+1,Ymage-1))!=100){
+        Hp(Unit(*M,Xmage,Ymage-1))+=Heal(Mage);
+    }
+}
+
+
 boolean get_hit (UNIT Defender) {
     srand (time(NULL));
     TabInt Prob;
@@ -24,8 +44,8 @@ void unit_attack(UNIT * Attacker, UNIT * Defender)
 /*I.S. Attacker dan Defender letaknya bersebalahan*/
 /*F.S. health dari Attacker dan Defender berubah sesuai kondisi*/
 {
+    Can_Atk(*Attacker)=false;
     if (get_hit(*Defender)){
-        Can_Atk(*Attacker)=false;
         if(Type(*Defender)!='K'){
             if(Atk_Type(*Attacker)==Atk_Type(*Defender)){
                 Hp(*Defender)-=Atk(*Attacker);
@@ -92,7 +112,7 @@ void attack(UNIT *Attacker, MAP *M)
             array_AddAsLastEl(&lokasi,1);
             count+=1;
             if(count==1){
-                printf("Please select enemy you want to attack:\n");
+                printf("\nPlease select enemy you want to attack:\n\n");
             }
             printf("%d. ",count);
             if(Atk_Type(Unit(*M,Xatk+1,Yatk))==Atk_Type(*Attacker)){
@@ -106,7 +126,7 @@ void attack(UNIT *Attacker, MAP *M)
             array_AddAsLastEl(&lokasi,2);
             count+=1;
             if(count==1){
-                printf("Please select enemy you want to attack:\n");
+                printf("\nPlease select enemy you want to attack:\n\n");
             }
             printf("%d. ",count);
             if(Atk_Type(Unit(*M,Xatk-1,Yatk))==Atk_Type(*Attacker)){
@@ -120,7 +140,7 @@ void attack(UNIT *Attacker, MAP *M)
             array_AddAsLastEl(&lokasi,3);
             count+=1;
             if(count==1){
-                printf("Please select enemy you want to attack:\n");
+                printf("\nPlease select enemy you want to attack:\n\n");
             }
             printf("%d. ",count);
             if(Atk_Type(Unit(*M,Xatk,Yatk+1))==Atk_Type(*Attacker)){
@@ -134,7 +154,7 @@ void attack(UNIT *Attacker, MAP *M)
             array_AddAsLastEl(&lokasi,4);
             count+=1;
             if(count==1){
-                printf("Please select enemy you want to attack:\n");
+                printf("\nPlease select enemy you want to attack:\n\n");
             }
             printf("%d. ",count);
             if(Atk_Type(Unit(*M,Xatk,Yatk-1))==Atk_Type(*Attacker)){
@@ -144,9 +164,10 @@ void attack(UNIT *Attacker, MAP *M)
             }
         }
         if(Found){
-            printf("Select enemy you want to attack : ");
+            printf("\nSelect enemy you want to attack : ");
             do{
                 scanf("%d",&inp);
+                printf("\n\nBattle logs : \n");
                 if(inp<=count){
                     inpmusuh=array_Elmt(lokasi,inp);
                     if(inpmusuh==1){     
@@ -168,6 +189,6 @@ void attack(UNIT *Attacker, MAP *M)
             printf("Enemy not found\n");
         }
     }else{
-        printf("You have attacked\n");
+        printf("Your unit is resting...\n");
     }
 }

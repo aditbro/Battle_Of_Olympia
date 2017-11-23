@@ -1,11 +1,6 @@
-#include "map.h"
-#include "unit.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include "ADT/stackt.h"
-#include "ADT/point.h"
+#include "move.h"
 
-Stack X,Y;
+Stack X,Y,C;
 
 
 int absolute(int x){
@@ -25,14 +20,9 @@ void call_move()
 {
 	stack_CreateEmpty(&X);
 	stack_CreateEmpty(&Y);
+	stack_CreateEmpty(&C);
 }
 
-void change_unit(UNIT New, UNIT *U)
-/*prosedur ini berguna untuk memilih unit yang akan dipindahkan*/
-{
-	*U = New;
-	call_move();
-}
 
 void possible_move(MAP *P,UNIT U)
 /**prosedur ini mengubah map menjadi map yang sudah berisi
@@ -45,37 +35,69 @@ void possible_move(MAP *P,UNIT U)
     int i;
 
 	POINT Loc = Pos(U);
-	for( i = 1; i <= M_Mov(U); i++){
-		if(Type(Unit(*P,Loc.Y + i,Loc.X)) == '0'){
-			Type(Unit(*P,Loc.Y + i,Loc.X)) = '#';
+	for( i = 1; i <= Mov(U) && Loc.X + i <= MapKolEff(*P); i++){
+		if(Type(Unit(*P,Loc.X + i,Loc.Y)) == '0'){
+			Type(Unit(*P,Loc.X + i,Loc.Y)) = '#';
 		}
-		else if(Owner(U) != Owner(Unit(*P,Loc.Y+i,Loc.X))){
+		else if(Owner(U) != Owner(Unit(*P,Loc.X+i,Loc.Y))){
 			break;
 		}
 	}
-	for( i = 1; i <= M_Mov(U); i++){
-		if(Type(Unit(*P,Loc.Y - i,Loc.X)) == '0'){
-			Type(Unit(*P,Loc.Y - i,Loc.X)) = '#';
+	for( i = 1; i <= Mov(U) && Loc.X - i >= 0; i++){
+		if(Type(Unit(*P,Loc.X - i,Loc.Y)) == '0'){
+			Type(Unit(*P,Loc.X - i,Loc.Y)) = '#';
 		}
-		else if(Owner(U) != Owner(Unit(*P,Loc.Y-i,Loc.X))){
+		else if(Owner(U) != Owner(Unit(*P,Loc.X-i,Loc.Y))){
 			break;
 		}
 	}
-	for( i = 1; i <= M_Mov(U); i++){
-		if(Type(Unit(*P,Loc.Y,Loc.X - i)) == '0'){
-			Type(Unit(*P,Loc.Y,Loc.X - i)) = '#';
+	for( i = 1; i <= Mov(U) && Loc.Y - i >= 0; i++){
+		if(Type(Unit(*P,Loc.X,Loc.Y - i)) == '0'){
+			Type(Unit(*P,Loc.X,Loc.Y - i)) = '#';
 		}
-		else if(Owner(U) != Owner(Unit(*P,Loc.Y,Loc.X-i))){
+		else if(Owner(U) != Owner(Unit(*P,Loc.X,Loc.Y-i))){
 			break;
 		}
 	}
-	for( i = 1; i <= M_Mov(U); i++){
-		if(Type(Unit(*P,Loc.Y,Loc.X + i)) == '0'){
-			Type(Unit(*P,Loc.Y,Loc.X + i)) = '#';
+	for( i = 1; i <= Mov(U) && Loc.Y + i <= MapBrsEff(*P); i++){
+		if(Type(Unit(*P,Loc.X,Loc.Y + i)) == '0'){
+			Type(Unit(*P,Loc.X,Loc.Y + i)) = '#';
 		}
-		else if(Owner(U) != Owner(Unit(*P,Loc.Y,Loc.X+i))){
+		else if(Owner(U) != Owner(Unit(*P,Loc.X,Loc.Y+i))){
 			break;
 		}
+	}
+	for( i = 1; i <= Mov(U)/2 && Loc.Y + i <= MapBrsEff(*P) && Loc.X + i <= MapBrsEff(*P); i++){
+		if(Type(Unit(*P,Loc.X + i,Loc.Y + i)) == '0'){
+			Type(Unit(*P,Loc.X + i,Loc.Y + i)) = '#';
+		}
+		else if(Owner(U) != Owner(Unit(*P,Loc.X + i,Loc.Y+i))){
+			break;
+		}			
+	}
+	for( i = 1; i <= Mov(U)/2 && Loc.Y - i >= 0 && Loc.X + i <= MapBrsEff(*P); i++){
+		if(Type(Unit(*P,Loc.X + i,Loc.Y - i)) == '0'){
+			Type(Unit(*P,Loc.X + i,Loc.Y - i)) = '#';
+		}
+		else if(Owner(U) != Owner(Unit(*P,Loc.X + i,Loc.Y-i))){
+			break;
+		}			
+	}
+	for( i = 1; i <= Mov(U)/2 && Loc.Y + i <= MapBrsEff(*P) && Loc.X - i >= 0; i++){
+		if(Type(Unit(*P,Loc.X - i,Loc.Y + i)) == '0'){
+			Type(Unit(*P,Loc.X - i,Loc.Y + i)) = '#';
+		}
+		else if(Owner(U) != Owner(Unit(*P,Loc.X-i,Loc.Y+i))){
+			break;
+		}			
+	}
+	for( i = 1; i <= Mov(U)/2 && Loc.Y - i >= 0 && Loc.X - i >= 0;i++){
+		if(Type(Unit(*P,Loc.X - i,Loc.Y - i)) == '0'){
+			Type(Unit(*P,Loc.X - i,Loc.Y - i)) = '#';
+		}
+		else if(Owner(U) != Owner(Unit(*P,Loc.X - i,Loc.Y-i))){
+			break;
+		}			
 	}
 	//printMap(P);
 }
@@ -96,7 +118,7 @@ int check_if_possible(MAP P, UNIT U, int x, int y)
 {
 	MAP temp = P;
 	possible_move(&temp, U);
-	if(Unit(temp, y, x).type != '#'){
+	if(Unit(temp, x, y).type != '#'){
 		return 0;
 	}else{
 		return 1;
@@ -108,24 +130,68 @@ void move_unit(MAP *P, UNIT *U, int x, int y)
  * lalu memasukan lokasi sebelumnya ke stack agar bisa melakukan undo
  */
 {
+	
 	POINT Loc = Pos(*U);
-	Unit(*P, Loc.Y,Loc.X).type = '0';
+	Unit(*P, Loc.X,Loc.Y).type = '0';
+	Unit(*P, Loc.X,Loc.Y).owner = 0;
+
 	stack_Push(&X, Loc.X);
 	stack_Push(&Y, Loc.Y);
+
+	int x1 = Loc.X;
+	int y1 = Loc.Y;
+
 	Loc.X = x;
 	Loc.Y = y;
-	Unit(*P, Loc.Y,Loc.X) = *U;
-	Pos(*U) = Loc;
-	M_Mov(*U) -= 1;
-}
 
+	Pos(*U) = Loc;
+	
+	if(Build(*P, x, y).type == 'V'){
+
+		Mov(*U) = 0;
+
+	}else{
+
+		if(x1 - x == 0 || y - y1 == 0){
+
+			Mov(*U) -= absolute((x1-x)+(y1-y));
+		}
+		else{
+			
+			Mov(*U) -= absolute((x1-x));
+
+		}
+	}
+
+	/* assign unit to correct place ONLY AFTER all compulsory variable changes */
+	Unit(*P,x,y) = *U; 
+}
 void undo(MAP *P, UNIT *U)
 /*prosedur ini mengembalikan state unit ke state sebelum pindah */
 {
+	if(stack_IsEmpty(Y) || stack_IsEmpty(X)){
+		printf("there's no move to undo\n");
+		return;
+	}
 	int xs;
 	stack_Pop(&X, &xs);
 	int ys;
 	stack_Pop(&Y, &ys);
-	move_unit(P, U, xs, ys);
-	M_Mov(*U) += 2;
+	POINT Loc = Pos(*U);
+	Unit(*P, Loc.X,Loc.Y).type = '0';
+	Unit(*P, Loc.X,Loc.Y).owner = 0;
+	if(Build(*P, Loc.X, Loc.Y).type == 'V'){
+		int conquered = 0;
+		stack_Pop(&C, &conquered);
+		Build(*P, Loc.X, Loc.Y).owner = conquered;
+	}
+	Loc.X = xs;
+	Loc.Y = ys;
+
+	Pos(*U) = Loc;
+	Mov(*U) += 1;
+
+	/* assign unit to correct place ONLY AFTER all compulsory variable changes */
+	Unit(*P,xs,ys) = *U;
 }
+

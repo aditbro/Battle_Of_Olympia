@@ -13,8 +13,9 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
         Heal(*U)        = 0;
         M_Mov(*U)		= 3;
         Mov(*U)		    = 3;
-        Cost(*U)		= 2;
-        GHP(*U)          = 90;
+        Cost(*U)		= 20;
+        Upkeep(*U)      = 4;
+        GHP(*U)          = 50;
         Atk_Type(*U)    = 'M';
     }else if(type=='A'){
         M_Hp(*U)		= 100;
@@ -24,18 +25,20 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
         Heal(*U)        = 0;
         M_Mov(*U)		= 2;
         Mov(*U)		    = 2;
-        Cost(*U)		= 1;
+        Cost(*U)		= 10;
+        Upkeep(*U)      = 2;
         GHP(*U)          = 90;
         Atk_Type(*U)    = 'R';
     }else if(type=='K'){
-        M_Hp(*U)		= 100;
-        Hp(*U)			= 100;
+        M_Hp(*U)		= 300;
+        Hp(*U)			= 300;
         Atk(*U)			= 25;
         Def(*U)         = 30;
         Heal(*U)        = 0;
         M_Mov(*U)		= 1;
         Mov(*U)		    = 1;
         Cost(*U)		= 0;
+        Upkeep(*U)       = 0;
         GHP(*U)          = 90;
         Atk_Type(*U)    = 'M';
     }else if(type=='W'){
@@ -46,7 +49,8 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
         Heal(*U)        = 25;
         M_Mov(*U)		= 3;
         Mov(*U)		    = 3;
-        Cost(*U)		= 5;
+        Cost(*U)		= 50;
+        Upkeep(*U)      = 10;
         GHP(*U)          = 90;
         Atk_Type(*U)    = 'M';
     }
@@ -78,8 +82,9 @@ UNIT Create_new_unit(char type,int owner,int x, int y){
 
 void Show_unit_info (UNIT U){
 
-    printf("Unit Type            : %c\n", Type(U));
+    printf("Unit Type            : ");print_unit_type(U);printf(" \n");
     printf("Max HP               : %d\n", M_Hp(U));
+    printf("Owner                : %d\n", Owner(U));
     printf("HP                   : %d\n", Hp(U));
     printf("Atk                  : %d\n", Atk(U));
     printf("Def                  : %d\n", Def(U));
@@ -89,6 +94,7 @@ void Show_unit_info (UNIT U){
     printf("Max Movement         : %d\n", M_Mov(U));
     printf("Movement             : %d\n", Mov(U));
     printf("Cost                 : %d\n", Cost(U));
+    printf("Upkeep               : %d\n", Upkeep(U));
     printf("Position             : <%d, %d>\n", Absis(Pos(U)), Ordinat((Pos(U))));
     printf("Attack Type          : %c\n", Atk_Type(U));
     printf("Can attack           : ");

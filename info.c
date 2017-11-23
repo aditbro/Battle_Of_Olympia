@@ -28,13 +28,14 @@ void printInfo(MAP M) {
 
 	printf("\nEnter the coordinate of the cell: ");
 	scanf("%d %d", &row, &col);
-	MakePOINT(row, col);
+	C = MakePOINT(row, col);
 
 	printf("== Cell Info ==\n");
 	if (IsBuildingInCell(M, C)){
 		Build B = BuildingInCell(M, C);
+		printf("Building type : ");
 		print_build_type(B);
-		printf("\nOwned by player ");
+		printf("\nOwner : player ");
 		printf("%d\n", Build_Owner(B));
 	}
 	else{
@@ -43,8 +44,9 @@ void printInfo(MAP M) {
 	printf("== UNIT Info ==\n");
 	if (IsUnitInCell(M, C)){
 		UNIT U = UnitInCell(M, C);
+		printf("Unit : ");
 		print_unit_type(U);
-		printf("\nOwned by player ");
+		printf("\nOwner : player ");
 		printf("%d", Owner(U));
 		printf("\nHealth %d/%d | ATK %d | DEF %d\n", Hp(U),M_Hp(U),Atk(U),Def(U));
 	}
