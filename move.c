@@ -6,7 +6,7 @@
 #include "ADT/stackt.h"
 #include "ADT/point.h"
 
-Stack X,Y,C,H,M;
+Stack X,Y,C,H,M,O;
 
 
 int absolute(int x){
@@ -49,7 +49,7 @@ void possible_move(MAP *P,UNIT U)
     int i;
 
 	POINT Loc = Pos(U);
-	for( i = 1; i <= M_Mov(U) && Loc.X + i <= MapKolEff(*P); i++){
+	for( i = 1; i <= Mov(U) && Loc.X + i <= MapKolEff(*P); i++){
 		if(Type(Unit(*P,Loc.X + i,Loc.Y)) == '0'){
 			Type(Unit(*P,Loc.X + i,Loc.Y)) = '#';
 		}
@@ -57,7 +57,7 @@ void possible_move(MAP *P,UNIT U)
 			break;
 		}
 	}
-	for( i = 1; i <= M_Mov(U) && Loc.X - i >= 0; i++){
+	for( i = 1; i <= Mov(U) && Loc.X - i >= 0; i++){
 		if(Type(Unit(*P,Loc.X - i,Loc.Y)) == '0'){
 			Type(Unit(*P,Loc.X - i,Loc.Y)) = '#';
 		}
@@ -65,7 +65,7 @@ void possible_move(MAP *P,UNIT U)
 			break;
 		}
 	}
-	for( i = 1; i <= M_Mov(U) && Loc.Y - i >= 0; i++){
+	for( i = 1; i <= Mov(U) && Loc.Y - i >= 0; i++){
 		if(Type(Unit(*P,Loc.X,Loc.Y - i)) == '0'){
 			Type(Unit(*P,Loc.X,Loc.Y - i)) = '#';
 		}
@@ -73,7 +73,7 @@ void possible_move(MAP *P,UNIT U)
 			break;
 		}
 	}
-	for( i = 1; i <= M_Mov(U) && Loc.Y + i <= MapBrsEff(*P); i++){
+	for( i = 1; i <= Mov(U) && Loc.Y + i <= MapBrsEff(*P); i++){
 		if(Type(Unit(*P,Loc.X,Loc.Y + i)) == '0'){
 			Type(Unit(*P,Loc.X,Loc.Y + i)) = '#';
 		}
@@ -81,7 +81,7 @@ void possible_move(MAP *P,UNIT U)
 			break;
 		}
 	}
-	for( i = 1; i <= M_Mov(U)/2 && Loc.Y + i <= MapBrsEff(*P) && Loc.X + i <= MapBrsEff(*P); i++){
+	for( i = 1; i <= Mov(U)/2 && Loc.Y + i <= MapBrsEff(*P) && Loc.X + i <= MapBrsEff(*P); i++){
 		if(Type(Unit(*P,Loc.X + i,Loc.Y + i)) == '0'){
 			Type(Unit(*P,Loc.X + i,Loc.Y + i)) = '#';
 		}
@@ -89,7 +89,7 @@ void possible_move(MAP *P,UNIT U)
 			break;
 		}			
 	}
-	for( i = 1; i <= M_Mov(U)/2 && Loc.Y - i >= 0 && Loc.X + i <= MapBrsEff(*P); i++){
+	for( i = 1; i <= Mov(U)/2 && Loc.Y - i >= 0 && Loc.X + i <= MapBrsEff(*P); i++){
 		if(Type(Unit(*P,Loc.X + i,Loc.Y - i)) == '0'){
 			Type(Unit(*P,Loc.X + i,Loc.Y - i)) = '#';
 		}
@@ -97,7 +97,7 @@ void possible_move(MAP *P,UNIT U)
 			break;
 		}			
 	}
-	for( i = 1; i <= M_Mov(U)/2 && Loc.Y + i <= MapBrsEff(*P) && Loc.X - i >= 0; i++){
+	for( i = 1; i <= Mov(U)/2 && Loc.Y + i <= MapBrsEff(*P) && Loc.X - i >= 0; i++){
 		if(Type(Unit(*P,Loc.X - i,Loc.Y + i)) == '0'){
 			Type(Unit(*P,Loc.X - i,Loc.Y + i)) = '#';
 		}
@@ -105,7 +105,7 @@ void possible_move(MAP *P,UNIT U)
 			break;
 		}			
 	}
-	for( i = 1; i <= M_Mov(U)/2 && Loc.Y - i >= 0 && Loc.X - i >= 0;i++){
+	for( i = 1; i <= Mov(U)/2 && Loc.Y - i >= 0 && Loc.X - i >= 0;i++){
 		if(Type(Unit(*P,Loc.X - i,Loc.Y - i)) == '0'){
 			Type(Unit(*P,Loc.X - i,Loc.Y - i)) = '#';
 		}
@@ -150,34 +150,36 @@ void move_unit(Player *p1,Player *p2, MAP *P, UNIT *U, int x, int y)
 	Select(*P, Loc.X,Loc.Y) = false;
 	stack_Push(&X, Loc.X);
 	stack_Push(&Y, Loc.Y);
-	stack_Push(&M, M_Mov(*U));
+	stack_Push(&M, Mov(*U));
 	stack_Push(&H, Hp(*U));
 	int x1 = Loc.X;
 	int y1 = Loc.Y;
 	Loc.X = x;
 	Loc.Y = y;
+	Select(*P, Loc.X,Loc.Y) = true;
 	Unit(*P,x,y) = *U;
 	Pos(*U) = Loc;
 	if(Build(*P, x, y).type == 'V'){
-		M_Mov(*U) = 0;
+		Mov(*U) = 0;
 		stack_Push(&C, Build(*P,x,y).owner);
 		if(Owner(*U) == 2){
 			income(*p2) += 80;
-		}else{
+		}else if(Owner(*U) == 1){
 			income(*p1) += 80;
 		}
 		if(Build(*P,x,y).owner == 1){
 			income(*p1) -= 80;
-		}else{
+		}else if(Build(*P,x,y).owner == 2){
 			income(*p2) -= 80;
 		}
 		Build(*P,x,y).owner = Owner(*U);
 		Hp(*U) = M_Hp(*U); 
 	}else{
-		M_Mov(*U) -= absolute(absolute(x1-x)+absolute(y1-y));
+		Mov(*U) -= absolute(absolute(x1-x)+absolute(y1-y));
 		printf("%d\n",absolute(absolute(x1-x)+absolute(y1-y)));
 		stack_Push(&C, 0);
 	}
+	Unit(*P,x,y) = *U; 
 }
 
 void undo(Player *p1, Player *p2,MAP *P, UNIT *U)
@@ -198,25 +200,27 @@ void undo(Player *p1, Player *p2,MAP *P, UNIT *U)
 	if(Build(*P, Loc.X, Loc.Y).type == 'V'){
 		int conquered = 0;
 		stack_Pop(&C, &conquered);
-		Build(*P, Loc.X, Loc.Y).owner = conquered;
-		if(Owner(*U) == 2){
+		if(conquered == 2){
 			income(*p2) += 80;
-		}else if(Owner(*U) == 1){
+		}else if(conquered == 1){
 			income(*p1) += 80;
 		}
 		if(Build(*P,Loc.X,Loc.Y).owner == 1){
 			income(*p1) -= 80;
-		}else if(Owner(*U) == 1){
+		}else if(Build(*P,Loc.X,Loc.Y).owner == 2){
 			income(*p2) -= 80;
 		}
+		Build(*P, Loc.X, Loc.Y).owner = conquered;
 	}
 	Loc.X = xs;
 	Loc.Y = ys;
+	Select(*P, Loc.X,Loc.Y) = true;
 	Unit(*P,xs,ys) = *U;
 	Pos(*U) = Loc;
 	int L;
 	stack_Pop(&H, &L);
 	Hp(*U) = L;
 	stack_Pop(&M, &L);
-	M_Mov(*U) = L;
+	Mov(*U) = L;
+	Unit(*P,xs,ys) = *U; 
 }

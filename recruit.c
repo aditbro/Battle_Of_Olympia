@@ -114,7 +114,7 @@ void recruit_unit(MAP *M, Player *P, UNIT K){
             }
 
             else if (choice==3) {
-                if (gold(*P)>=50) {
+                if (gold(*P)>=200) {
 
                    
                     U = Create_new_unit('W', ID(*P), x, y);

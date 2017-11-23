@@ -12,21 +12,32 @@ void heal(UNIT  Mage, MAP *M)
     int Ymage=Ordinat(Pos(Mage));
     if(Type(Unit(*M,Xmage+1,Ymage))!=Nil&& Owner(Unit(*M,Xmage+1,Ymage))==Owner(Mage)&&Hp(Unit(*M,Xmage+1,Ymage))!=0&&Hp(Unit(*M,Xmage+1,Ymage))!=100){
         Hp(Unit(*M,Xmage+1,Ymage))+=Heal(Mage);
+        if(Hp(Unit(*M,Xmage+1,Ymage))>100){
+            Hp(Unit(*M,Xmage+1,Ymage))=100;
+        }
     }
     if(Type(Unit(*M,Xmage-1,Ymage))!=Nil&& Owner(Unit(*M,Xmage-1,Ymage))==Owner(Mage)&&Hp(Unit(*M,Xmage-1,Ymage))!=0&&Hp(Unit(*M,Xmage-1,Ymage))!=100){
         Hp(Unit(*M,Xmage-1,Ymage))+=Heal(Mage);
+        if(Hp(Unit(*M,Xmage-1,Ymage))>100){
+            Hp(Unit(*M,Xmage-1,Ymage))=100;
+        }
     }
     if(Type(Unit(*M,Xmage,Ymage+1))!=Nil&& Owner(Unit(*M,Xmage,Ymage+1))==Owner(Mage)&&Hp(Unit(*M,Xmage,Ymage+1))!=0&&Hp(Unit(*M,Xmage,Ymage+1))!=100){
         Hp(Unit(*M,Xmage,Ymage+1))+=Heal(Mage);
+        if(Hp(Unit(*M,Xmage,Ymage+1))>100){
+            Hp(Unit(*M,Xmage,Ymage+1))=100;
+        }
     }
     if(Type(Unit(*M,Xmage,Ymage-1))!=Nil&& Owner(Unit(*M,Xmage,Ymage-1))==Owner(Mage)&&Hp(Unit(*M,Xmage,Ymage-1))!=0&&Hp(Unit(*M,Xmage+1,Ymage-1))!=100){
         Hp(Unit(*M,Xmage,Ymage-1))+=Heal(Mage);
+        if(Hp(Unit(*M,Xmage,Ymage-1))>100){
+            Hp(Unit(*M,Xmage,Ymage-1))=100;
+        }
     }
 }
 
 
 boolean get_hit (UNIT Defender) {
-    srand (time(NULL));
     TabInt Prob;
     int i, r;
 
@@ -44,7 +55,9 @@ void unit_attack(UNIT * Attacker, UNIT * Defender)
 /*I.S. Attacker dan Defender letaknya bersebalahan*/
 /*F.S. health dari Attacker dan Defender berubah sesuai kondisi*/
 {
+    srand (time(NULL));
     Can_Atk(*Attacker)=false;
+    Mov(*Attacker)=0;
     if (get_hit(*Defender)){
         if(Type(*Defender)!='K'){
             if(Atk_Type(*Attacker)==Atk_Type(*Defender)){
