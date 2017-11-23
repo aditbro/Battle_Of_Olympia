@@ -40,7 +40,6 @@ int main() {
 							 Unit(M, 1, 1) = Create_new_unit('S',1,1,1);
 							 point = MakePOINT(1,1);
 							 units(player_1) = Insert_unit(units(player_1), point, UnitNbElmt(units(player_1)));
-
 							 Unit(M, 1, 2) = Create_new_unit('S',2,1,2);
 							 point = MakePOINT(1,2);
 							 units(player_2) = Insert_unit(units(player_2), point, UnitNbElmt(units(player_2)));
@@ -70,7 +69,7 @@ int main() {
 
 					int unit_index_in_list;
 					units(*Current_player) = change_unit_position_pre(units(*Current_player), Current_unit, &unit_index_in_list);
-					move_unit(&M, Current_unit, x, y);
+					move_unit(&player_1,&player_2,&M, Current_unit, x, y);
 					units(*Current_player) = change_unit_position_post(units(*Current_player), Current_unit, unit_index_in_list);
 
 					printf("Unit moved\n");
@@ -153,7 +152,7 @@ int main() {
 
 			int unit_index_in_list;
 			units(*Current_player) = change_unit_position_pre(units(*Current_player), Current_unit, &unit_index_in_list);
-			undo(&M, Current_unit);
+			undo(&player_1,&player_2,&M, Current_unit);
 			units(*Current_player) = change_unit_position_post(units(*Current_player), Current_unit, unit_index_in_list);
 		}
 		else if (strcmp(input, "SAVE") == 0) {

@@ -148,19 +148,16 @@ void move_unit(Player *p1,Player *p2, MAP *P, UNIT *U, int x, int y)
 	Unit(*P, Loc.X,Loc.Y).type = '0';
 	Unit(*P, Loc.X,Loc.Y).owner = 0;
 	Select(*P, Loc.X,Loc.Y) = false;
-
 	stack_Push(&X, Loc.X);
 	stack_Push(&Y, Loc.Y);
 	stack_Push(&M, M_Mov(*U));
+	stack_Push(&H, Hp(*U));
 	int x1 = Loc.X;
 	int y1 = Loc.Y;
 	Loc.X = x;
 	Loc.Y = y;
 	Unit(*P,x,y) = *U;
 	Pos(*U) = Loc;
-	
-	Select(*P, Loc.X,Loc.Y) = true;
-
 	if(Build(*P, x, y).type == 'V'){
 		M_Mov(*U) = 0;
 		stack_Push(&C, Build(*P,x,y).owner);
@@ -175,7 +172,7 @@ void move_unit(Player *p1,Player *p2, MAP *P, UNIT *U, int x, int y)
 			income(*p2) -= 80;
 		}
 		Build(*P,x,y).owner = Owner(*U);
-
+		Hp(*U) = M_Hp(*U); 
 	}else{
 		M_Mov(*U) -= absolute(absolute(x1-x)+absolute(y1-y));
 		printf("%d\n",absolute(absolute(x1-x)+absolute(y1-y)));
@@ -215,15 +212,11 @@ void undo(Player *p1, Player *p2,MAP *P, UNIT *U)
 	}
 	Loc.X = xs;
 	Loc.Y = ys;
-	Select(*P, Loc.X,Loc.Y) = true;
-
-	Pos(*U) = Loc;
-	Mov(*U) += 1;
-
-	/* assign unit to correct place ONLY AFTER all compulsory variable changes */
 	Unit(*P,xs,ys) = *U;
 	Pos(*U) = Loc;
 	int L;
+	stack_Pop(&H, &L);
+	Hp(*U) = L;
 	stack_Pop(&M, &L);
 	M_Mov(*U) = L;
 }
