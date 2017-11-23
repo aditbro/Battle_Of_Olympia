@@ -60,7 +60,6 @@ int Index_Max(UnitList L)
             return Prev_Max;
         }
 
-        
     }
 }
 
@@ -76,7 +75,6 @@ UnitList Insert_unit(UnitList L, POINT unit_pos, int indeks)
 {
 
     if (UnitList_empty(L)){
-        
         return Alokasi_point(unit_pos, indeks);
     }
 
@@ -153,6 +151,13 @@ void select_unit(MAP Map, UnitList Unit_list, UNIT * Current_unit, int Index){
         printf("You don't have such unit...\n");
     }
 }
+
+void selected_on_map_ON(MAP *Map, UNIT *Current_unit, int Cond){
+    /* Function to turn on and off 'select' atribut in map */
+
+    Select(*Map, Absis(Pos(*Current_unit)), Ordinat(Pos(*Current_unit))) = Cond;
+}
+
 
 UnitList  change_unit_position_pre(UnitList Unit_list, UNIT *Current_unit, int *unit_index_in_list){
 /* Function to delete unit in unitlist and store index */
@@ -232,7 +237,6 @@ void refresh_unit_list(MAP *M,UnitList L)
 /* Refresh Can_Atk,Mov all Unit in UnitList*/
 {
     if(!UnitList_empty(L)){
-        
         POINT unit_pos = get_unit_position(L,Index(L));
 
         Mov(Unit(*M, Absis(unit_pos), Ordinat(unit_pos)))=M_Mov(Unit(*M, Absis(unit_pos), Ordinat(unit_pos)));
@@ -244,7 +248,6 @@ void do_heal(MAP *M,UnitList L)
 /* Heal with your white mage */
 {
     if(!UnitList_empty(L)){
-        
         POINT unit_pos = get_unit_position(L,Index(L));
 
         if(Type(Unit(*M, Absis(unit_pos), Ordinat(unit_pos)))=='W'){
