@@ -30,8 +30,8 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
         GHP(*U)          = 90;
         Atk_Type(*U)    = 'R';
     }else if(type=='K'){
-        M_Hp(*U)		= 10;
-        Hp(*U)			= 10;
+        M_Hp(*U)		= 300;
+        Hp(*U)			= 300;
         Atk(*U)			= 10;
         Def(*U)         = 50;
         Heal(*U)        = 0;

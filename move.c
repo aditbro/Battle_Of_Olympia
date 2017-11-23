@@ -176,7 +176,7 @@ void move_unit(Player *p1,Player *p2, MAP *P, UNIT *U, int x, int y)
 		Hp(*U) = M_Hp(*U); 
 	}else{
 		Mov(*U) -= absolute(absolute(x1-x)+absolute(y1-y));
-		printf("%d\n",absolute(absolute(x1-x)+absolute(y1-y)));
+		//printf("%d\n",absolute(absolute(x1-x)+absolute(y1-y)));
 		stack_Push(&C, 0);
 	}
 	Unit(*P,x,y) = *U; 
