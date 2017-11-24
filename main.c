@@ -11,7 +11,6 @@
 #include "file_handler/save.h"
 #include <string.h>
 
-
 int main() {
 
 	Show_title();
@@ -32,18 +31,6 @@ int main() {
 	UNIT* Current_unit = &Dummy_unit;
 
 	char input[100] = "END_TURN"; //automatic start first turn
-
-
-							 // DUMMY TEST material (for attack and move )
-							 /*
-							 POINT point;
-							 Unit(M, 1, 1) = Create_new_unit('S',1,1,1);
-							 point = MakePOINT(1,1);
-							 units(player_1) = Insert_unit(units(player_1), point, UnitNbElmt(units(player_1)));
-							 Unit(M, 1, 2) = Create_new_unit('S',2,1,2);
-							 point = MakePOINT(1,2);
-							 units(player_2) = Insert_unit(units(player_2), point, UnitNbElmt(units(player_2)));
-							 */
 
 	while (strcmp(input, "Quit") != 0) {
 
@@ -104,6 +91,21 @@ int main() {
 			call_move();
 		}
 
+		else if (strcmp(input, "NEXT_UNIT") == 0) {
+			/* Switching current next unit */
+
+			refreshMap(&M,units(*Current_player));
+			int next_unit_idx = search_next_unit(&M, units(*Current_player), Current_unit);
+			if(next_unit_idx != -999){
+                select_unit(&M, units(*Current_player), Current_unit, next_unit_idx);
+                call_move();
+			}
+			else{
+                printf("\nNo more unit to move nor attack...\n");
+			}
+		}
+
+
 		else if (strcmp(input, "RECRUIT") == 0) {
 			/* Recruit unit */
 
@@ -130,7 +132,6 @@ int main() {
 		else if (strcmp(input, "END_TURN") == 0) {
 			/* End turn */
 			if (!dummy) {
-				printf("Please change your unit first!\n");
 				gold(*Current_player) = gold(*Current_player) - upkeep(*Current_player);
 				gold(*Current_player) = gold(*Current_player) + income(*Current_player);
 				refresh_unit_list(&M, units(*Current_player));
@@ -138,7 +139,6 @@ int main() {
 
 			}
 			else {
-				printf("Please change your unit first!\n");
 				dummy = false;
 			}
 
@@ -154,7 +154,8 @@ int main() {
 				strcpy(input, "End");
 			}
 			printf("Cash: %dG | Income: %dG | Upkeep: %dG\n", gold(*Current_player), income(*Current_player), upkeep(*Current_player));
-			// increase gold , decrease gold , healing 
+			printf("\nPlease change your unit first!\n");
+			// increase gold , decrease gold , healing
 
 		}
 		else if (strcmp(input, "UNDO") == 0) {
@@ -166,7 +167,7 @@ int main() {
 		}
 		else if (strcmp(input, "SAVE") == 0) {
 			printf("Save current game? (y/n)\n");
-			
+
 			print_red('!');
 			printf("! Saving your game will result in ending your current turn.\n");
 			scanf("%s", input);
