@@ -9,16 +9,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-/* NOTES :
-
-    - in main program, use :
-        Queue Player_turn_queue = Init_turn();
-
-    - switch_turn should be called when player's end his/her turn
-        Switch_turn(&Player_turn_queue, &Current_player);
-
-*/
-
 Queue Create_turn();
 /* Function to return queue for storing player's turn */
 

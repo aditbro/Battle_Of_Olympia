@@ -145,12 +145,13 @@ void queue_PrintQ (Queue Q){
 
         printf("queue_Head : %d\n",queue_Head(Q));
         printf("queue_Tail : %d\n",queue_Tail(Q));
-        printf("Jumlah el : %d\n",queue_NBElmt(Q));
-        printf("element : ");
+        printf("queu_El : %d\n",queue_NBElmt(Q));
+        printf("element : \n");
 
+        printf("[n-th element] > value\n");
         while(i != (queue_Tail(Q) + 1 ))
         {
-            printf("[%d] > %d ",i,Q.T[i]);
+            printf("[%d] > %d\n",i,Q.T[i]);
             i = (i % queue_MaxEl(Q)) + 1;
         }
     }
