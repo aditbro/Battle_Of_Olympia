@@ -23,13 +23,6 @@ typedef village_address VillageList;
 #define Info(P) (P)->info
 #define Next(P) (P)->next
 
-/* NOTES :
-    - Start off :
-        VillageList UNITLIST = NULL;
-    - Usage :
-        UNITLIST = Insert_village(UNITLIST, point, NbElmt(UNITLIST));
-        Delete_village(UNITLIST, 3);
-        Display_village_list(UNITLIST);
 
 /****************** ADD AND DEL ******************/
 VillageList Insert_village(VillageList L, POINT village_pos, int indeks);

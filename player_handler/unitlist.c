@@ -208,6 +208,35 @@ int search_current_unit_index(UnitList Unit_list, UNIT *Current_unit){
 
 }
 
+int search_next_unit(MAP *M, UnitList Unit_list,UNIT *Current_unit){
+    /* function to return next index of unit that can move / attack */
+
+    int max_idx = Index_Max(Unit_list);
+    int cur_idx = search_current_unit_index(Unit_list, Current_unit);
+    int max_repeat = UnitNbElmt(Unit_list);
+
+    /* Modular increment */
+    while(max_repeat > 0){
+
+        if (cur_idx == max_idx){
+            cur_idx = 1;
+        }
+        else{
+            cur_idx += 1;
+        }
+
+        POINT Unit_pos = get_unit_position(Unit_list, cur_idx);
+        UNIT check_unit = Unit(*M, Absis(Unit_pos), Ordinat(Unit_pos));
+
+        if ((Mov(check_unit) >= 0) || Can_Atk(check_unit)){
+            return cur_idx;
+        }
+
+        max_repeat--;
+    }
+
+    return -999;
+}
 
 /****************** DISPLAY ******************/
 void Display_unit_list (MAP M, UnitList L)
