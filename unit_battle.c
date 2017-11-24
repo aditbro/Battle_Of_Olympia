@@ -115,7 +115,7 @@ void unit_attack(UNIT * Attacker, UNIT * Defender,boolean *Win, boolean *Lose)
                 printf("Your enemy king died\n");
             }
         }
-        if(Hp(*Attacker)==0){
+        if(Hp(*Attacker)<=0){
             printf("Your ");
             print_unit_type(*Attacker);
             printf("is dead :(");
