@@ -82,7 +82,7 @@ void recruit_unit(MAP *M, Player *P, UNIT K){
                     gold(*P)=gold(*P)-Cost(U);
 
                     Unit(*M, x, y) = U;
-
+                    Mov(U)=0;
                     units(*P) = Insert_unit(units(*P), Pos(U), Index_Max(units(*P)));
                     printf("You have successfully recruited a(n) ");
                     print_unit_type(U);
@@ -102,6 +102,7 @@ void recruit_unit(MAP *M, Player *P, UNIT K){
                     upkeep(*P)=upkeep(*P)+Upkeep(U);
                     gold(*P)=gold(*P)-Cost(U);
                     Unit(*M, x, y) = U;
+                    Mov(U)=0;
 
                     units(*P) = Insert_unit(units(*P), Pos(U), Index_Max(units(*P)));
                     printf("You have successfully recruited a(n) ");
@@ -123,7 +124,7 @@ void recruit_unit(MAP *M, Player *P, UNIT K){
                     gold(*P)=gold(*P)-Cost(U);
 
                     Unit(*M, x, y) = U;
-
+                    Mov(U)=0;
                     units(*P) = Insert_unit(units(*P), Pos(U), Index_Max(units(*P)));
                     printf("You have successfully recruited a(n) ");
                     print_unit_type(U);
