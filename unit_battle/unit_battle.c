@@ -1,9 +1,10 @@
 #include "../ADT/array.h"
 #include "../ADT/boolean.h"
+#include "unit_battle.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#include "unit_battle.h"
 
 void heal(UNIT  Mage, MAP *M)
 /* Heal other unit */
@@ -75,10 +76,10 @@ void unit_attack(UNIT * Attacker, UNIT * Defender,boolean *Win, boolean *Lose)
                         Hp(*Attacker)-=Def(*Defender);
                         printf("Your ");
                         print_unit_type(*Attacker);
-                        printf("is damaged by %d\n",Def(*Defender)); 
+                        printf("is damaged by %d\n",Def(*Defender));
                         if(Type(*Attacker)=='K' && Hp(*Attacker)){
                             *Lose=true;
-                        } 
+                        }
                     }else{
                         printf("But your unit avoided their attack\n");
                     }
@@ -105,7 +106,7 @@ void unit_attack(UNIT * Attacker, UNIT * Defender,boolean *Win, boolean *Lose)
                     Hp(*Attacker)-=Def(*Defender);
                     printf("Your ");
                     print_unit_type(*Attacker);
-                    printf("is damaged by %d\n",Def(*Defender));   
+                    printf("is damaged by %d\n",Def(*Defender));
                 }else{
                     printf("But your unit avoided their attack\n");
                 }
@@ -131,7 +132,7 @@ void attack(UNIT *Attacker, MAP *M,boolean *Win, boolean *Lose)
 /*I.S. Attacker terdefinisi*/
 /*F.S. menjalankan command attack sesuai kondisi yang terdefinisi*/
 {
-    int Found=false; 
+    int Found=false;
     int count=0;
     int inp;        //input
     int inpmusuh;    //musuh mana yang dipilih
@@ -204,7 +205,7 @@ void attack(UNIT *Attacker, MAP *M,boolean *Win, boolean *Lose)
                 if(inp<=count){
                     inpmusuh=array_Elmt(lokasi,inp);
                     boolean Wins,Loses;
-                    if(inpmusuh==1){     
+                    if(inpmusuh==1){
                         unit_attack(Attacker,&Unit(*M,Xatk+1,Yatk),&Wins,&Loses);
                     }else if(inpmusuh==2){
                         unit_attack(Attacker,&Unit(*M,Xatk-1,Yatk),&Wins,&Loses);

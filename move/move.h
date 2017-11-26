@@ -1,9 +1,11 @@
-#include "map.h"
-#include "unit.h"
+#include "../map/map.h"
+#include "../unit/unit.h"
+#include "../ADT/stackt.h"
+#include "../ADT/point.h"
+
 #include <stdlib.h>
 #include <stdio.h>
-#include "ADT/stackt.h"
-#include "ADT/point.h"
+
 
 Stack X,Y;
 

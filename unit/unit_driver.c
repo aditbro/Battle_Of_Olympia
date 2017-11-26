@@ -12,6 +12,7 @@ int main(){
     char inp;
     boolean retalities;
     do{
+        printf("\nInput S to show unit info, or A to show unit available : ");
         scanf("%c",&inp);
         if(inp=='S'){
             Show_unit_info(U1);

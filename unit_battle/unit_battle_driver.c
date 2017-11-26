@@ -15,9 +15,10 @@ int main(){
     Unit(M, 2, 2) = E3;
     E4 = Create_new_unit('A',2,0,2);
     Unit(M, 0, 2) = E4;
-    
+
     char inp;
     do{
+        printf("\nInput A to attack, or M to show map : ");
         scanf("%c",&inp);
         if(inp=='A'){
             attack(&U1, &M, &Win,&Lose);
