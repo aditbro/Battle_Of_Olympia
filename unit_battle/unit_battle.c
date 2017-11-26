@@ -1,5 +1,5 @@
-#include "ADT/array.h"
-#include "ADT/boolean.h"
+#include "../ADT/array.h"
+#include "../ADT/boolean.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>

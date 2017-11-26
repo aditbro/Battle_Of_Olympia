@@ -136,23 +136,24 @@ POINT get_unit_position(UnitList L, int Index){
 }
 
 
-void select_unit(MAP Map, UnitList Unit_list, UNIT * Current_unit, int Index){
+void select_unit(MAP *Map, UnitList Unit_list, UNIT * Current_unit, int Index){
     /* Change value of current unit by selecting unit in unitlist by index */
 
     POINT unit_pos = get_unit_position(Unit_list, Index);
     int i = Absis(unit_pos);
     int j = Ordinat(unit_pos);
 
-    if ( (i >= 0) && (i <= MapBrsEff(Map)) && (j >= 0) && (j <= MapKolEff(Map))){
-        *Current_unit = Unit(Map,i,j);
+    if ( (i >= 0) && (i <= MapBrsEff(*Map)) && (j >= 0) && (j <= MapKolEff(*Map))){
+        *Current_unit = Unit(*Map,i,j);
         printf("current unit : unit < %.2d > \n", Index);
+        selected_on_map_ON(Map, Current_unit, true);
     }
     else{
         printf("You don't have such unit...\n");
     }
 }
 
-void selected_on_map_ON(MAP *Map, UNIT *Current_unit, int Cond){
+void selected_on_map_ON(MAP *Map, UNIT *Current_unit, boolean Cond){
     /* Function to turn on and off 'select' atribut in map */
 
     Select(*Map, Absis(Pos(*Current_unit)), Ordinat(Pos(*Current_unit))) = Cond;
@@ -207,6 +208,35 @@ int search_current_unit_index(UnitList Unit_list, UNIT *Current_unit){
 
 }
 
+int search_next_unit(MAP *M, UnitList Unit_list,UNIT *Current_unit){
+    /* function to return next index of unit that can move / attack */
+
+    int max_idx = Index_Max(Unit_list);
+    int cur_idx = search_current_unit_index(Unit_list, Current_unit);
+    int max_repeat = UnitNbElmt(Unit_list);
+
+    /* Modular increment */
+    while(max_repeat > 0){
+
+        if (cur_idx == max_idx){
+            cur_idx = 1;
+        }
+        else{
+            cur_idx += 1;
+        }
+
+        POINT Unit_pos = get_unit_position(Unit_list, cur_idx);
+        UNIT check_unit = Unit(*M, Absis(Unit_pos), Ordinat(Unit_pos));
+
+        if ((Mov(check_unit) >= 0) || Can_Atk(check_unit)){
+            return cur_idx;
+        }
+
+        max_repeat--;
+    }
+
+    return -999;
+}
 
 /****************** DISPLAY ******************/
 void Display_unit_list (MAP M, UnitList L)
@@ -239,8 +269,10 @@ void refresh_unit_list(MAP *M,UnitList L)
     if(!UnitList_empty(L)){
         POINT unit_pos = get_unit_position(L,Index(L));
 
+        Can_Atk(Unit(*M, Absis(unit_pos), Ordinat(unit_pos)))=true;
         Mov(Unit(*M, Absis(unit_pos), Ordinat(unit_pos)))=M_Mov(Unit(*M, Absis(unit_pos), Ordinat(unit_pos)));
         refresh_unit_list(M,Tail(L));
+        refreshMap(M,L);
     }
 }
 
@@ -255,5 +287,16 @@ void do_heal(MAP *M,UnitList L)
         }
 
         do_heal(M,Tail(L));
+    }
+}
+
+void refreshMap(MAP *M,UnitList L)
+/* Refresh Can_Atk,Mov all Unit in UnitList*/
+{
+    if(!UnitList_empty(L)){
+        POINT unit_pos = get_unit_position(L,Index(L));
+
+        selected_on_map_ON(M, &Unit(*M,Absis(unit_pos), Ordinat(unit_pos)), false);
+        refreshMap(M,Tail(L));
     }
 }

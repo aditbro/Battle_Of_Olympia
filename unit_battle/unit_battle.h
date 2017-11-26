@@ -2,12 +2,12 @@
 #ifndef UNITBATTLE_H
 #define UNITBATTLE_H
 
-#include "ADT/point.h"
-#include "ADT/boolean.h"
+#include "../ADT/point.h"
+#include "../ADT/boolean.h"
 
-#include "unit.h"
-#include "map.h"
-#include "ADT/matriks.h"
+#include "../unit.h"
+#include "../map.h"
+#include "../ADT/matriks.h"
 
 
 void heal(UNIT  Mage, MAP *M);

@@ -66,8 +66,8 @@ void recruit_unit(MAP *M, Player *P, UNIT K){
             } while (!IsCastleEmpty(*M, x, y) || Build_Owner(Build(*M,x,y))!=ID(*P));
 
             printf("\n=== List of Recruits ===\n");
-            printf("1. Archer | Health 100 | ATK 15 | DEF 15 | 10G\n");
-            printf("2. Swordsman | Health 100 | ATK 20 | DEF 15 | 20G\n");
+            printf("1. Archer | Health 100 | ATK 50 | DEF 30 | 10G\n");
+            printf("2. Swordsman | Health 100 | ATK 60 | DEF 30 | 20G\n");
             printf("3. White Mage | Health 100 | ATK 5 | DEF 5 | HEAL 25 | 50G\n");
             printf("\n");
             printf("Enter no. of unit you want to recruit: ");
@@ -82,7 +82,7 @@ void recruit_unit(MAP *M, Player *P, UNIT K){
                     gold(*P)=gold(*P)-Cost(U);
 
                     Unit(*M, x, y) = U;
-
+                    Mov(U)=0;
                     units(*P) = Insert_unit(units(*P), Pos(U), Index_Max(units(*P)));
                     printf("You have successfully recruited a(n) ");
                     print_unit_type(U);
@@ -102,6 +102,7 @@ void recruit_unit(MAP *M, Player *P, UNIT K){
                     upkeep(*P)=upkeep(*P)+Upkeep(U);
                     gold(*P)=gold(*P)-Cost(U);
                     Unit(*M, x, y) = U;
+                    Mov(U)=0;
 
                     units(*P) = Insert_unit(units(*P), Pos(U), Index_Max(units(*P)));
                     printf("You have successfully recruited a(n) ");
@@ -114,7 +115,7 @@ void recruit_unit(MAP *M, Player *P, UNIT K){
             }
 
             else if (choice==3) {
-                if (gold(*P)>=50) {
+                if (gold(*P)>=200) {
 
                    
                     U = Create_new_unit('W', ID(*P), x, y);
@@ -123,7 +124,7 @@ void recruit_unit(MAP *M, Player *P, UNIT K){
                     gold(*P)=gold(*P)-Cost(U);
 
                     Unit(*M, x, y) = U;
-
+                    Mov(U)=0;
                     units(*P) = Insert_unit(units(*P), Pos(U), Index_Max(units(*P)));
                     printf("You have successfully recruited a(n) ");
                     print_unit_type(U);

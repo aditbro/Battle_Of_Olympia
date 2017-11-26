@@ -32,17 +32,20 @@ UnitList Insert_unit(UnitList L, POINT unit_pos, int indeks);
 void Delete_unit (UnitList *L, int Index);
 /* Delete an element at index X */
 
-void select_unit(MAP Map, UnitList Unit_list, UNIT * Current_unit, int Index);
+void select_unit(MAP *Map, UnitList Unit_list, UNIT * Current_unit, int Index);
 /* Change value of current unit by selecting unit in unitlist by index */
 
-UnitList  change_unit_position_pre(UnitList Unit_list, UNIT *Current_unit, int *unit_index_in_list);
+UnitList change_unit_position_pre(UnitList Unit_list, UNIT *Current_unit, int *unit_index_in_list);
 /* Function to delete unit in unitlist and store index */
 
 UnitList change_unit_position_post(UnitList Unit_list, UNIT *Current_unit, int unit_index_in_list);
 /* Function to insert unit in unitlist after the position is modified */
 
-void selected_on_map_ON(MAP *Map, UNIT *Current_unit, int Cond);
+void selected_on_map_ON(MAP *Map, UNIT *Current_unit, boolean Cond);
 /* Function to turn on and off 'select' atribut in map */
+
+int search_next_unit(MAP *M, UnitList Unit_list,UNIT *Current_unit);
+/* function to return next index of unit that can move / attack */
 
 /****************** DISPLAY ******************/
 void Display_unit_list (MAP M, UnitList L);
@@ -73,5 +76,7 @@ POINT get_unit_position(UnitList L, int Index);
 
 int search_current_unit_index(UnitList Unit_list, UNIT *Current_unit);
 /* Function to return index of current unit in unitlist */
+
+void refreshMap(MAP *M, UnitList L);
 
 #endif
