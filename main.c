@@ -8,6 +8,7 @@
 #include "player/player.h"
 #include "unitlist/unitlist.h"
 #include "save/save.h"
+#include "ADT/jam.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -176,7 +177,9 @@ int main() {
 				printf("Saving game... \n");
 				saveMap(M);
 				SaveGame(player_1, player_2);
+				print_JAM();
 				printf("Saved.\n");
+				
 			}
 			else {
 				printf("Canceled.\n");
