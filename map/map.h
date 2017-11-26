@@ -3,8 +3,8 @@
 #ifndef MAP_H
 #define MAP_H
 
-#include "ADT/matriks.h"
-#include "ADT/pcolor.h"
+#include "../ADT/matriks.h"
+#include "../ADT/pcolor.h"
 
 #define Nil '0'
 

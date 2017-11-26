@@ -4,7 +4,8 @@
 #ifndef TURN_H
 #define TURN_H
 
-#include "ADT/queue.h"
+#include "../ADT/queue.h"
+
 #include <time.h>
 #include <stdlib.h>
 #include <stdio.h>

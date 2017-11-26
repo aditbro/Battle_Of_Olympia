@@ -1,14 +1,16 @@
-#include "../map.h"
+#include "../map/map.h"
+#include "../offbattle/offbattle.h"
+#include "../unit/unit.h"
+#include "../unit_battle/unit_battle.h"
+#include "../recruit/recruit.h"
+#include "../turn/turn.h"
+#include "../player/player.h"
+#include "../unitlist/unitlist.h"
+#include "../save/save.h"
+
+#include "move.h"
+
 #include <stdio.h>
-#include "../Offbattle.h"
-#include "../unit.h"
-#include "../unit_battle.h"
-#include "../move.h"
-#include "../recruit.h"
-#include "../turn.h"
-#include "../player_handler/player.h"
-#include "../player_handler/unitlist.h"
-#include "../file_handler/save.h"
 #include <string.h>
 
 int main() {

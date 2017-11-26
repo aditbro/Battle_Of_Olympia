@@ -1,5 +1,5 @@
 
-#include "Offbattle.h"
+#include "offbattle.h"
 
 void Init_game(MAP *M, Player *P1, Player *P2){
     /* Function to setup kings, tower, castle, and villages before game starts */
@@ -111,7 +111,7 @@ void Init_game(MAP *M, Player *P1, Player *P2){
 void Show_title(){
     /* Function to show title, well ~ */
     printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    printf("                                                                                                                                                                     \n");  
+    printf("                                                                                                                                                                     \n");
     printf("      ##### ##                               ###                               /##            # ###  ###                                                             \n");
     printf("   ######  /##                                ###                            #/ ###         /  /###   ###                                            #               \n");
     printf("  /#   /  / ##                  #        #     ##                           ##   ###       /  /  ###   ##                                           ###              \n");

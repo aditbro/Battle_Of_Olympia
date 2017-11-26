@@ -4,10 +4,11 @@
 
 #include "../ADT/point.h"
 #include "../ADT/boolean.h"
-
-#include "../unit.h"
-#include "../map.h"
 #include "../ADT/matriks.h"
+
+#include "../unit/unit.h"
+#include "../map/map.h"
+
 
 
 void heal(UNIT  Mage, MAP *M);

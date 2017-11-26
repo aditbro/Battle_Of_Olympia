@@ -1,11 +1,11 @@
 #ifndef RECRUIT_H
 #define RECRUIT_H
 
-#include "player_handler/player.h"
-#include "map.h"
-#include "unit.h"
-#include "building.h"
-#include "info.h"
+#include "../player/player.h"
+#include "../map/map.h"
+#include "../unit/unit.h"
+#include "../building/building.h"
+#include "../info/info.h"
 
 Build SearchTower (MAP M, Player P);
 /* Mencari letak tower milik pemain */

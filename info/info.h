@@ -1,10 +1,11 @@
 /*** INFO COMMAND HANDLER ***/
 
-#include "map.h"
-#include "unit.h"
-#include "building.h"
-#include "ADT/boolean.h"
-#include "ADT/point.h"
+#include "../map/map.h"
+#include "../unit/unit.h"
+#include "../building/building.h"
+#include "../ADT/boolean.h"
+#include "../ADT/point.h"
+
 #include <stdio.h>
 
 #define Nil '0'

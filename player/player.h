@@ -2,8 +2,8 @@
 #define PLAYER_H
 
 #include "../ADT/pcolor.h"
-#include "unitlist.h"
-#include "villagelist.h"
+#include "../unitlist/unitlist.h"
+#include "../villagelist/villagelist.h"
 
 
 typedef struct {

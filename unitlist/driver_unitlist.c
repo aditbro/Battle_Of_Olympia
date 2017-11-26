@@ -2,10 +2,11 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../turn.h"
-#include "../map.h"
-#include "../player_handler/player.h"
-#include "../Offbattle.h"
+#include "../turn/turn.h"
+#include "../map/map.h"
+#include "../player/player.h"
+#include "../offbattle/offbattle.h"
+#include "unitlist.h"
 
 void pause(void){
     printf("\n");

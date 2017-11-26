@@ -1,4 +1,4 @@
-#include "../map.h"
+#include "map.h"
 
 int main() {
 	MAP M = Init_map();
@@ -10,8 +10,7 @@ int main() {
 	Owner(Unit(M, 6, 8)) = 2;
 
 	Build_Type(Build(M, 2, 5)) = 'T';
-	Build_Owner(Build(M, 2, 5)) = 1;
-
+	Build_Owner(Build(M, 2, 5)) = 1 ;
 	Build_Type(Build(M, 7, 5)) = 'V';
 	Build_Owner(Build(M, 7, 5)) = 0;
 

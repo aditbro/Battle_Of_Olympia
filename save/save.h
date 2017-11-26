@@ -1,8 +1,10 @@
-#include <stdio.h>
-#include <math.h>
+
 #include "../ADT/mesinkata.h"
 #include "../ADT/boolean.h"
-#include "../player_handler/player.h"
+#include "../player/player.h"
+
+#include <stdio.h>
+#include <math.h>
 
 int KataToInt (Kata K);
 

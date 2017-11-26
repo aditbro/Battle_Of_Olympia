@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../turn.h"
+#include "turn.h"
 
 void pause(void){
     printf("\n");

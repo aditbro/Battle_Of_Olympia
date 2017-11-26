@@ -2,14 +2,14 @@
 #ifndef OFFBATTLE_H
 #define OFFBATTLE_H
 
-#include "ADT/matriks.h"
-#include "ADT/point.h"
+#include "../ADT/matriks.h"
+#include "../ADT/point.h"
 
-#include "building.h"
-#include "map.h"
-#include "unit.h"
-#include "player_handler/unitlist.h"
-#include "player_handler/player.h"
+#include "../building/building.h"
+#include "../map/map.h"
+#include "../unit/unit.h"
+#include "../unitlist/unitlist.h"
+#include "../player/player.h"
 
 #include <stdlib.h>
 #include <time.h>

@@ -1,10 +1,10 @@
-#include "map.h"
-#include "unit.h"
-#include "player_handler/player.h"
+#include "../map/map.h"
+#include "../unit/unit.h"
+#include "../player/player.h"
+#include "../ADT/stackt.h"
+#include "../ADT/point.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include "ADT/stackt.h"
-#include "ADT/point.h"
 
 Stack X,Y,C,H,M,O;
 
@@ -87,7 +87,7 @@ void possible_move(MAP *P,UNIT U)
 		}
 		else if(Owner(U) != Owner(Unit(*P,Loc.X + i,Loc.Y+i))){
 			break;
-		}			
+		}
 	}
 	for( i = 1; i <= Mov(U)/2 && Loc.Y - i >= 0 && Loc.X + i <= MapBrsEff(*P); i++){
 		if(Type(Unit(*P,Loc.X + i,Loc.Y - i)) == '0'){
@@ -95,7 +95,7 @@ void possible_move(MAP *P,UNIT U)
 		}
 		else if(Owner(U) != Owner(Unit(*P,Loc.X + i,Loc.Y-i))){
 			break;
-		}			
+		}
 	}
 	for( i = 1; i <= Mov(U)/2 && Loc.Y + i <= MapBrsEff(*P) && Loc.X - i >= 0; i++){
 		if(Type(Unit(*P,Loc.X - i,Loc.Y + i)) == '0'){
@@ -103,7 +103,7 @@ void possible_move(MAP *P,UNIT U)
 		}
 		else if(Owner(U) != Owner(Unit(*P,Loc.X-i,Loc.Y+i))){
 			break;
-		}			
+		}
 	}
 	for( i = 1; i <= Mov(U)/2 && Loc.Y - i >= 0 && Loc.X - i >= 0;i++){
 		if(Type(Unit(*P,Loc.X - i,Loc.Y - i)) == '0'){
@@ -111,7 +111,7 @@ void possible_move(MAP *P,UNIT U)
 		}
 		else if(Owner(U) != Owner(Unit(*P,Loc.X - i,Loc.Y-i))){
 			break;
-		}			
+		}
 	}
 	//printMap(P);
 }
@@ -173,13 +173,13 @@ void move_unit(Player *p1,Player *p2, MAP *P, UNIT *U, int x, int y)
 			income(*p2) -= 80;
 		}
 		Build(*P,x,y).owner = Owner(*U);
-		Hp(*U) = M_Hp(*U); 
+		Hp(*U) = M_Hp(*U);
 	}else{
 		Mov(*U) -= absolute(absolute(x1-x)+absolute(y1-y));
 		//printf("%d\n",absolute(absolute(x1-x)+absolute(y1-y)));
 		stack_Push(&C, 0);
 	}
-	Unit(*P,x,y) = *U; 
+	Unit(*P,x,y) = *U;
 }
 
 void undo(Player *p1, Player *p2,MAP *P, UNIT *U)
@@ -222,5 +222,5 @@ void undo(Player *p1, Player *p2,MAP *P, UNIT *U)
 	Hp(*U) = L;
 	stack_Pop(&M, &L);
 	Mov(*U) = L;
-	Unit(*P,xs,ys) = *U; 
+	Unit(*P,xs,ys) = *U;
 }

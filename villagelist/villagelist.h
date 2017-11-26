@@ -4,8 +4,8 @@
 #ifndef villagelist_H
 #define villagelist_H
 
-#include "../unit.h"
-#include "../map.h"
+#include "../unit/unit.h"
+#include "../map/map.h"
 #include "../ADT/point.h"
 #include <stdlib.h>
 

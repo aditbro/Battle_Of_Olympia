@@ -4,10 +4,11 @@
 #ifndef unitlist_H
 #define unitlist_H
 
-#include "../unit.h"
-#include "../unit_battle.h"
-#include "../map.h"
+#include "../unit/unit.h"
+#include "../unit_battle/unit_battle.h"
+#include "../map/map.h"
 #include "../ADT/point.h"
+
 #include <stdlib.h>
 
 typedef POINT infotype;

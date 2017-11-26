@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../Offbattle.h"
+#include "offbattle.h"
 
 void pause(void){
     printf("\n");
