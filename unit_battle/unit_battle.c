@@ -52,7 +52,7 @@ boolean get_hit (UNIT Defender) {
     return (array_Elmt(Prob, r)==1) ? true : false;
 }
 
-void unit_attack(UNIT * Attacker, UNIT * Defender,boolean *Win, boolean *Lose)
+void unit_attack(UNIT * Attacker, UNIT * Defender,boolean *Win, boolean *Lose,boolean *Kill,boolean *Killed,int *Up)
 /*I.S. Attacker dan Defender letaknya bersebalahan*/
 /*F.S. health dari Attacker dan Defender berubah sesuai kondisi*/
 {
@@ -61,6 +61,9 @@ void unit_attack(UNIT * Attacker, UNIT * Defender,boolean *Win, boolean *Lose)
     Mov(*Attacker)=0;
     *Win=false;
     *Lose=false;
+    *Kill=false;
+    *Up=0;
+    *Killed=false;
     if (get_hit(*Defender)){
         if(Type(*Defender)!='K'){
             if(Atk_Type(*Attacker)==Atk_Type(*Defender)){
@@ -85,6 +88,8 @@ void unit_attack(UNIT * Attacker, UNIT * Defender,boolean *Win, boolean *Lose)
                     }
                 }else{
                     Type(*Defender)=Nil;
+                    *Kill=true;
+                    *Up=Upkeep(*Defender);
                     printf("Your enemy's unit died\n");
                 }
             }else{
@@ -119,6 +124,7 @@ void unit_attack(UNIT * Attacker, UNIT * Defender,boolean *Win, boolean *Lose)
         if(Hp(*Attacker)<=0){
             printf("Your ");
             print_unit_type(*Attacker);
+            *Killed=true;
             printf("is dead :(");
             Type(*Attacker)=Nil;
         }
@@ -128,7 +134,7 @@ void unit_attack(UNIT * Attacker, UNIT * Defender,boolean *Win, boolean *Lose)
     }
 
 }
-void attack(UNIT *Attacker, MAP *M,boolean *Win, boolean *Lose)
+void attack(UNIT *Attacker, MAP *M,boolean *Win, boolean *Lose,boolean *Kill,boolean *Killed,int *Up)
 /*I.S. Attacker terdefinisi*/
 /*F.S. menjalankan command attack sesuai kondisi yang terdefinisi*/
 {
@@ -204,18 +210,22 @@ void attack(UNIT *Attacker, MAP *M,boolean *Win, boolean *Lose)
                 printf("\n\nBattle logs : \n");
                 if(inp<=count){
                     inpmusuh=array_Elmt(lokasi,inp);
-                    boolean Wins,Loses;
+                    boolean Wins,Loses,Kills,Killeds;
+                    int Ups;
                     if(inpmusuh==1){
-                        unit_attack(Attacker,&Unit(*M,Xatk+1,Yatk),&Wins,&Loses);
+                        unit_attack(Attacker,&Unit(*M,Xatk+1,Yatk),&Wins,&Loses,&Kills,&Killeds,&Ups);
                     }else if(inpmusuh==2){
-                        unit_attack(Attacker,&Unit(*M,Xatk-1,Yatk),&Wins,&Loses);
+                        unit_attack(Attacker,&Unit(*M,Xatk-1,Yatk),&Wins,&Loses,&Kills,&Killeds,&Ups);
                     }else if(inpmusuh==3){
-                        unit_attack(Attacker,&Unit(*M,Xatk,Yatk+1),&Wins,&Loses);
+                        unit_attack(Attacker,&Unit(*M,Xatk,Yatk+1),&Wins,&Loses,&Kills,&Killeds,&Ups);
                     }else if(inpmusuh==4){
-                        unit_attack(Attacker,&Unit(*M,Xatk,Yatk-1),&Wins,&Loses);
+                        unit_attack(Attacker,&Unit(*M,Xatk,Yatk-1),&Wins,&Loses,&Kills,&Killeds,&Ups);
                     }
                     *Win=Wins;
                     *Lose=Loses;
+                    *Up=Ups;
+                    *Kill=Kills;
+                    *Killed=Killeds;
                 }else{
                     printf("Wrong target\n");
                     printf("Select enemy you want to attack : ");
