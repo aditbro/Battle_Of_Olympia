@@ -2,7 +2,7 @@
 
 void SaveGame(Player P1, Player P2) {
 
-    FILE *f = fopen("savegame.txt", "w");
+    FILE *f = fopen("playerprofile.txt", "w");
     
     fprintf(f, "PLAYER %d %d %d %d ", ID(P1), gold(P1), income(P1), upkeep(P1));
     fprintf(f, "PLAYER %d %d %d %d.", ID(P2), gold(P2), income(P2), upkeep(P2));
@@ -22,7 +22,7 @@ void LoadGame(Player *P1, Player*P2) {
     player.TabKata[6] = 'R';
     player.Length = 6;
 
-    STARTKATA();
+    STARTKATA(1);
     count = 1;
     while (!EndKata) {
         if (IsKataSama(player,CKata)) {

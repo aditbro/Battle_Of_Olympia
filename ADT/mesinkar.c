@@ -10,7 +10,7 @@ boolean EOP;    /* bisa diakses dimana saja */
 static FILE * pita;
 static int retval;
 
-void START() {
+void START(int fileindex) {
 /* Mesin siap dioperasikan. Pita disiapkan untuk dibaca.
    Karakter pertama yang ada pada pita posisinya adalah pada jendela.
    I.S. : sembarang
@@ -18,7 +18,12 @@ void START() {
           Jika CC = MARK maka EOP akan menyala (true) */
 
 	/* Algoritma */
-	pita = fopen("unit/unitinfo.txt","r");
+      if (fileindex==0) {
+	      pita = fopen("unit/unitinfo.txt","r");
+      }
+      else if (fileindex==1) {
+            pita = fopen("playerprofile.txt","r");
+      }
 	ADV();
 }
 

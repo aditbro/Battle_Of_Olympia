@@ -20,8 +20,8 @@ void IgnoreBlank(){
    I.S. : CC sembarang
    F.S. : CC ≠ BLANK atau CC = MARK */
 
-void STARTKATA(){
-    START();
+void STARTKATA(int fileindex){
+    START(fileindex);
     IgnoreBlank();
     if(CC==MARK){
         EndKata = true;

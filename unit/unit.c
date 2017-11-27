@@ -53,7 +53,7 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
     found = false;
 
     if (type=='S' || type=='A' || type=='K' || type=='W') {
-        STARTKATA();
+        STARTKATA(0);
         while (!EndKata && found==false) {
             if (IsKataSama(CKata,utype)) {
                 ADVKATA();
