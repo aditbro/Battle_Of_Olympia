@@ -1,4 +1,63 @@
-# Battle of Olympia
-Repo untuk sharing kode tubes alstrukdat  
-ADT dasar yang dipake ada di folder ADT, ADT selain itu bebas mau dimasukin ke folder ADT juga atau dibedain  
-(p.s. sorry note-nya pake readme.md biar keliatan wkwk)
+# Battle for Olympia
+Remake dari game RPG Multiplayer yang Open Source "Battle for Wesnoth"
+
+# Memulai
+### Linux
+Buka terminal dan jalankan main dengan mengetik :
+```
+./main
+```
+
+# Command
+Memilih unit yang dimiliki :
+```
+CHANGE_UNIT
+```
+Mengganti unit dengan unit yang bersebelahan :
+```
+NEXT
+```
+Menggerakan unit :
+```
+MOVE
+```
+Membatalkan command sebelumnya :
+```
+UNDO
+```
+Merekrut unit :
+```
+RECRUIT
+```
+Menyerang :
+```
+ATTACK
+```
+Mencetak peta :
+```
+MAP
+```
+Melihat info dari unit :
+```
+INFO
+```
+Melihat status :
+```
+STATUS
+```
+Mengakhiri putaran :
+```
+END_TURN
+```
+Menyimpan data sedang dimainkan :
+```
+SAVE
+```
+Memuat data game yang sebelumnya disimpan :
+```
+LOAD
+```
+Keluar dari game ketika sudah bosan dan ga menang-menang :
+```
+EXIT
+```
