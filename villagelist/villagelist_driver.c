@@ -133,7 +133,7 @@ int main() {
 	Display_village_list(M, villages(player_1));
 	Display_village_list(M, villages(player_2));
 	printMap(M);
-	scannf("%d %d", &i, &j);
+	scanf("%d %d", &i, &j);
 	Insert_village(villages(player_1),Build(M,i,j).position, 1);
 	printMap(M);
 }
