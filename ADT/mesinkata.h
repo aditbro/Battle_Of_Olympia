@@ -45,5 +45,13 @@ void SalinKata();
           CC adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
 
+int KataToInt (Kata K);
+/* Mengubah tipe data dari Kata menjadi integer
+   Hanya berlaku untuk kata numerik
+   Contoh: Kata 100 menjadi int 100 */
+
+boolean IsKataSama (Kata K1,Kata K2);
+/* Mereturn true jika Kata K1 dan K2 sama, false jika beda */
+
 #endif
 
