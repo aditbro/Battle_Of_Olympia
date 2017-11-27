@@ -244,23 +244,25 @@ void Display_unit_list (MAP M, UnitList L)
 {
     if (!UnitList_empty(L)){
 
-        printf("%d. ",Index(L));
-
         POINT unit_pos = get_unit_position(L, Index(L));
 
-        show_unit_in_list(Unit(M, Absis(unit_pos), Ordinat(unit_pos)));
+        show_unit_in_list(Unit(M, Absis(unit_pos), Ordinat(unit_pos)), Index(L));
         printf("\n");
         Display_unit_list(M, Tail(L));
     }
 }
 
-void show_unit_in_list(UNIT U){
+void show_unit_in_list(UNIT U, int Index){
 /* Function to show unit data */
-    print_unit_type(U);
-    printf("  ");
-    TulisPOINT(Pos(U));
-    printf(" | ");
-    printf("Health %d", Hp(U));
+
+    if (Type(U) != '0'){
+        printf("%d. ",Index);
+        print_unit_type(U);
+        printf("  ");
+        TulisPOINT(Pos(U));
+        printf(" | ");
+        printf("Health %d", Hp(U));
+    }
 }
 
 void refresh_unit_list(MAP *M,UnitList L)

@@ -52,7 +52,7 @@ int search_next_unit(MAP *M, UnitList Unit_list,UNIT *Current_unit);
 void Display_unit_list (MAP M, UnitList L);
 /* Display unit index and unit position */
 
-void show_unit_in_list(UNIT U);
+void show_unit_in_list(UNIT U, int Index);
 /* Function to show unit data  */
 
 void refresh_unit_list(MAP *M,UnitList L);
