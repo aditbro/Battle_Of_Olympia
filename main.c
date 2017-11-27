@@ -11,7 +11,6 @@
 #include "ADT/mesinkata.h"
 
 #include <stdio.h>
-#include <string.h>
 
 boolean isKataCommand(Kata kata1,char *input){
 	int i=1;
