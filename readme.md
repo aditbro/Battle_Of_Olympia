@@ -9,6 +9,7 @@ Buka terminal dan jalankan main dengan mengetik :
 ```
 
 # Command
+### Command-command yang tersedia dan siap digunakan
 Memilih unit yang dimiliki :
 ```
 CHANGE_UNIT
