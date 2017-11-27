@@ -88,6 +88,7 @@ void unit_attack(UNIT * Attacker, UNIT * Defender,boolean *Win, boolean *Lose,bo
                     }
                 }else{
                     Type(*Defender)=Nil;
+                    Owner(*Defender)=0;
                     *Kill=true;
                     *Up=Upkeep(*Defender);
                     printf("Your enemy's unit died\n");
@@ -124,6 +125,7 @@ void unit_attack(UNIT * Attacker, UNIT * Defender,boolean *Win, boolean *Lose,bo
         if(Hp(*Attacker)<=0){
             printf("Your ");
             print_unit_type(*Attacker);
+            Owner(*Attacker)=0;
             *Killed=true;
             printf("is dead :(");
             Type(*Attacker)=Nil;
