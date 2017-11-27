@@ -1,14 +1,14 @@
 # Battle for Olympia
 Remake dari game RPG Multiplayer yang Open Source "Battle for Wesnoth"
 
-# Memulai
+## Memulai
 ### Linux
 Buka terminal dan jalankan main dengan mengetik :
 ```
 ./main
 ```
 
-# Command
+## Command
 ### Command-command yang tersedia dan siap digunakan
 Memilih unit yang dimiliki :
 ```
