@@ -68,7 +68,7 @@ void recruit_unit(MAP *M, Player *P, UNIT K){
             printf("\n=== List of Recruits ===\n");
             printf("1. Archer | Health 100 | ATK 50 | DEF 30 | 10G\n");
             printf("2. Swordsman | Health 100 | ATK 60 | DEF 30 | 20G\n");
-            printf("3. White Mage | Health 100 | ATK 5 | DEF 5 | HEAL 25 | 50G\n");
+            printf("3. White Mage | Health 100 | ATK 5 | DEF 5 | HEAL 25 | 200G\n");
             printf("\n");
             printf("Enter no. of unit you want to recruit: ");
             scanf("%d", &choice);
@@ -80,9 +80,8 @@ void recruit_unit(MAP *M, Player *P, UNIT K){
 
                     upkeep(*P)=upkeep(*P)+Upkeep(U);
                     gold(*P)=gold(*P)-Cost(U);
-
-                    Unit(*M, x, y) = U;
                     Mov(U)=0;
+                    Unit(*M, x, y) = U;
                     units(*P) = Insert_unit(units(*P), Pos(U), Index_Max(units(*P)));
                     printf("You have successfully recruited a(n) ");
                     print_unit_type(U);
@@ -101,8 +100,8 @@ void recruit_unit(MAP *M, Player *P, UNIT K){
 
                     upkeep(*P)=upkeep(*P)+Upkeep(U);
                     gold(*P)=gold(*P)-Cost(U);
-                    Unit(*M, x, y) = U;
                     Mov(U)=0;
+                    Unit(*M, x, y) = U;
 
                     units(*P) = Insert_unit(units(*P), Pos(U), Index_Max(units(*P)));
                     printf("You have successfully recruited a(n) ");
@@ -122,9 +121,8 @@ void recruit_unit(MAP *M, Player *P, UNIT K){
 
                     upkeep(*P)=upkeep(*P)+Upkeep(U);
                     gold(*P)=gold(*P)-Cost(U);
-
-                    Unit(*M, x, y) = U;
                     Mov(U)=0;
+                    Unit(*M, x, y) = U;
                     units(*P) = Insert_unit(units(*P), Pos(U), Index_Max(units(*P)));
                     printf("You have successfully recruited a(n) ");
                     print_unit_type(U);
