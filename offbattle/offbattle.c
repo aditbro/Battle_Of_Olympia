@@ -142,7 +142,7 @@ void Show_title(){
 void Show_win(){
     /* Function to show win notification */
 
-    printf("            \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    printf("            \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     printf("                                                                                                                           \n");
     printf("                       ##### /    ##                                                                       ###             \n");
     printf("                    ######  /  #####                                                  #                     ###            \n");
@@ -165,14 +165,14 @@ void Show_win(){
     printf("                  /           ###/                                                                                         \n");
     printf("                                                                                                                           \n");
     printf("            \n\n\n\n\n\n\n\n\n\n");
-    printf("                                                 Thanks for playing Battle of Olympia, remember that there's no victory that is too small !!\n");
+    printf("                      Thanks for playing Battle of Olympia, remember that there's no victory that is too small !!\n");
     printf("            \n\n\n\n\n\n\n\n");
 }
 
 void Show_lose(){
 /* Function to show lose notification */
 
-    printf("            \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    printf("            \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                                                                                              
     printf("                          ##### /    ##                          ###                                     ###            \n");
     printf("                       ######  /  #####                           ###                                     ###           \n");
@@ -195,6 +195,6 @@ void Show_lose(){
     printf("                     /           ###/                                                                                   \n");
 
     printf("            \n\n\n\n\n\n\n\n\n\n");
-    printf("                                                     Thanks for playing Battle of Olympia, remember that there's no defeat is too great !!\n");
+    printf("                        Thanks for playing Battle of Olympia, remember that there's no defeat is too great !!\n");
     printf("            \n\n\n\n\n\n\n\n");
 }
