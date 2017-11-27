@@ -37,22 +37,22 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
         utype.TabKata[4] = 'G';
         utype.Length = 4;
     }
-    else if (type=='W') {
-        utype.TabKata[1] = 'w';
-        utype.TabKata[2] = 'H';
-        utype.TabKata[3] = 'I';
-        utype.TabKata[4] = 'T';
-        utype.TabKata[5] = 'E';
-        utype.TabKata[6] = 'M';
-        utype.TabKata[7] = 'A';
-        utype.TabKata[8] = 'G';
-        utype.TabKata[9] = 'E';
-        utype.Length = 9;
-    }
+    // else if (type=='W') {
+    //     utype.TabKata[1] = 'w';
+    //     utype.TabKata[2] = 'H';
+    //     utype.TabKata[3] = 'I';
+    //     utype.TabKata[4] = 'T';
+    //     utype.TabKata[5] = 'E';
+    //     utype.TabKata[6] = 'M';
+    //     utype.TabKata[7] = 'A';
+    //     utype.TabKata[8] = 'G';
+    //     utype.TabKata[9] = 'E';
+    //     utype.Length = 9;
+    // }
 
     found = false;
 
-    if (type=='S' || type=='A' || type=='K' || type=='W') {
+    if (type=='S' || type=='A' || type=='K') {
         STARTKATA(0);
         while (!EndKata && found==false) {
             if (IsKataSama(CKata,utype)) {
@@ -84,6 +84,19 @@ void Init_unit(UNIT * U,char type,int owner,int x, int y){
                 ADVKATA();
             }
         }
+    }
+    else if (type=='W') {
+        M_Hp(*U)         = 100;
+        Hp(*U)           = 100;
+        Atk(*U)          = 5;
+        Def(*U)          = 5;
+        Heal(*U)         = 25;
+        M_Mov(*U)        = 3;
+        Mov(*U)          = 3;
+        Cost(*U)         = 200;
+        Upkeep(*U)       = 10;
+        GHP(*U)          = 90;
+        Atk_Type(*U)     = 'M';
     }
     else {
         /* dummy for unitlist purpose */

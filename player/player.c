@@ -3,7 +3,7 @@
 
 void InitializeNewPlayer(Player *P, int ID){
 	ID(*P) = ID;
-	gold(*P) = 40;
+	gold(*P) = 500;
 	income(*P) = 0;
 	upkeep(*P) = 0;
 
