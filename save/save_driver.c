@@ -1,17 +1,17 @@
-#include "map/map.h"
-#include "offbattle/offbattle.h"
-#include "unit/unit.h"
-#include "unit_battle/unit_battle.h"
-#include "move/move.h"
-#include "recruit/recruit.h"
-#include "turn/turn.h"
-#include "player/player.h"
-#include "unitlist/unitlist.h"
-#include "ADT/jam.h"
-#include "ADT/mesinkata.h"
+#include "../map/map.h"
+#include "../offbattle/offbattle.h"
+#include "../unit/unit.h"
+#include "../unit_battle/unit_battle.h"
+#include "../move/move.h"
+#include "../recruit/recruit.h"
+#include "../turn/turn.h"
+#include "../player/player.h"
+#include "../unitlist/unitlist.h"
+#include "../ADT/jam.h"
+#include "../ADT/mesinkata.h"
+#include "save.h"
 
 #include <stdio.h>
-#include <string.h>
 
 boolean isKataCommand(Kata kata1,char *input){
 	int i=1;
