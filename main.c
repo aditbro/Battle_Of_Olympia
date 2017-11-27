@@ -8,10 +8,10 @@
 #include "player/player.h"
 #include "unitlist/unitlist.h"
 #include "ADT/jam.h"
+#include "save/save.h"
 #include "ADT/mesinkata.h"
 
 #include <stdio.h>
-#include <string.h>
 
 boolean isKataCommand(Kata kata1,char *input){
 	int i=1;
@@ -141,11 +141,11 @@ int main() {
 			boolean Win,Lose;
 			attack(Current_unit, &M, &Win,&Lose);
 			if(Win){
-				printf("You Win\n");
+				Show_win();
 				break;
 			}
 			if(Lose){
-				printf("You Lose\n");
+				Show_lose();
 				break;
 			}
 		}
@@ -243,12 +243,16 @@ int main() {
 			if (Current_player_int == 1) {
 				Current_player = &player_1;
 				Current_unit = &Dummy_unit;
-				strcpy(input, "End");
+				input[0]='E';
+				input[1]='n';
+				input[2]='d';
 			}
 			else if (Current_player_int == 2) {
 				Current_player = &player_2;
 				Current_unit = &Dummy_unit;
-				strcpy(input, "End");
+				input[0]='E';
+				input[1]='n';
+				input[2]='d';
 			}
 			printf("Cash: %dG | Income: %dG | Upkeep: %dG\n", gold(*Current_player), income(*Current_player), upkeep(*Current_player));
 			printf("\nPlease change your unit first!\n");
@@ -268,9 +272,10 @@ int main() {
 			print_red('!');
 			printf("! Saving your game will result in ending your current turn.\n");
 			scanf("%s", input);
-			if (strcmp(input, "y") == 0) {
+			if (input[0]=='y' || input[0]=='Y') {
 				printf("Saving game... \n");
 				saveMap(M);
+				SaveGame(player_1, player_2);
 				print_JAM();
 				printf("Saved.\n");
 				
@@ -283,9 +288,36 @@ int main() {
 			printf("Load previous saved game?(y/n)\n");
 			printf("Be careful! You'll lost your current game.\n");
 			scanf("%s", input);
-			if (strcmp(input, "y") == 0) {
+			if (input[0]=='y'||input[0]=='Y') {
 				printf("Loading game.. \n");
+				LoadGame(&player_1, &player_2);
+				units(player_1) = NULL;
+				units(player_2) = NULL;
+				villages(player_1) = NULL;
+				villages(player_2) = NULL;
 				loadMap(&M);
+				int idx1u = 0;
+				int idx2u = 0;
+				int idx1b = 0;
+				int idx2b = 0;
+				for(int i = 0; i <= MapBrsEff(M); i++){
+					for(int j = 0; j <= MapKolEff(M); j++){
+						if(Unit(M,i,j).type != '0'){
+							if(Unit(M,i,j).owner == 1){
+								units(player_1) = Insert_unit(units(player_1), Unit(M,i,j).position, idx1u++);
+							}else{
+								units(player_2) = Insert_unit(units(player_2), Unit(M,i,j).position, idx2u++);
+							}
+						}
+						if(Build(M,i,j).type == 'V'){
+							if(Build(M,i,j).owner == 1){
+								villages(player_1) = Insert_village(villages(player_1), Build(M,i,j).position, idx1b++);
+							}else if(Build(M,i,j).owner == 2){
+								villages(player_2) = Insert_village(villages(player_2), Build(M,i,j).position, idx2b++);
+							}
+						}
+					}
+				}
 				printf("Loaded.\n");
 			}
 			else {
@@ -299,3 +331,4 @@ int main() {
 		printf("\n");
 	}
 }
+
