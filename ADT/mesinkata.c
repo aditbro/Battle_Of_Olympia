@@ -5,6 +5,7 @@
 #include "mesinkata.h"
 #include "mesinkar.h"
 #include <stdio.h>
+#include <math.h>
 #include "boolean.h"
 
 boolean EndKata;
@@ -74,3 +75,38 @@ void SalinKata(){
           CC = BLANK atau CC = MARK;
           CC adalah karakter sesudah karakter terakhir yang diakuisisi.
           Jika panjang kata melebihi NMax, maka sisa kata "dipotong" */
+
+int KataToInt (Kata K){
+    int i, power, result;
+
+    result = 0;
+    for (i=1;i<=K.Length;i++) {
+        power = K.Length-i;
+        result = result + (((int) (pow(10,power))) * (K.TabKata[i]-'0'));
+    }
+
+    return result;
+}
+/* Mengubah tipe data dari Kata menjadi integer
+   Hanya berlaku untuk kata numerik
+   Contoh: Kata 100 menjadi int 100 */
+
+boolean IsKataSama (Kata K1,Kata K2){
+    int i = 1;
+    boolean iSama = true;
+    if (K1.Length != K2.Length){
+        iSama = false;
+    }
+    else {
+        while ((i<=K1.Length) && (iSama)) {
+            if (K1.TabKata[i] != K2.TabKata[i]) {
+                iSama = false;
+            }
+            else {
+                i++;
+            }
+        }
+    }
+    return iSama;
+}
+/* Mereturn true jika Kata K1 dan K2 sama, false jika beda */

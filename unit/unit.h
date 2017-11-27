@@ -4,6 +4,8 @@
 
 #include "../ADT/point.h"
 #include "../ADT/boolean.h"
+#include "../ADT/mesinkata.h"
+#include "../ADT/boolean.h"
 
 typedef struct {
     char type;

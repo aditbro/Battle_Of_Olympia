@@ -1,36 +1,5 @@
 #include "save.h"
 
-int KataToInt (Kata K){
-    int i, power, result;
-
-    result = 0;
-    for (i=1;i<=K.Length;i++) {
-        power = K.Length-i;
-        result = result + (((int) (pow(10,power))) * (K.TabKata[i]-'0'));
-    }
-
-    return result;
-}
-
-boolean IsKataSama (Kata K1,Kata K2){
-    int i = 1;
-    boolean iSama = true;
-    if (K1.Length != K2.Length){
-        iSama = false;
-    }
-    else {
-        while ((i<=K1.Length) && (iSama)) {
-            if (K1.TabKata[i] != K2.TabKata[i]) {
-                iSama = false;
-            }
-            else {
-                i++;
-            }
-        }
-    }
-    return iSama;
-}
-
 void SaveGame(Player P1, Player P2) {
 
     FILE *f = fopen("savegame.txt", "w");

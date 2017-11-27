@@ -18,7 +18,7 @@ void START() {
           Jika CC = MARK maka EOP akan menyala (true) */
 
 	/* Algoritma */
-	pita = fopen("savegame.txt","r");
+	pita = fopen("unit/unitinfo.txt","r");
 	ADV();
 }
 
