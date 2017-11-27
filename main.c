@@ -285,7 +285,33 @@ int main() {
 			scanf("%s", input);
 			if (strcmp(input, "y") == 0) {
 				printf("Loading game.. \n");
+				units(player_1) = NULL;
+				units(player_2) = NULL;
+				villages(player_1) = NULL;
+				villages(player_2) = NULL;
 				loadMap(&M);
+				int idx1u = 1;
+				int idx2u = 1;
+				int idx1b = 1;
+				int idx2b = 1;
+				for(int i = 0; i <= MapBrsEff(M); i++){
+					for(int j = 0; j <= MapKolEff(M); j++){
+						if(Unit(M,i,j).type != '0'){
+							if(Unit(M,i,j).owner == 1){
+								units(player_1) = Insert_unit(units(player_1), Unit(M,i,j).position, idx1u++);
+							}else{
+								units(player_2) = Insert_unit(units(player_2), Unit(M,i,j).position, idx2u++);
+							}
+						}
+						if(Build(M,i,j).type == 'V'){
+							if(Build(M,i,j).owner == 1){
+								villages(player_1) = Insert_village(units(player_1), Build(M,i,j).position, idx1b++);
+							}else if(Build(M,i,j).owner == 2){
+								villages(player_2) = Insert_village(units(player_2), Build(M,i,j).position, idx2b++);
+							}
+						}
+					}
+				}
 				printf("Loaded.\n");
 			}
 			else {
