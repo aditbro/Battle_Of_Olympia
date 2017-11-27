@@ -34,7 +34,7 @@ int main() {
 
 	char input[100] = "END_TURN"; //automatic start first turn
 
-	while (strcmp(input, "Quit") != 0) {
+	while (strcmp(input, "EXIT") != 0) {
 
 		if (strcmp(input, "MAP") == 0) {
 			/* Print map */
