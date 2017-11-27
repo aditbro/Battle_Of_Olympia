@@ -138,8 +138,19 @@ int main() {
 
 		else if (isKataCommand(Attack,input)) {
 			/* Command to declare attack using current unit */
-			boolean Win,Lose;
-			attack(Current_unit, &M, &Win,&Lose);
+			boolean Win=false,Lose=false,Kill=false,Killed=false;
+			int Up=0;
+			attack(Current_unit, &M, &Win,&Lose,&Kill,&Killed,&Up);
+			if(Kill){
+				if(ID(*Current_player)==1){
+					upkeep(player_2)-=Up;
+				}else{
+					upkeep(player_1)-=Up;
+				}
+			}
+			if(Killed){
+				upkeep(*Current_player)-=Upkeep(*Current_unit);
+			}
 			if(Win){
 				Show_win();
 				break;
