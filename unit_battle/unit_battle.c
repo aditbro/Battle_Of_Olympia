@@ -13,25 +13,25 @@ void heal(UNIT  Mage, MAP *M)
     int Ymage=Ordinat(Pos(Mage));
     if(Type(Unit(*M,Xmage+1,Ymage))!=Nil&& Owner(Unit(*M,Xmage+1,Ymage))==Owner(Mage)&&Hp(Unit(*M,Xmage+1,Ymage))!=0&&Hp(Unit(*M,Xmage+1,Ymage))!=100){
         Hp(Unit(*M,Xmage+1,Ymage))+=Heal(Mage);
-        if(Hp(Unit(*M,Xmage+1,Ymage))>100){
+        if(Hp(Unit(*M,Xmage+1,Ymage))>M_Hp(Unit(*M,Xmage+1,Ymage))){
             Hp(Unit(*M,Xmage+1,Ymage))=100;
         }
     }
     if(Type(Unit(*M,Xmage-1,Ymage))!=Nil&& Owner(Unit(*M,Xmage-1,Ymage))==Owner(Mage)&&Hp(Unit(*M,Xmage-1,Ymage))!=0&&Hp(Unit(*M,Xmage-1,Ymage))!=100){
         Hp(Unit(*M,Xmage-1,Ymage))+=Heal(Mage);
-        if(Hp(Unit(*M,Xmage-1,Ymage))>100){
+        if(Hp(Unit(*M,Xmage-1,Ymage))>M_Hp(Unit(*M,Xmage-1,Ymage))){
             Hp(Unit(*M,Xmage-1,Ymage))=100;
         }
     }
     if(Type(Unit(*M,Xmage,Ymage+1))!=Nil&& Owner(Unit(*M,Xmage,Ymage+1))==Owner(Mage)&&Hp(Unit(*M,Xmage,Ymage+1))!=0&&Hp(Unit(*M,Xmage,Ymage+1))!=100){
         Hp(Unit(*M,Xmage,Ymage+1))+=Heal(Mage);
-        if(Hp(Unit(*M,Xmage,Ymage+1))>100){
+        if(Hp(Unit(*M,Xmage,Ymage+1))>M_Hp(Unit(*M,Xmage,Ymage+1))){
             Hp(Unit(*M,Xmage,Ymage+1))=100;
         }
     }
     if(Type(Unit(*M,Xmage,Ymage-1))!=Nil&& Owner(Unit(*M,Xmage,Ymage-1))==Owner(Mage)&&Hp(Unit(*M,Xmage,Ymage-1))!=0&&Hp(Unit(*M,Xmage+1,Ymage-1))!=100){
         Hp(Unit(*M,Xmage,Ymage-1))+=Heal(Mage);
-        if(Hp(Unit(*M,Xmage,Ymage-1))>100){
+        if(Hp(Unit(*M,Xmage,Ymage-1))>M_Hp(Unit(*M,Xmage,Ymage-1))){
             Hp(Unit(*M,Xmage,Ymage-1))=100;
         }
     }
